@@ -1,0 +1,1 @@
+6da12236926f0b3d50d78200a09ac98f  test.subreads.bam

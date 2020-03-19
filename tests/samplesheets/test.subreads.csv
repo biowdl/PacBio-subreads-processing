@@ -1,0 +1,2 @@
+sample,library,readgroup,R1,R1_md5,R2,R2_md5,barcode
+test_subreads,lib1,rg1,tests/data/test.subreads.bam,6da12236926f0b3d50d78200a09ac98f,,,tests/data/barcodes.fasta

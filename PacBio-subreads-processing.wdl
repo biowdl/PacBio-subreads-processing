@@ -25,7 +25,6 @@ workflow Pipeline {
         File sampleConfigFile
         String outputDirectory = "."
         File dockerImagesFile
-        File
     }
 
     call common.YamlToJson as convertDockerImagesFile {
@@ -45,4 +44,28 @@ workflow Pipeline {
 
     SampleConfig sampleConfig = read_json(convertSampleConfig.json)
     Array[Sample] allSamples = sampleConfig.samples
+
+    call Test as TestTask {
+        input:
+            inputFile = sampleConfig.barcode
+    }
+}
+
+task Test {
+    input {
+        File inputFile
+        String dockerImage = "debian@sha256:f05c05a218b7a4a5fe979045b1c8e2a9ec3524e5611ebfdd0ef5b8040f9008fa"
+    }
+
+    command <<<
+        echo ~{inputFile}
+    >>>
+
+    output {
+        String outTest = read_lines(stdout())
+    }
+
+    runtime {
+        docker: dockerImage
+    }
 }
