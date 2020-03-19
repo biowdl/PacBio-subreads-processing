@@ -1,4 +1,4 @@
-# xx
+# PacBio-subreads-processing
 
 This repository contains the [Biowdl](https://github.com/biowdl) pipeline usable
 for processing PacBio subread BAMs
