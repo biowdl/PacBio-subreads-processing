@@ -1,0 +1,7 @@
+- name: testSubreads
+  tags:
+    - integration
+    - no_docker_conf
+  command: >-
+    cromwell run -o tests/cromwell_options.json
+    -i tests/integration/pairedEnd.json PacBio-subreads-processing.wdl

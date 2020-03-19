@@ -20,6 +20,10 @@ version 1.0
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import "structs.wdl" as structs
+import "tasks/biowdl.wdl" as biowdl
+import "tasks/common.wdl" as common
+
 workflow Pipeline {
     input {
         File sampleConfigFile
@@ -45,9 +49,14 @@ workflow Pipeline {
     SampleConfig sampleConfig = read_json(convertSampleConfig.json)
     Array[Sample] allSamples = sampleConfig.samples
 
-    call Test as TestTask {
-        input:
-            inputFile = sampleConfig.barcode
+    scatter (sample in allSamples) {
+        Array[Readgroup] readgroups = sample.readgroups
+        scatter (readgroup in readgroups) {
+            call Test as TestTask {
+                input:
+                    inputFile = readgroup.barcode
+            }
+        }
     }
 }
 
