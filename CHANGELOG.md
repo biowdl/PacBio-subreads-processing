@@ -10,4 +10,4 @@ that users understand how the changes affect the new version.
 
 version develop
 ---------------------------
-+ xx
++ Setup PacBio subreads processing pipeline.
