@@ -1,4 +1,5 @@
 {
-    "Pipeline.sampleConfigFile": "tests/samplesheets/singleEnd.csv",
-    "Pipeline.dockerImagesFile": "dockerImages.yml"
+    "Pipeline.sampleConfigFile": "tests/samplesheets/test.subreads.csv",
+    "Pipeline.dockerImagesFile": "dockerImages.yml",
+    "Pipeline.outputDirectory": "/exports/sasc/jboom/testtest"
 }

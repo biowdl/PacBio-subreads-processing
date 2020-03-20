@@ -24,12 +24,12 @@ struct Readgroup {
     String id
     String lib_id
     File R1
-    File barcode
 }
 
 struct Sample {
     String id
     Array[Readgroup] readgroups
+    File barcode
 }
 
 struct SampleConfig {

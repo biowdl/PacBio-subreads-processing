@@ -20,6 +20,7 @@ version 1.0
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import "sample.wdl" as sampleWorkflow
 import "structs.wdl" as structs
 import "tasks/biowdl.wdl" as biowdl
 import "tasks/common.wdl" as common
@@ -50,31 +51,18 @@ workflow Pipeline {
     Array[Sample] allSamples = sampleConfig.samples
 
     scatter (sample in allSamples) {
-        Array[Readgroup] readgroups = sample.readgroups
-        scatter (readgroup in readgroups) {
-            call Test as TestTask {
-                input:
-                    inputFile = readgroup.barcode
-            }
+        call sampleWorkflow.SampleWorkflow as executeSampleWorkflow {
+            input:
+                sample = sample,
+                outputDirectory = outputDirectory + "/" + sample.id,
+                dockerImages = dockerImages
         }
     }
-}
-
-task Test {
-    input {
-        File inputFile
-        String dockerImage = "debian@sha256:f05c05a218b7a4a5fe979045b1c8e2a9ec3524e5611ebfdd0ef5b8040f9008fa"
-    }
-
-    command <<<
-        echo ~{inputFile}
-    >>>
 
     output {
-        String outTest = read_lines(stdout())
-    }
-
-    runtime {
-        docker: dockerImage
+        Array[File] outputCCS = flatten(executeSampleWorkflow.outputCCS)
+        Array[File] outputCCSindex = flatten(executeSampleWorkflow.outputCCSindex)
+        Array[File] outputCCSreport = flatten(executeSampleWorkflow.outputCCSreport)
+        Array[File] outputCCSstderr = flatten(executeSampleWorkflow.outputCCSstderr)
     }
 }
