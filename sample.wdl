@@ -22,7 +22,8 @@ version 1.0
 
 import "structs.wdl" as structs
 import "tasks/ccs.wdl" as ccs
-import "/exports/sasc/jboom/WorkInProgress/tasks/lima.wdl" as lima
+import "tasks/lima.wdl" as lima
+import "tasks/isoseq3.wdl" as isoseq3
 
 workflow SampleWorkflow {
     input {
@@ -55,7 +56,17 @@ workflow SampleWorkflow {
                 outputPrefix = outputDirectory + "/" + readgroupIdentifier,
                 dockerImage = dockerImages["lima"]
         }
+
+        scatter (bamFile in executeLima.outputFLfile) {
+            call isoseq3.Refine as executeRefine {
+                input:
+                    inputBamFile = bamFile,
+                    primerFile = sample.barcode,
+                    outputPrefix = outputDirectory + "/" + readgroupIdentifier
+            }
+        }
     }
+
 
     output {
         Array[File] outputCCS = executeCCS.outputCCSfile
@@ -64,10 +75,17 @@ workflow SampleWorkflow {
         Array[File] outputCCSstderr = executeCCS.outputSTDERRfile
         Array[File] outputLima = flatten(executeLima.outputFLfile)
         Array[File] outputLimaIndex = flatten(executeLima.outputFLindexFile)
+        Array[File] outputLimaSubreadset = flatten(executeLima.outputFLxmlFile)
         Array[File] outputLimaStderr = executeLima.outputSTDERRfile
         Array[File] outputLimaJson = executeLima.outputJSONfile
         Array[File] outputLimaCounts = executeLima.outputCountsFile
         Array[File] outputLimaReport = executeLima.outputReportFile
         Array[File] outputLimaSummary = executeLima.outputSummaryFile
+        Array[File] outputRefine = executeRefine.outputFLNCfile
+        Array[File] outputRefineIndex = executeRefine.outputFLNCindexFile
+        Array[File] outputRefineConsensusReadset = executeRefine.outputConsensusReadsetFile
+        Array[File] outputRefineSummary = executeRefine.outputFilterSummaryFile
+        Array[File] outputRefineReport = executeRefine.outputReportFile
+        Array[File] outputRefineStderr = executeRefine.outputSTDERRfile
     }
 }
