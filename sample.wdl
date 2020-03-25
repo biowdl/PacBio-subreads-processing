@@ -20,10 +20,11 @@ version 1.0
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import "readgroup.wdl" as readgroupWorkflow
 import "structs.wdl" as structs
 import "tasks/ccs.wdl" as ccs
 import "tasks/lima.wdl" as lima
-import "tasks/isoseq3.wdl" as isoseq3
+
 
 workflow SampleWorkflow {
     input {
@@ -57,13 +58,12 @@ workflow SampleWorkflow {
                 dockerImage = dockerImages["lima"]
         }
 
-        scatter (bamFile in executeLima.outputFLfile) {
-            call isoseq3.Refine as executeRefine {
-                input:
-                    inputBamFile = bamFile,
-                    primerFile = sample.barcode,
-                    outputPrefix = outputDirectory + "/" + readgroupIdentifier
-            }
+        call readgroupWorkflow.ReadgroupWorkflow as executeReadgroupWorkflow {
+            input:
+                inputFiles = executeLima.outputFLfile,
+                primerFile = sample.barcode,
+                outputDirectory = outputDirectory + "/" + readgroupIdentifier,
+                dockerImages = dockerImages
         }
     }
 
@@ -81,11 +81,11 @@ workflow SampleWorkflow {
         Array[File] outputLimaCounts = executeLima.outputCountsFile
         Array[File] outputLimaReport = executeLima.outputReportFile
         Array[File] outputLimaSummary = executeLima.outputSummaryFile
-        Array[File] outputRefine = executeRefine.outputFLNCfile
-        Array[File] outputRefineIndex = executeRefine.outputFLNCindexFile
-        Array[File] outputRefineConsensusReadset = executeRefine.outputConsensusReadsetFile
-        Array[File] outputRefineSummary = executeRefine.outputFilterSummaryFile
-        Array[File] outputRefineReport = executeRefine.outputReportFile
-        Array[File] outputRefineStderr = executeRefine.outputSTDERRfile
+        Array[File] outputRefine = flatten(executeReadgroupWorkflow.outputRefine)
+        Array[File] outputRefineIndex = flatten(executeReadgroupWorkflow.outputRefineIndex)
+        Array[File] outputRefineConsensusReadset = flatten(executeReadgroupWorkflow.outputRefineConsensusReadset)
+        Array[File] outputRefineSummary = flatten(executeReadgroupWorkflow.outputRefineSummary)
+        Array[File] outputRefineReport = flatten(executeReadgroupWorkflow.outputRefineReport)
+        Array[File] outputRefineStderr = flatten(executeReadgroupWorkflow.outputRefineStderr)
     }
 }

@@ -1,5 +1,4 @@
 {
     "Pipeline.sampleConfigFile": "tests/samplesheets/test.subreads.csv",
-    "Pipeline.dockerImagesFile": "dockerImages.yml",
-    "Pipeline.outputDirectory": "/exports/sasc/jboom/WorkInProgress/PacBio-subreads-processing/testtest"
+    "Pipeline.dockerImagesFile": "dockerImages.yml"
 }
