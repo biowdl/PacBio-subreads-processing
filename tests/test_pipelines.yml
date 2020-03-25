@@ -5,3 +5,18 @@
   command: >-
     cromwell run -o tests/cromwell_options.json
     -i tests/integration/pairedEnd.json PacBio-subreads-processing.wdl
+  files:
+    - path: "test-output/test_subreads/test_subreads-lib1-rg1.ccs.bam"
+    - path: "test-output/test_subreads/test_subreads-lib1-rg1.ccs.report.txt"
+    - path: "test-output/test_subreads/test_subreads-lib1-rg1.fl.lima.counts"
+    - path: "test-output/test_subreads/test_subreads-lib1-rg1.fl.lima.report"
+    - path: "test-output/test_subreads/test_subreads-lib1-rg1.fl.lima.summary"
+    - path: "test-output/test_subreads/test_subreads-lib1-rg1.flnc.Barcode_1_3p--Barcode_1_3p.bam"
+    - path: "test-output/test_subreads/test_subreads-lib1-rg1.flnc.Barcode_1_3p--Barcode_1_3p.filter_summary.json"
+    - path: "test-output/test_subreads/test_subreads-lib1-rg1.flnc.Barcode_1_3p--Barcode_1_3p.report.csv"
+    - path: "test-output/test_subreads/test_subreads-lib1-rg1.flnc.Barcode_3_3p--Barcode_3_3p.bam"
+    - path: "test-output/test_subreads/test_subreads-lib1-rg1.flnc.Barcode_3_3p--Barcode_3_3p.filter_summary.json"
+    - path: "test-output/test_subreads/test_subreads-lib1-rg1.flnc.Barcode_3_3p--Barcode_3_3p.report.csv"
+    - path: "test-output/test_subreads/test_subreads-lib1-rg1.flnc.Barcode_4_3p--Barcode_4_3p.bam"
+    - path: "test-output/test_subreads/test_subreads-lib1-rg1.flnc.Barcode_4_3p--Barcode_4_3p.filter_summary.json"
+    - path: "test-output/test_subreads/test_subreads-lib1-rg1.flnc.Barcode_4_3p--Barcode_4_3p.report.csv"

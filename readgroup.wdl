@@ -49,4 +49,20 @@ workflow ReadgroupWorkflow {
         Array[File] outputRefineReport = flatten(executeRefine.outputReportFile)
         Array[File] outputRefineStderr = flatten(executeRefine.outputSTDERRfile)
     }
+
+    parameter_meta {
+        # inputs
+        inputFiles: {description: "BAM input file(s).", category: "required"}
+        primerFile: {description: "Barcode/primer fasta file used in Lima.", category: "required"}
+        outputDirectory: {description: "Output directory path + output file prefix.", category: "required"}
+        dockerImages: {description: "The docker image used for this task. Changing this may result in errors which the developers may choose not to address.", category: "required"}
+
+        # outputs
+        outputRefine: {description: "Filtered reads output file(s)."}
+        outputRefineIndex: {description: "Index of filtered reads output file(s)."}
+        outputRefineConsensusReadset: {description: "Refine consensus readset XML file(s)."}
+        outputRefineSummary: {description: "Refine summary file(s)."}
+        outputRefineReport: {description: "Refine report file(s)."}
+        outputRefineStderr: {description: "Refine STDERR log file(s)."}
+    }
 }

@@ -67,7 +67,6 @@ workflow SampleWorkflow {
         }
     }
 
-
     output {
         Array[File] outputCCS = executeCCS.outputCCSfile
         Array[File] outputCCSindex = executeCCS.outputCCSindexFile
@@ -87,5 +86,35 @@ workflow SampleWorkflow {
         Array[File] outputRefineSummary = flatten(executeReadgroupWorkflow.outputRefineSummary)
         Array[File] outputRefineReport = flatten(executeReadgroupWorkflow.outputRefineReport)
         Array[File] outputRefineStderr = flatten(executeReadgroupWorkflow.outputRefineStderr)
+    }
+
+    parameter_meta {
+    # inputs
+    sample: {description: "The sample data.", category: "required"}
+    outputDirectory: {description: "The directory to which the outputs will be written.", category: "advanced"}
+    libraryDesign: {description: "Barcode structure of the library design.", category: "advanced"}
+    ccsMode: {description: "CCS mode, use optimal alignment options.", category: "advanced"}
+    splitBamNamed: {description: "Split BAM output by resolved barcode pair name.", category: "advanced"}
+    dockerImages: {description: "The docker image used for this workflow. Changing this may result in errors which the developers may choose not to address.", category: "required"}
+
+    # outputs
+    outputCCS: {description: "Consensus reads output file(s)."}
+    outputCCSindex: {description: "Index of consensus reads output file(s)."}
+    outputCCSreport: {description: "CCS results report file(s)."}
+    outputCCSstderr: {description: "CCS STDERR log file(s)."}
+    outputLima: {description: "Demultiplexed reads output file(s)."}
+    outputLimaIndex: {description: "Index of demultiplexed reads output file(s)."}
+    outputLimaSubreadset: {description: "XML file of the subreadset(s)."}
+    outputLimaStderr: {description: "Lima STDERR log file(s)."}
+    outputLimaJson: {description: "Lima JSON file(s)."}
+    outputLimaCounts: {description: "Lima counts file(s)."}
+    outputLimaReport: {description: "Lima report file(s)."}
+    outputLimaSummary: {description: "Lima summary file(s)."}
+    outputRefine: {description: "Filtered reads output file(s)."}
+    outputRefineIndex: {description: "Index of filtered reads output file(s)."}
+    outputRefineConsensusReadset: {description: "Refine consensus readset XML file(s)."}
+    outputRefineSummary: {description: "Refine summary file(s)."}
+    outputRefineReport: {description: "Refine report file(s)."}
+    outputRefineStderr: {description: "Refine STDERR log file(s)."}
     }
 }
