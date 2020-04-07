@@ -102,9 +102,9 @@ workflow Pipeline {
 
     parameter_meta {
         # inputs
-        sampleConfigFile: {description: "Samplesheet describing input fasta/fastq files.", category: "required"}
+        subreadsConfigFile: {description: "Samplesheet describing input fasta/fastq files.", category: "required"}
         outputDirectory: {description: "The directory to which the outputs will be written.", category: "advanced"}
-        dockerImages: {description: "The docker image used for this workflow. Changing this may result in errors which the developers may choose not to address.", category: "required"}
+        dockerImagesFile: {description: "The docker image used for this workflow. Changing this may result in errors which the developers may choose not to address.", category: "required"}
         libraryDesign: {description: "Barcode structure of the library design.", category: "advanced"}
         ccsMode: {description: "CCS mode, use optimal alignment options.", category: "advanced"}
         splitBamNamed: {description: "Split BAM output by resolved barcode pair name.", category: "advanced"}
