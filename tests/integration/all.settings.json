@@ -1,0 +1,5 @@
+{
+    "Pipeline.subreadsConfigFile": "tests/samplesheets/all.settings.json",
+    "Pipeline.dockerImagesFile": "dockerImages.yml",
+    "Pipeline.outputDirectory": "/exports/sasc/jboom/WorkInProgress/output"
+}

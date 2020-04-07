@@ -20,18 +20,14 @@ version 1.0
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-struct Readgroup {
-    String id
-    String lib_id
-    File R1
+struct Subreads {
+    String subreads_id
+    String? scraps_id
+    File subreads_file
+    File? scraps_file
+    File barcodes_file
 }
 
-struct Sample {
-    String id
-    Array[Readgroup] readgroups
-    File barcode
-}
-
-struct SampleConfig {
-    Array[Sample] samples
+struct SubreadsConfig {
+    Array[Subreads] subreads
 }
