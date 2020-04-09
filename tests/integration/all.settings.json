@@ -1,4 +1,4 @@
 {
-    "Pipeline.subreadsConfigFile": "tests/samplesheets/all.settings.json",
-    "Pipeline.dockerImagesFile": "dockerImages.yml"
+    "PacBio-subreads-processing.subreadsConfigFile": "tests/samplesheets/all.settings.json",
+    "PacBio-subreads-processing.dockerImagesFile": "dockerImages.yml"
 }
