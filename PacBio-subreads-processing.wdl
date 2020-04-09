@@ -27,7 +27,7 @@ import "tasks/ccs.wdl" as ccs
 import "tasks/lima.wdl" as lima
 import "tasks/isoseq3.wdl" as isoseq3
 
-workflow PacBio-subreads-processing {
+workflow SubreadsProcessing {
     input {
         File subreadsConfigFile
         String outputDirectory = "."
