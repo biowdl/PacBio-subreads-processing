@@ -49,11 +49,10 @@ workflow Pipeline {
     Array[Subreads] allSubreads = subreadsConfig.subreads
 
     scatter (subreads in allSubreads) {
-        String groupIdentifier = subreads.subreads_id + "/" + subreads.subreads_id
         call ccs.CCS as executeCCS {
             input:
                 subreadsFile = subreads.subreads_file,
-                outputPrefix = outputDirectory + "/" + groupIdentifier,
+                outputPrefix = outputDirectory + "/" + subreads.subreads_id + "/" + subreads.subreads_id,
                 dockerImage = dockerImages["ccs"]
         }
 
@@ -64,16 +63,18 @@ workflow Pipeline {
                 splitBamNamed = splitBamNamed,
                 inputBamFile = executeCCS.outputCCSfile,
                 barcodeFile = subreads.barcodes_file,
-                outputPrefix = outputDirectory + "/" + groupIdentifier,
+                outputPrefix = outputDirectory + "/" + subreads.subreads_id + "/" + subreads.subreads_id,
                 dockerImage = dockerImages["lima"]
         }
 
         scatter (bamFile in executeLima.outputFLfile) {
+            String refineOutputPrefix = sub(basename(bamFile, ".bam"), "fl", "flnc")
             call isoseq3.Refine as executeRefine {
                 input:
                     inputBamFile = bamFile,
                     primerFile = subreads.barcodes_file,
-                    outputPrefix = outputDirectory + "/" + groupIdentifier,
+                    outputDir = outputDirectory + "/" + subreads.subreads_id,
+                    outputNamePrefix = refineOutputPrefix,
                     dockerImage = dockerImages["isoseq3"]
             }
         }
@@ -92,12 +93,12 @@ workflow Pipeline {
         Array[File] outputLimaCounts = executeLima.outputCountsFile
         Array[File] outputLimaReport = executeLima.outputReportFile
         Array[File] outputLimaSummary = executeLima.outputSummaryFile
-        Array[File] outputRefine = flatten(flatten(executeRefine.outputFLNCfile))
-        Array[File] outputRefineIndex = flatten(flatten(executeRefine.outputFLNCindexFile))
-        Array[File] outputRefineConsensusReadset = flatten(flatten(executeRefine.outputConsensusReadsetFile))
-        Array[File] outputRefineSummary = flatten(flatten(executeRefine.outputFilterSummaryFile))
-        Array[File] outputRefineReport = flatten(flatten(executeRefine.outputReportFile))
-        Array[File] outputRefineStderr = flatten(flatten(executeRefine.outputSTDERRfile))
+        Array[File] outputRefine = flatten(executeRefine.outputFLNCfile)
+        Array[File] outputRefineIndex = flatten(executeRefine.outputFLNCindexFile)
+        Array[File] outputRefineConsensusReadset = flatten(executeRefine.outputConsensusReadsetFile)
+        Array[File] outputRefineSummary = flatten(executeRefine.outputFilterSummaryFile)
+        Array[File] outputRefineReport = flatten(executeRefine.outputReportFile)
+        Array[File] outputRefineStderr = flatten(executeRefine.outputSTDERRfile)
     }
 
     parameter_meta {
