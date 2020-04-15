@@ -1,4 +1,5 @@
 {
     "SubreadsProcessing.subreadsConfigFile": "tests/samplesheets/all.settings.json",
-    "SubreadsProcessing.dockerImagesFile": "dockerImages.yml"
+    "SubreadsProcessing.dockerImagesFile": "dockerImages.yml",
+    "SubreadsProcessing.outputDirectory": "/exports/sasc/jboom/output-pacbio"
 }
