@@ -34,7 +34,23 @@ For an overview of all available inputs, see [this page](./inputs.html).
 }
 ```
 
-#### Sample configuration
+#### Subread configuration
+The subread configuration can be given as a json file with the following items.
+
+```
+subreads_id
+subreads_file
+subreads_md5
+barcodes_file
+```
+
+These items need to be filled per subreads BAM.
+Below is a example of such a json configuration.
+
+```json
+{"subreads": [{"subreads_id": "id", "subreads_file": "path/to/subreads.bam",
+"subreads_md5": "94127ced6d8428301376ee4ac18df58a", "barcodes_file": "path/to/barcodes.fasta"}]}
+```
 
 ### Dependency requirements and tool versions
 Biowdl pipelines use docker images to ensure  reproducibility. This
@@ -50,7 +66,9 @@ biowdl pipelines. The list of default images for this pipeline can be
 found in the default for the `dockerImages` input.
 
 ### Output
-
+The workflow will output polished CCS reads split into their respective sample.
+Along with these BAM files, the workflow will also output all intermediate
+generated files.
 
 ## Contact
 <p>
