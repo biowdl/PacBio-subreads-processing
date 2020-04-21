@@ -103,7 +103,7 @@ workflow SubreadsProcessing {
 
     parameter_meta {
         # inputs
-        subreadsConfigFile: {description: "Samplesheet describing input fasta/fastq files.", category: "required"}
+        subreadsConfigFile: {description: "Configuration file describing input subread BAMs and barcode files.", category: "required"}
         outputDirectory: {description: "The directory to which the outputs will be written.", category: "advanced"}
         dockerImagesFile: {description: "The docker image used for this workflow. Changing this may result in errors which the developers may choose not to address.", category: "required"}
         libraryDesign: {description: "Barcode structure of the library design.", category: "advanced"}

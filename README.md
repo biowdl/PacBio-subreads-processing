@@ -9,7 +9,7 @@ using [CCS](https://github.com/PacificBiosciences/ccs),
 ## Documentation
 
 Documentation for this pipeline can be
-found [here]().
+found [here](https://biowdl.github.io/PacBio-subreads-processing).
 
 ## About
 This pipeline is part of [Biowdl](https://github.com/biowdl) developed by the
