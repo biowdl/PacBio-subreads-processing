@@ -48,8 +48,14 @@ These items need to be filled per subreads BAM.
 Below is a example of such a json configuration.
 
 ```json
-{"subreads": [{"subreads_id": "id", "subreads_file": "path/to/subreads.bam",
-"subreads_md5": "94127ced6d8428301376ee4ac18df58a", "barcodes_file": "path/to/barcodes.fasta"}]}
+{"subreads": [{"subreads_id": "id",
+"subreads_file": "path/to/subreads.bam",
+"subreads_md5": "94127ced6d8428301376ee4ac18df58a",
+"barcodes_file": "path/to/barcodes.fasta"},
+{"subreads_id": "id",
+"subreads_file": "path/to/subreads.bam",
+"subreads_md5": "94127ced6d8428301376ee4ac18df58a",
+"barcodes_file": "path/to/barcodes.fasta"}]}
 ```
 
 ### Dependency requirements and tool versions
