@@ -22,10 +22,10 @@ version 1.0
 
 import "structs.wdl" as structs
 import "tasks/biowdl.wdl" as biowdl
-import "tasks/common.wdl" as common
 import "tasks/ccs.wdl" as ccs
-import "tasks/lima.wdl" as lima
+import "tasks/common.wdl" as common
 import "tasks/isoseq3.wdl" as isoseq3
+import "tasks/lima.wdl" as lima
 
 workflow SubreadsProcessing {
     input {
