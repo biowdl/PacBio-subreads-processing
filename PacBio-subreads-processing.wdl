@@ -27,7 +27,6 @@ import "tasks/common.wdl" as common
 import "tasks/fastqc.wdl" as fastqc
 import "tasks/isoseq3.wdl" as isoseq3
 import "tasks/lima.wdl" as lima
-import "tasks/multiqc.wdl" as multiqc
 
 workflow SubreadsProcessing {
     input {
@@ -109,6 +108,8 @@ workflow SubreadsProcessing {
         Array[File] outputRefineSummary = flatten(executeRefine.outputFilterSummaryFile)
         Array[File] outputRefineReport = flatten(executeRefine.outputReportFile)
         Array[File] outputRefineStderr = flatten(executeRefine.outputSTDERRfile)
+        Array[File] outputHtmlReport = flatten(fastqcTask.htmlReport)
+        Array[File] outputZipReport = flatten(fastqcTask.reportZip)
     }
 
     parameter_meta {
@@ -139,5 +140,7 @@ workflow SubreadsProcessing {
         outputRefineSummary: {description: "Refine summary file(s)."}
         outputRefineReport: {description: "Refine report file(s)."}
         outputRefineStderr: {description: "Refine STDERR log file(s)."}
+        outputHtmlReport: {description: "FastQC output HTML file(s)."}
+        outputZipReport: {description: "FastQC output support file(s)."}
     }
 }
