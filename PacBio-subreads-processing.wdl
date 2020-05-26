@@ -24,8 +24,10 @@ import "structs.wdl" as structs
 import "tasks/biowdl.wdl" as biowdl
 import "tasks/ccs.wdl" as ccs
 import "tasks/common.wdl" as common
+import "tasks/fastqc.wdl" as fastqc
 import "tasks/isoseq3.wdl" as isoseq3
 import "tasks/lima.wdl" as lima
+import "tasks/multiqc.wdl" as multiqc
 
 workflow SubreadsProcessing {
     input {
@@ -76,6 +78,14 @@ workflow SubreadsProcessing {
                     outputDir = outputDirectory + "/" + subreads.subreads_id,
                     outputNamePrefix = refineOutputPrefix,
                     dockerImage = dockerImages["isoseq3"]
+            }
+
+            call fastqc.Fastqc as fastqcTask {
+                input:
+                    seqFile = executeRefine.outputFLNCfile,
+                    outdirPath = outputDirectory + "/" + subreads.subreads_id + "/" + basename(executeRefine.outputFLNCfile, ".bam") + "-fastqc",
+                    format = "bam",
+                    dockerImage = dockerImages["fastqc"]
             }
         }
     }
