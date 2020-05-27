@@ -24,6 +24,7 @@ import "structs.wdl" as structs
 import "tasks/biowdl.wdl" as biowdl
 import "tasks/ccs.wdl" as ccs
 import "tasks/common.wdl" as common
+import "tasks/fastqc.wdl" as fastqc
 import "tasks/isoseq3.wdl" as isoseq3
 import "tasks/lima.wdl" as lima
 
@@ -77,6 +78,14 @@ workflow SubreadsProcessing {
                     outputNamePrefix = refineOutputPrefix,
                     dockerImage = dockerImages["isoseq3"]
             }
+
+            call fastqc.Fastqc as fastqcTask {
+                input:
+                    seqFile = executeRefine.outputFLNCfile,
+                    outdirPath = outputDirectory + "/" + subreads.subreads_id + "/" + basename(executeRefine.outputFLNCfile, ".bam") + "-fastqc",
+                    format = "bam",
+                    dockerImage = dockerImages["fastqc"]
+            }
         }
     }
 
@@ -99,6 +108,8 @@ workflow SubreadsProcessing {
         Array[File] outputRefineSummary = flatten(executeRefine.outputFilterSummaryFile)
         Array[File] outputRefineReport = flatten(executeRefine.outputReportFile)
         Array[File] outputRefineStderr = flatten(executeRefine.outputSTDERRfile)
+        Array[File] outputHtmlReport = flatten(fastqcTask.htmlReport)
+        Array[File] outputZipReport = flatten(fastqcTask.reportZip)
     }
 
     parameter_meta {
@@ -129,5 +140,7 @@ workflow SubreadsProcessing {
         outputRefineSummary: {description: "Refine summary file(s)."}
         outputRefineReport: {description: "Refine report file(s)."}
         outputRefineStderr: {description: "Refine STDERR log file(s)."}
+        outputHtmlReport: {description: "FastQC output HTML file(s)."}
+        outputZipReport: {description: "FastQC output support file(s)."}
     }
 }
