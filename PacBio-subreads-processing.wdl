@@ -21,7 +21,6 @@ version 1.0
 # SOFTWARE.
 
 import "structs.wdl" as structs
-import "tasks/biowdl.wdl" as biowdl
 import "tasks/ccs.wdl" as ccs
 import "tasks/common.wdl" as common
 import "tasks/fastqc.wdl" as fastqc
@@ -36,6 +35,7 @@ workflow SubreadsProcessing {
         String libraryDesign = "same"
         Boolean ccsMode = true
         Boolean splitBamNamed = true
+        Boolean runIsoseq3Refine = false
     }
 
     call common.YamlToJson as convertDockerImagesFile {
@@ -69,23 +69,39 @@ workflow SubreadsProcessing {
         }
 
         scatter (bamFile in executeLima.outputFLfile) {
-            String refineOutputPrefix = sub(basename(bamFile, ".bam"), "fl", "flnc")
-            call isoseq3.Refine as executeRefine {
-                input:
-                    inputBamFile = bamFile,
-                    primerFile = subreads.barcodes_file,
-                    outputDir = outputDirectory + "/" + subreads.subreads_id,
-                    outputNamePrefix = refineOutputPrefix,
-                    dockerImage = dockerImages["isoseq3"]
+            if (runIsoseq3Refine) {
+                String refineOutputPrefix = sub(basename(bamFile, ".bam"), "fl", "flnc")
+                call isoseq3.Refine as executeRefine {
+                    input:
+                        inputBamFile = bamFile,
+                        primerFile = subreads.barcodes_file,
+                        outputDir = outputDirectory + "/" + subreads.subreads_id,
+                        outputNamePrefix = refineOutputPrefix,
+                        dockerImage = dockerImages["isoseq3"]
+                }
+
+                call fastqc.Fastqc as fastqcTaskClean {
+                    input:
+                        seqFile = executeRefine.outputFLNCfile,
+                        outdirPath = outputDirectory + "/" + subreads.subreads_id + "/" + basename(executeRefine.outputFLNCfile, ".bam") + "-fastqc",
+                        format = "bam",
+                        dockerImage = dockerImages["fastqc"]
+                }
             }
 
-            call fastqc.Fastqc as fastqcTask {
-                input:
-                    seqFile = executeRefine.outputFLNCfile,
-                    outdirPath = outputDirectory + "/" + subreads.subreads_id + "/" + basename(executeRefine.outputFLNCfile, ".bam") + "-fastqc",
-                    format = "bam",
-                    dockerImage = dockerImages["fastqc"]
+            if (!runIsoseq3Refine) {
+                call fastqc.Fastqc as fastqcTaskNoClean {
+                    input:
+                        seqFile = bamFile,
+                        outdirPath = outputDirectory + "/" + subreads.subreads_id + "/" + basename(bamFile, ".bam") + "-fastqc",
+                        format = "bam",
+                        dockerImage = dockerImages["fastqc"]
+                }
             }
+
+            File fastqcHtmlReport = select_first([fastqcTaskClean.htmlReport, fastqcTaskNoClean.htmlReport])
+            File fastqcZipReport = select_first([fastqcTaskClean.reportZip, fastqcTaskNoClean.reportZip])
+
         }
     }
 
@@ -102,14 +118,14 @@ workflow SubreadsProcessing {
         Array[File] outputLimaCounts = executeLima.outputCountsFile
         Array[File] outputLimaReport = executeLima.outputReportFile
         Array[File] outputLimaSummary = executeLima.outputSummaryFile
-        Array[File] outputRefine = flatten(executeRefine.outputFLNCfile)
-        Array[File] outputRefineIndex = flatten(executeRefine.outputFLNCindexFile)
-        Array[File] outputRefineConsensusReadset = flatten(executeRefine.outputConsensusReadsetFile)
-        Array[File] outputRefineSummary = flatten(executeRefine.outputFilterSummaryFile)
-        Array[File] outputRefineReport = flatten(executeRefine.outputReportFile)
-        Array[File] outputRefineStderr = flatten(executeRefine.outputSTDERRfile)
-        Array[File] outputHtmlReport = flatten(fastqcTask.htmlReport)
-        Array[File] outputZipReport = flatten(fastqcTask.reportZip)
+        Array[File] outputHtmlReport = flatten(fastqcHtmlReport)
+        Array[File] outputZipReport = flatten(fastqcZipReport)
+        Array[File?] outputRefine = flatten(executeRefine.outputFLNCfile)
+        Array[File?] outputRefineIndex = flatten(executeRefine.outputFLNCindexFile)
+        Array[File?] outputRefineConsensusReadset = flatten(executeRefine.outputConsensusReadsetFile)
+        Array[File?] outputRefineSummary = flatten(executeRefine.outputFilterSummaryFile)
+        Array[File?] outputRefineReport = flatten(executeRefine.outputReportFile)
+        Array[File?] outputRefineStderr = flatten(executeRefine.outputSTDERRfile)
     }
 
     parameter_meta {
@@ -120,6 +136,7 @@ workflow SubreadsProcessing {
         libraryDesign: {description: "Barcode structure of the library design.", category: "advanced"}
         ccsMode: {description: "CCS mode, use optimal alignment options.", category: "advanced"}
         splitBamNamed: {description: "Split BAM output by resolved barcode pair name.", category: "advanced"}
+        runIsoseq3Refine: {description: "Run isoseq3 refine for de-novo transcript reconstruction. Do not set this to true when analysing DNA reads.", category: "advanced"}
 
         # outputs
         outputCCS: {description: "Consensus reads output file(s)."}

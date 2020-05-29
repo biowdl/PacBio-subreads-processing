@@ -50,3 +50,5 @@ matrix:
         - echo "Linting failed"
     - env:
       - TEST="all-settings"
+    - env:
+      - TEST="run-isoseq3-refine"
