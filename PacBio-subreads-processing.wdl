@@ -71,23 +71,23 @@ workflow SubreadsProcessing {
         scatter (bamFile in executeLima.outputFLfile) {
             String refineOutputPrefix = sub(basename(bamFile, ".bam"), "fl", "flnc")
             if (runIsoseq3Refine) {
-              call isoseq3.Refine as executeRefine {
-                  input:
-                      inputBamFile = bamFile,
-                      primerFile = subreads.barcodes_file,
-                      outputDir = outputDirectory + "/" + subreads.subreads_id,
-                      outputNamePrefix = refineOutputPrefix,
-                      dockerImage = dockerImages["isoseq3"]
-              }
+                String refineOutputPrefix = sub(basename(bamFile, ".bam"), "fl", "flnc")
+                call isoseq3.Refine as executeRefine {
+                    input:
+                        inputBamFile = bamFile,
+                        primerFile = subreads.barcodes_file,
+                        outputDir = outputDirectory + "/" + subreads.subreads_id,
+                        outputNamePrefix = refineOutputPrefix,
+                        dockerImage = dockerImages["isoseq3"]
+                }
 
-              call fastqc.Fastqc as fastqcTaskClean {
-                  input:
-                      seqFile = executeRefine.outputFLNCfile,
-                      outdirPath = outputDirectory + "/" + subreads.subreads_id + "/" + basename(executeRefine.outputFLNCfile, ".bam") + "-fastqc",
-                      format = "bam",
-                      dockerImage = dockerImages["fastqc"]
-
-              }
+                call fastqc.Fastqc as fastqcTaskClean {
+                    input:
+                        seqFile = executeRefine.outputFLNCfile,
+                        outdirPath = outputDirectory + "/" + subreads.subreads_id + "/" + basename(executeRefine.outputFLNCfile, ".bam") + "-fastqc",
+                        format = "bam",
+                        dockerImage = dockerImages["fastqc"]
+                }
             }
 
             if (!runIsoseq3Refine) {
