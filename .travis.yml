@@ -49,4 +49,4 @@ matrix:
       after_failure:
         - echo "Linting failed"
     - env:
-      - TEST="all-settings"
+      - TEST="integration"
