@@ -90,13 +90,13 @@ workflow SubreadsProcessing {
             }
 
             if (!runIsoseq3Refine) {
-              call fastqc.Fastqc as fastqcTaskNoClean {
-                  input:
-                      seqFile = bamFile,
-                      outdirPath = outputDirectory + "/" + subreads.subreads_id + "/" + basename(bamFile, ".bam") + "-fastqc",
-                      format = "bam",
-                      dockerImage = dockerImages["fastqc"]
-              }
+                call fastqc.Fastqc as fastqcTaskNoClean {
+                    input:
+                        seqFile = bamFile,
+                        outdirPath = outputDirectory + "/" + subreads.subreads_id + "/" + basename(bamFile, ".bam") + "-fastqc",
+                        format = "bam",
+                        dockerImage = dockerImages["fastqc"]
+                }
             }
 
             File fastqcHtmlReport = select_first([fastqcTaskClean.htmlReport, fastqcTaskNoClean.htmlReport])
