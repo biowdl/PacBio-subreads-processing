@@ -10,60 +10,79 @@
     - path: test-output/august/august.fl.lima.counts
     - path: test-output/august/august.fl.lima.report
     - path: test-output/august/august.fl.lima.summary
-    - path: test-output/august/august.flnc.E_1_1_3p--E_1_1_3p.bam
-    - path: test-output/august/august.flnc.E_1_2_3p--E_1_2_3p.bam
-    - path: test-output/august/august.flnc.E_2_2_3p--E_2_2_3p.bam
-    - path: test-output/august/august.flnc.E_SCR_3p--E_SCR_3p.bam
-    - path: test-output/august/august.flnc.F_1_1_3p--F_1_1_3p.bam
-    - path: test-output/august/august.flnc.F_1_3_3p--F_1_3_3p.bam
-    - path: test-output/august/august.flnc.F_2_1_3p--F_2_1_3p.bam
-    - path: test-output/august/august.flnc.F_73_3p--F_73_3p.bam
-    - path: test-output/august/august.flnc.F_SCR_3p--F_SCR_3p.bam
-    - path: test-output/august/august.flnc.F_VEH_3p--F_VEH_3p.bam
-    - path: test-output/august/august.flnc.G_1_1_3p--G_1_1_3p.bam
-    - path: test-output/august/august.flnc.G_2_1_3p--G_2_1_3p.bam
-    - path: test-output/august/august.flnc.G_2_2_3p--G_2_2_3p.bam
-    - path: test-output/august/august.flnc.G_73_3p--G_73_3p.bam
-    - path: test-output/august/august.flnc.G_SCR_3p--G_SCR_3p.bam
-    - path: test-output/august/august.flnc.E_1_1_3p--E_1_1_3p-fastqc
     - path: test-output/february/february.ccs.bam
     - path: test-output/february/february.ccs.report.txt
     - path: test-output/february/february.fl.lima.counts
     - path: test-output/february/february.fl.lima.report
     - path: test-output/february/february.fl.lima.summary
-    - path: test-output/february/february.flnc.11_n3_3p--11_n3_3p.bam
-    - path: test-output/february/february.flnc.SCR_t7_3p--SCR_t7_3p.bam
-    - path: test-output/february/february.flnc.11_n3_3p--11_n3_3p-fastqc
     - path: test-output/march/march.ccs.bam
     - path: test-output/march/march.ccs.report.txt
     - path: test-output/march/march.fl.lima.counts
     - path: test-output/march/march.fl.lima.report
     - path: test-output/march/march.fl.lima.summary
-    - path: test-output/march/march.flnc.Barcode_1_3p--Barcode_1_3p.bam
-    - path: test-output/march/march.flnc.Barcode_3_3p--Barcode_3_3p.bam
-    - path: test-output/march/march.flnc.Barcode_4_3p--Barcode_4_3p.bam
-    - path: test-output/march/march.flnc.Barcode_1_3p--Barcode_1_3p-fastqc
 
-- name: no-transcript-clean
+    - path: test-output/august/august.flnc.E_1_1_3p--E_1_1_3p.bam
+      should_exist: false
+    - path: test-output/august/august.flnc.E_1_2_3p--E_1_2_3p.bam
+      should_exist: false
+    - path: test-output/august/august.flnc.E_2_2_3p--E_2_2_3p.bam
+      should_exist: false
+    - path: test-output/august/august.flnc.E_SCR_3p--E_SCR_3p.bam
+      should_exist: false
+    - path: test-output/august/august.flnc.F_1_1_3p--F_1_1_3p.bam
+      should_exist: false
+    - path: test-output/august/august.flnc.F_1_3_3p--F_1_3_3p.bam
+      should_exist: false
+    - path: test-output/august/august.flnc.F_2_1_3p--F_2_1_3p.bam
+      should_exist: false
+    - path: test-output/august/august.flnc.F_73_3p--F_73_3p.bam
+      should_exist: false
+    - path: test-output/august/august.flnc.F_SCR_3p--F_SCR_3p.bam
+      should_exist: false
+    - path: test-output/august/august.flnc.F_VEH_3p--F_VEH_3p.bam
+      should_exist: false
+    - path: test-output/august/august.flnc.G_1_1_3p--G_1_1_3p.bam
+      should_exist: false
+    - path: test-output/august/august.flnc.G_2_1_3p--G_2_1_3p.bam
+      should_exist: false
+    - path: test-output/august/august.flnc.G_2_2_3p--G_2_2_3p.bam
+      should_exist: false
+    - path: test-output/august/august.flnc.G_73_3p--G_73_3p.bam
+      should_exist: false
+    - path: test-output/august/august.flnc.G_SCR_3p--G_SCR_3p.bam
+      should_exist: false
+    - path: test-output/august/august.flnc.E_1_1_3p--E_1_1_3p-fastqc
+      should_exist: false
+    - path: test-output/february/february.flnc.11_n3_3p--11_n3_3p.bam
+      should_exist: false
+    - path: test-output/february/february.flnc.SCR_t7_3p--SCR_t7_3p.bam
+      should_exist: false
+    - path: test-output/february/february.flnc.11_n3_3p--11_n3_3p-fastqc
+      should_exist: false
+    - path: test-output/march/march.flnc.Barcode_1_3p--Barcode_1_3p.bam
+      should_exist: false
+    - path: test-output/march/march.flnc.Barcode_3_3p--Barcode_3_3p.bam
+      should_exist: false
+    - path: test-output/march/march.flnc.Barcode_4_3p--Barcode_4_3p.bam
+      should_exist: false
+    - path: test-output/march/march.flnc.Barcode_1_3p--Barcode_1_3p-fastqc
+      should_exist: false
+
+- name: run-isoseq3-refine
   tags:
     - integration
   command: >-
     cromwell run -o tests/cromwell.options.json
-    -i tests/integration/no-transcript-clean.settings.json PacBio-subreads-processing.wdl
+    -i tests/integration/run-isoseq3-refine.settings.json PacBio-subreads-processing.wdl
   files:
     - path: test-output/august/august.ccs.bam
     - path: test-output/august/august.fl.lima.counts
-    - path: test-output/february/february.fl.SCR_t7_3p--SCR_t7_3p-fastqc
-
+    - path: test-output/february/february.flnc.11_n3_3p--11_n3_3p-fastqc
     - path: test-output/february/february.flnc.11_n3_3p--11_n3_3p.consensusreadset.xml
-      should_exist: false
     - path: test-output/february/february.flnc.11_n3_3p--11_n3_3p.bam
-      should_exist: false
     - path: test-output/february/february.flnc.11_n3_3p--11_n3_3p.bam.pbi
-      should_exist: false
     - path: test-output/february/february.flnc.11_n3_3p--11_n3_3p.filter_summary.json
-      should_exist: false
     - path: test-output/february/february.flnc.11_n3_3p--11_n3_3p.report.csv
-      should_exist: false
     - path: test-output/february/february.flnc.11_n3_3p--11_n3_3p.stderr.log
-      should_exist: false
+    - path: test-output/march/march.flnc.Barcode_1_3p--Barcode_1_3p.bam
+    - path: test-output/august/august.flnc.E_1_1_3p--E_1_1_3p.bam

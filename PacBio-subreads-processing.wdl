@@ -35,7 +35,7 @@ workflow SubreadsProcessing {
         String libraryDesign = "same"
         Boolean ccsMode = true
         Boolean splitBamNamed = true
-        Boolean noTranscriptClean = false
+        Boolean runIsoseq3Refine = false
     }
 
     call common.YamlToJson as convertDockerImagesFile {
@@ -70,7 +70,7 @@ workflow SubreadsProcessing {
 
         scatter (bamFile in executeLima.outputFLfile) {
             String refineOutputPrefix = sub(basename(bamFile, ".bam"), "fl", "flnc")
-            if (!noTranscriptClean) {
+            if (runIsoseq3Refine) {
               call isoseq3.Refine as executeRefine {
                   input:
                       inputBamFile = bamFile,
@@ -90,7 +90,7 @@ workflow SubreadsProcessing {
               }
             }
 
-            if (noTranscriptClean) {
+            if (!runIsoseq3Refine) {
               call fastqc.Fastqc as fastqcTaskNoClean {
                   input:
                       seqFile = bamFile,
@@ -137,7 +137,7 @@ workflow SubreadsProcessing {
         libraryDesign: {description: "Barcode structure of the library design.", category: "advanced"}
         ccsMode: {description: "CCS mode, use optimal alignment options.", category: "advanced"}
         splitBamNamed: {description: "Split BAM output by resolved barcode pair name.", category: "advanced"}
-        noTranscriptClean: {description: "Do not performe transcript cleaning with isoseq3, set this flag when analysing DNA reads.", category: "advanced"}
+        runIsoseq3Refine: {description: "Run isoseq3 refine for de-novo transcript reconstruction. Do not set this to true when analysing DNA reads.", category: "advanced"}
 
         # outputs
         outputCCS: {description: "Consensus reads output file(s)."}
