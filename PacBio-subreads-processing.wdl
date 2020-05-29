@@ -69,7 +69,6 @@ workflow SubreadsProcessing {
         }
 
         scatter (bamFile in executeLima.outputFLfile) {
-            String refineOutputPrefix = sub(basename(bamFile, ".bam"), "fl", "flnc")
             if (runIsoseq3Refine) {
                 String refineOutputPrefix = sub(basename(bamFile, ".bam"), "fl", "flnc")
                 call isoseq3.Refine as executeRefine {
