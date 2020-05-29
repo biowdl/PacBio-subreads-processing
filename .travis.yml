@@ -49,4 +49,5 @@ matrix:
       after_failure:
         - echo "Linting failed"
     - env:
-      - TEST="integration"
+      - TEST="all-settings"
+      - TEST="run-isoseq3-refine"
