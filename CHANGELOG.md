@@ -15,6 +15,8 @@ version develop
 + Rename test files to show PacBio file structure more clearly.
 + Make running isoseq3 refine optional. This changes the default behaviour
   to not running isoseq3 refine.
++ Increase the number of fastqc threads. This prevents java heapspace memory
+  errors.
 + Add FastQC to the pipeline.
 + Tasks were updated to contain the `time_minutes` runtime attribute and
   associated `timeMinutes` input, describing the maximum time the task will
