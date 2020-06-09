@@ -85,6 +85,7 @@ workflow SubreadsProcessing {
                         seqFile = executeRefine.outputFLNCfile,
                         outdirPath = outputDirectory + "/" + subreads.subreads_id + "/" + basename(executeRefine.outputFLNCfile, ".bam") + "-fastqc",
                         format = "bam",
+                        threads = 4,
                         dockerImage = dockerImages["fastqc"]
                 }
             }
@@ -95,6 +96,7 @@ workflow SubreadsProcessing {
                         seqFile = bamFile,
                         outdirPath = outputDirectory + "/" + subreads.subreads_id + "/" + basename(bamFile, ".bam") + "-fastqc",
                         format = "bam",
+                        threads = 4,
                         dockerImage = dockerImages["fastqc"]
                 }
             }
