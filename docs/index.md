@@ -34,6 +34,13 @@ For an overview of all available inputs, see [this page](./inputs.html).
 }
 ```
 
+Optional settings:
+```json
+{
+    "SubreadsProcessing.runIsoseq3Refine": "In the case of RNA, polish the reads."
+}
+```
+
 #### Subread configuration
 The subread configuration can be given as a json file with the following items.
 
