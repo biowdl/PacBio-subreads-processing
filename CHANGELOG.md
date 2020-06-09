@@ -10,6 +10,9 @@ that users understand how the changes affect the new version.
 
 version develop
 ---------------------------
++ Add multiqc to collect the fastqc results.
++ Rename fastqc tasks to correctly reflect what input they process.
++ Rename test files to show PacBio file structure more clearly.
 + Make running isoseq3 refine optional. This changes the default behaviour
   to not running isoseq3 refine.
 + Add FastQC to the pipeline.

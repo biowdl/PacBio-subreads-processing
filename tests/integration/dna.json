@@ -1,0 +1,4 @@
+{
+    "SubreadsProcessing.subreadsConfigFile": "tests/samplesheets/batches.json",
+    "SubreadsProcessing.dockerImagesFile": "dockerImages.yml"
+}
