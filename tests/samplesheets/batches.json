@@ -1,1 +1,22 @@
-{"subreads": [{"subreads_id": "batch_1_march", "subreads_file": "tests/data/batch.1.march.subreads.bam", "subreads_md5": "7f92774d5202140cd9f29553dfbd239a", "barcodes_file": "tests/data/batch.1.march.barcodes.fasta"}, {"subreads_id": "batch_2_february", "subreads_file": "tests/data/batch.2.february.subreads.bam", "subreads_md5": "62de17af354fb3ce596315693230db53", "barcodes_file": "tests/data/batch.2.february.barcodes.fasta"}, {"subreads_id": "batch_3_august", "subreads_file": "tests/data/batch.3.august.subreads.bam", "subreads_md5": "94127ced6d8428301376ee4ac18df58a", "barcodes_file": "tests/data/batch.3.august.barcodes.fasta"}]}
+{
+    "subreads": [
+        {
+            "subreads_id": "batch_1_march",
+            "subreads_file": "tests/data/batch.1.march.subreads.bam",
+            "subreads_md5": "7f92774d5202140cd9f29553dfbd239a",
+            "barcodes_file": "tests/data/batch.1.march.barcodes.fasta"
+        },
+        {
+            "subreads_id": "batch_2_february",
+            "subreads_file": "tests/data/batch.2.february.subreads.bam",
+            "subreads_md5": "62de17af354fb3ce596315693230db53",
+            "barcodes_file": "tests/data/batch.2.february.barcodes.fasta"
+        },
+        {
+            "subreads_id": "batch_3_august",
+            "subreads_file": "tests/data/batch.3.august.subreads.bam",
+            "subreads_md5": "94127ced6d8428301376ee4ac18df58a",
+            "barcodes_file": "tests/data/batch.3.august.barcodes.fasta"
+        }
+    ]
+}
