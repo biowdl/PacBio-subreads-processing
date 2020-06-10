@@ -64,7 +64,7 @@
 <p name="SubreadsProcessing.convertDockerImagesFile.memory">
         <b>SubreadsProcessing.convertDockerImagesFile.memory</b><br />
         <i>String &mdash; Default: "128M"</i><br />
-        The maximum aount of memroy the job will need.
+        The maximum amount of memory the job will need.
 </p>
 <p name="SubreadsProcessing.convertDockerImagesFile.timeMinutes">
         <b>SubreadsProcessing.convertDockerImagesFile.timeMinutes</b><br />
