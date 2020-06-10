@@ -243,7 +243,6 @@
     - path: test-output/batch_3_august/batch_3_august.fl.Sample_26_3p--Sample_26_3p-fastqc
       should_exist: false
     - path: test-output/batch_3_august/batch_3_august.flnc.Sample_2_3p--Sample_2_3p-fastqc
-      should_exist: false
     - path: test-output/batch_3_august/batch_3_august.flnc.Sample_2_3p--Sample_2_3p.bam
     - path: test-output/batch_3_august/batch_3_august.flnc.Sample_2_3p--Sample_2_3p.bam.pbi
     - path: test-output/batch_3_august/batch_3_august.flnc.Sample_2_3p--Sample_2_3p.consensusreadset.xml
