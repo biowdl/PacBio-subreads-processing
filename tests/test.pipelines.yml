@@ -120,8 +120,6 @@
       should_exist: false
     - path: test-output/batch_3_august/batch_3_august.flnc.Sample_21_3p--Sample_21_3p.bam
       should_exist: false
-    - path: test-output/batch_3_august/batch_3_august.flnc.Sample_21_3p--Sample_21_3p.bam.pbi
-      should_exist: false
     - path: test-output/batch_3_august/batch_3_august.flnc.Sample_24_3p--Sample_24_3p-fastqc
       should_exist: false
     - path: test-output/batch_3_august/batch_3_august.flnc.Sample_24_3p--Sample_24_3p.bam
