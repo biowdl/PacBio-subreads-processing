@@ -30,7 +30,7 @@ For an overview of all available inputs, see [this page](./inputs.html).
 ```json
 {
     "SubreadsProcessing.subreadsConfigFile": "Configuration file describing input subread BAMs and barcode files.",
-    "SubreadsProcessing.dockerImagesFile": "A file listing the used docker images."
+    "SubreadsProcessing.dockerImagesFile": "A file listing the used docker images.",
     "SubreadsProcessing.outputDirectory": "The path to the output directory."
 }
 ```
