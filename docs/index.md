@@ -31,6 +31,7 @@ For an overview of all available inputs, see [this page](./inputs.html).
 {
     "SubreadsProcessing.subreadsConfigFile": "Configuration file describing input subread BAMs and barcode files.",
     "SubreadsProcessing.dockerImagesFile": "A file listing the used docker images."
+    "SubreadsProcessing.outputDirectory": "The path to the output directory."
 }
 ```
 
@@ -81,6 +82,7 @@ The following is an example of what an inputs JSON might look like:
 {
     "SubreadsProcessing.subreadsConfigFile": "tests/samplesheets/batches.json",
     "SubreadsProcessing.dockerImagesFile": "dockerImages.yml",
+    "SubreadsProcessing.outputDirectory": "tests/test-output",
     "SubreadsProcessing.runIsoseq3Refine": true 
 }
 ```
