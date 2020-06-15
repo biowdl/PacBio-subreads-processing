@@ -80,7 +80,7 @@ workflow SubreadsProcessing {
                         dockerImage = dockerImages["isoseq3"]
                 }
 
-                call fastqc.Fastqc as fastqcTaskClean {
+                call fastqc.Fastqc as executeFastqcRefine {
                     input:
                         seqFile = executeRefine.outputFLNCfile,
                         outdirPath = outputDirectory + "/" + subreads.subreads_id + "/" + basename(executeRefine.outputFLNCfile, ".bam") + "-fastqc",
@@ -91,7 +91,7 @@ workflow SubreadsProcessing {
             }
 
             if (!runIsoseq3Refine) {
-                call fastqc.Fastqc as fastqcTaskNoClean {
+                call fastqc.Fastqc as executeFastqcLima {
                     input:
                         seqFile = bamFile,
                         outdirPath = outputDirectory + "/" + subreads.subreads_id + "/" + basename(bamFile, ".bam") + "-fastqc",
@@ -101,8 +101,8 @@ workflow SubreadsProcessing {
                 }
             }
 
-            File fastqcHtmlReport = select_first([fastqcTaskClean.htmlReport, fastqcTaskNoClean.htmlReport])
-            File fastqcZipReport = select_first([fastqcTaskClean.reportZip, fastqcTaskNoClean.reportZip])
+            File fastqcHtmlReport = select_first([executeFastqcRefine.htmlReport, executeFastqcLima.htmlReport])
+            File fastqcZipReport = select_first([executeFastqcRefine.reportZip, executeFastqcLima.reportZip])
 
         }
     }

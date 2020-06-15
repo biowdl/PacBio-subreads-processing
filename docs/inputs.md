@@ -61,6 +61,16 @@
         <i>String &mdash; Default: "quay.io/biocontainers/biowdl-input-converter:0.2.1--py_0"</i><br />
         The docker image used for this task. Changing this may result in errors which the developers may choose not to address.
 </p>
+<p name="SubreadsProcessing.convertDockerImagesFile.memory">
+        <b>SubreadsProcessing.convertDockerImagesFile.memory</b><br />
+        <i>String &mdash; Default: "128M"</i><br />
+        The maximum amount of memory the job will need.
+</p>
+<p name="SubreadsProcessing.convertDockerImagesFile.timeMinutes">
+        <b>SubreadsProcessing.convertDockerImagesFile.timeMinutes</b><br />
+        <i>Int &mdash; Default: 1</i><br />
+        The maximum amount of time the job will run in minutes.
+</p>
 <p name="SubreadsProcessing.executeCCS.byStrand">
         <b>SubreadsProcessing.executeCCS.byStrand</b><br />
         <i>Boolean &mdash; Default: false</i><br />
@@ -95,6 +105,141 @@
         <b>SubreadsProcessing.executeCCS.minPasses</b><br />
         <i>Int &mdash; Default: 3</i><br />
         Minimum number of full-length subreads required to generate CCS for a ZMW.
+</p>
+<p name="SubreadsProcessing.executeCCS.timeMinutes">
+        <b>SubreadsProcessing.executeCCS.timeMinutes</b><br />
+        <i>Int &mdash; Default: 1440</i><br />
+        The maximum amount of time the job will run in minutes.
+</p>
+<p name="SubreadsProcessing.executeFastqcLima.adapters">
+        <b>SubreadsProcessing.executeFastqcLima.adapters</b><br />
+        <i>File? &mdash; Default: None</i><br />
+        Equivalent to fastqc's --adapters option.
+</p>
+<p name="SubreadsProcessing.executeFastqcLima.casava">
+        <b>SubreadsProcessing.executeFastqcLima.casava</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Equivalent to fastqc's --casava flag.
+</p>
+<p name="SubreadsProcessing.executeFastqcLima.contaminants">
+        <b>SubreadsProcessing.executeFastqcLima.contaminants</b><br />
+        <i>File? &mdash; Default: None</i><br />
+        Equivalent to fastqc's --contaminants option.
+</p>
+<p name="SubreadsProcessing.executeFastqcLima.dir">
+        <b>SubreadsProcessing.executeFastqcLima.dir</b><br />
+        <i>String? &mdash; Default: None</i><br />
+        Equivalent to fastqc's --dir option.
+</p>
+<p name="SubreadsProcessing.executeFastqcLima.extract">
+        <b>SubreadsProcessing.executeFastqcLima.extract</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Equivalent to fastqc's --extract flag.
+</p>
+<p name="SubreadsProcessing.executeFastqcLima.kmers">
+        <b>SubreadsProcessing.executeFastqcLima.kmers</b><br />
+        <i>Int? &mdash; Default: None</i><br />
+        Equivalent to fastqc's --kmers option.
+</p>
+<p name="SubreadsProcessing.executeFastqcLima.limits">
+        <b>SubreadsProcessing.executeFastqcLima.limits</b><br />
+        <i>File? &mdash; Default: None</i><br />
+        Equivalent to fastqc's --limits option.
+</p>
+<p name="SubreadsProcessing.executeFastqcLima.memory">
+        <b>SubreadsProcessing.executeFastqcLima.memory</b><br />
+        <i>String &mdash; Default: "~{250 + 250 * threads}M"</i><br />
+        The amount of memory this job will use.
+</p>
+<p name="SubreadsProcessing.executeFastqcLima.minLength">
+        <b>SubreadsProcessing.executeFastqcLima.minLength</b><br />
+        <i>Int? &mdash; Default: None</i><br />
+        Equivalent to fastqc's --min_length option.
+</p>
+<p name="SubreadsProcessing.executeFastqcLima.nano">
+        <b>SubreadsProcessing.executeFastqcLima.nano</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Equivalent to fastqc's --nano flag.
+</p>
+<p name="SubreadsProcessing.executeFastqcLima.noFilter">
+        <b>SubreadsProcessing.executeFastqcLima.noFilter</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Equivalent to fastqc's --nofilter flag.
+</p>
+<p name="SubreadsProcessing.executeFastqcLima.nogroup">
+        <b>SubreadsProcessing.executeFastqcLima.nogroup</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Equivalent to fastqc's --nogroup flag.
+</p>
+<p name="SubreadsProcessing.executeFastqcLima.timeMinutes">
+        <b>SubreadsProcessing.executeFastqcLima.timeMinutes</b><br />
+        <i>Int &mdash; Default: 1 + ceil(size(seqFile,"G")) * 4</i><br />
+        The maximum amount of time the job will run in minutes.
+</p>
+<p name="SubreadsProcessing.executeFastqcRefine.adapters">
+        <b>SubreadsProcessing.executeFastqcRefine.adapters</b><br />
+        <i>File? &mdash; Default: None</i><br />
+        Equivalent to fastqc's --adapters option.
+</p>
+<p name="SubreadsProcessing.executeFastqcRefine.casava">
+        <b>SubreadsProcessing.executeFastqcRefine.casava</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Equivalent to fastqc's --casava flag.
+</p>
+<p name="SubreadsProcessing.executeFastqcRefine.contaminants">
+        <b>SubreadsProcessing.executeFastqcRefine.contaminants</b><br />
+        <i>File? &mdash; Default: None</i><br />
+        Equivalent to fastqc's --contaminants option.
+</p>
+<p name="SubreadsProcessing.executeFastqcRefine.dir">
+        <b>SubreadsProcessing.executeFastqcRefine.dir</b><br />
+        <i>String? &mdash; Default: None</i><br />
+        Equivalent to fastqc's --dir option.
+</p>
+<p name="SubreadsProcessing.executeFastqcRefine.extract">
+        <b>SubreadsProcessing.executeFastqcRefine.extract</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Equivalent to fastqc's --extract flag.
+</p>
+<p name="SubreadsProcessing.executeFastqcRefine.kmers">
+        <b>SubreadsProcessing.executeFastqcRefine.kmers</b><br />
+        <i>Int? &mdash; Default: None</i><br />
+        Equivalent to fastqc's --kmers option.
+</p>
+<p name="SubreadsProcessing.executeFastqcRefine.limits">
+        <b>SubreadsProcessing.executeFastqcRefine.limits</b><br />
+        <i>File? &mdash; Default: None</i><br />
+        Equivalent to fastqc's --limits option.
+</p>
+<p name="SubreadsProcessing.executeFastqcRefine.memory">
+        <b>SubreadsProcessing.executeFastqcRefine.memory</b><br />
+        <i>String &mdash; Default: "~{250 + 250 * threads}M"</i><br />
+        The amount of memory this job will use.
+</p>
+<p name="SubreadsProcessing.executeFastqcRefine.minLength">
+        <b>SubreadsProcessing.executeFastqcRefine.minLength</b><br />
+        <i>Int? &mdash; Default: None</i><br />
+        Equivalent to fastqc's --min_length option.
+</p>
+<p name="SubreadsProcessing.executeFastqcRefine.nano">
+        <b>SubreadsProcessing.executeFastqcRefine.nano</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Equivalent to fastqc's --nano flag.
+</p>
+<p name="SubreadsProcessing.executeFastqcRefine.noFilter">
+        <b>SubreadsProcessing.executeFastqcRefine.noFilter</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Equivalent to fastqc's --nofilter flag.
+</p>
+<p name="SubreadsProcessing.executeFastqcRefine.nogroup">
+        <b>SubreadsProcessing.executeFastqcRefine.nogroup</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Equivalent to fastqc's --nogroup flag.
+</p>
+<p name="SubreadsProcessing.executeFastqcRefine.timeMinutes">
+        <b>SubreadsProcessing.executeFastqcRefine.timeMinutes</b><br />
+        <i>Int &mdash; Default: 1 + ceil(size(seqFile,"G")) * 4</i><br />
+        The maximum amount of time the job will run in minutes.
 </p>
 <p name="SubreadsProcessing.executeLima.cores">
         <b>SubreadsProcessing.executeLima.cores</b><br />
@@ -181,6 +326,11 @@
         <i>Boolean &mdash; Default: false</i><br />
         Only use subreads flanked by adapters for barcode identification.
 </p>
+<p name="SubreadsProcessing.executeLima.timeMinutes">
+        <b>SubreadsProcessing.executeLima.timeMinutes</b><br />
+        <i>Int &mdash; Default: 30</i><br />
+        The maximum amount of time the job will run in minutes.
+</p>
 <p name="SubreadsProcessing.executeRefine.cores">
         <b>SubreadsProcessing.executeRefine.cores</b><br />
         <i>Int &mdash; Default: 2</i><br />
@@ -201,6 +351,11 @@
         <i>Int &mdash; Default: 20</i><br />
         Minimum poly(A) tail length.
 </p>
+<p name="SubreadsProcessing.executeRefine.timeMinutes">
+        <b>SubreadsProcessing.executeRefine.timeMinutes</b><br />
+        <i>Int &mdash; Default: 30</i><br />
+        The maximum amount of time the job will run in minutes.
+</p>
 <p name="SubreadsProcessing.libraryDesign">
         <b>SubreadsProcessing.libraryDesign</b><br />
         <i>String &mdash; Default: "same"</i><br />
@@ -210,6 +365,11 @@
         <b>SubreadsProcessing.outputDirectory</b><br />
         <i>String &mdash; Default: "."</i><br />
         The directory to which the outputs will be written.
+</p>
+<p name="SubreadsProcessing.runIsoseq3Refine">
+        <b>SubreadsProcessing.runIsoseq3Refine</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Run isoseq3 refine for de-novo transcript reconstruction. Do not set this to true when analysing DNA reads.
 </p>
 <p name="SubreadsProcessing.splitBamNamed">
         <b>SubreadsProcessing.splitBamNamed</b><br />

@@ -10,6 +10,8 @@ that users understand how the changes affect the new version.
 
 version develop
 ---------------------------
++ Rename fastqc tasks to correctly reflect what input they process.
++ Rename test files to show PacBio file structure more clearly.
 + Increase the number of fastqc threads. This prevents java heapspace memory
   errors.
 + Make running isoseq3 refine optional. This changes the default behaviour
