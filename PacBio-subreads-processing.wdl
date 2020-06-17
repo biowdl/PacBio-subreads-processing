@@ -108,7 +108,6 @@ workflow SubreadsProcessing {
             # because the sample names are determine from the headers in the
             # fasta file, which is not accessible from the WDL.
             String sampleName = sub(sub(bamFile, ".*--", ""),".bam", "")
-
         }
     }
 
