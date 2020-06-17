@@ -106,7 +106,7 @@ workflow SubreadsProcessing {
 
             # Determine the sample name from the bam file name. This is needed
             # because the sample names are determine from the headers in the
-            # fasta file, which is not accessible from the WDL
+            # fasta file, which is not accessible from the WDL.
             String sampleName = sub(sub(bamFile, ".*--", ""),".bam", "")
 
         }
