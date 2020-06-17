@@ -167,5 +167,6 @@ workflow SubreadsProcessing {
         outputRefineStderr: {description: "Refine STDERR log file(s)."}
         outputHtmlReport: {description: "FastQC output HTML file(s)."}
         outputZipReport: {description: "FastQC output support file(s)."}
+        outputSamples: {description: "The name(s) of the sample(s)."}
     }
 }
