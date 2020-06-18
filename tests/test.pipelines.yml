@@ -4,6 +4,9 @@
   command: >-
     cromwell run -o tests/cromwell.options.json
     -i tests/integration/dna.json PacBio-subreads-processing.wdl
+  stdout:
+    contains_regex:
+      - 'SubreadsProcessing.outputSamples.*"Sample_1_3p"'
   files:
     - path: test-output/batch_1_march/batch_1_march.ccs.bam
     - path: test-output/batch_1_march/batch_1_march.ccs.bam.pbi
@@ -139,6 +142,9 @@
   command: >-
     cromwell run -o tests/cromwell.options.json
     -i tests/integration/rna.json PacBio-subreads-processing.wdl
+  stdout:
+    contains_regex:
+      - 'SubreadsProcessing.outputSamples.*"Sample_1_3p"'
   files:
     - path: test-output/batch_1_march/batch_1_march.ccs.bam
     - path: test-output/batch_1_march/batch_1_march.ccs.bam.pbi

@@ -104,6 +104,10 @@ workflow SubreadsProcessing {
             File fastqcHtmlReport = select_first([executeFastqcRefine.htmlReport, executeFastqcLima.htmlReport])
             File fastqcZipReport = select_first([executeFastqcRefine.reportZip, executeFastqcLima.reportZip])
 
+            # Determine the sample name from the bam file name. This is needed
+            # because the sample names are determine from the headers in the
+            # fasta file, which is not accessible from the WDL.
+            String sampleName = sub(sub(bamFile, ".*--", ""),".bam", "")
         }
     }
 
@@ -128,6 +132,7 @@ workflow SubreadsProcessing {
         Array[File?] outputRefineSummary = flatten(executeRefine.outputFilterSummaryFile)
         Array[File?] outputRefineReport = flatten(executeRefine.outputReportFile)
         Array[File?] outputRefineStderr = flatten(executeRefine.outputSTDERRfile)
+        Array[String] outputSamples = flatten(sampleName)
     }
 
     parameter_meta {
@@ -161,5 +166,6 @@ workflow SubreadsProcessing {
         outputRefineStderr: {description: "Refine STDERR log file(s)."}
         outputHtmlReport: {description: "FastQC output HTML file(s)."}
         outputZipReport: {description: "FastQC output support file(s)."}
+        outputSamples: {description: "The name(s) of the sample(s)."}
     }
 }
