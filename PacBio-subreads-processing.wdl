@@ -26,6 +26,7 @@ import "tasks/common.wdl" as common
 import "tasks/fastqc.wdl" as fastqc
 import "tasks/isoseq3.wdl" as isoseq3
 import "tasks/lima.wdl" as lima
+import "tasks/multiqc.wdl" as multiqc
 
 workflow SubreadsProcessing {
     input {
@@ -37,6 +38,8 @@ workflow SubreadsProcessing {
         Boolean splitBamNamed = true
         Boolean runIsoseq3Refine = false
     }
+
+    meta {allowNestedInputs: true}
 
     call common.YamlToJson as convertDockerImagesFile {
         input:
@@ -50,28 +53,28 @@ workflow SubreadsProcessing {
     Array[Subreads] allSubreads = subreadsConfig.subreads
 
     scatter (subreads in allSubreads) {
-        call ccs.CCS as executeCCS {
+        call ccs.CCS as ccs {
             input:
                 subreadsFile = subreads.subreads_file,
                 outputPrefix = outputDirectory + "/" + subreads.subreads_id + "/" + subreads.subreads_id,
                 dockerImage = dockerImages["ccs"]
         }
 
-        call lima.Lima as executeLima {
+        call lima.Lima as lima {
             input:
                 libraryDesign = libraryDesign,
                 ccsMode = ccsMode,
                 splitBamNamed = splitBamNamed,
-                inputBamFile = executeCCS.outputCCSfile,
+                inputBamFile = ccs.outputCCSfile,
                 barcodeFile = subreads.barcodes_file,
                 outputPrefix = outputDirectory + "/" + subreads.subreads_id + "/" + subreads.subreads_id,
                 dockerImage = dockerImages["lima"]
         }
 
-        scatter (bamFile in executeLima.outputFLfile) {
+        scatter (bamFile in lima.outputFLfile) {
             if (runIsoseq3Refine) {
                 String refineOutputPrefix = sub(basename(bamFile, ".bam"), "fl", "flnc")
-                call isoseq3.Refine as executeRefine {
+                call isoseq3.Refine as refine {
                     input:
                         inputBamFile = bamFile,
                         primerFile = subreads.barcodes_file,
@@ -80,10 +83,10 @@ workflow SubreadsProcessing {
                         dockerImage = dockerImages["isoseq3"]
                 }
 
-                call fastqc.Fastqc as executeFastqcRefine {
+                call fastqc.Fastqc as fastqcRefine {
                     input:
-                        seqFile = executeRefine.outputFLNCfile,
-                        outdirPath = outputDirectory + "/" + subreads.subreads_id + "/" + basename(executeRefine.outputFLNCfile, ".bam") + "-fastqc",
+                        seqFile = refine.outputFLNCfile,
+                        outdirPath = outputDirectory + "/" + subreads.subreads_id + "/" + basename(refine.outputFLNCfile, ".bam") + "-fastqc",
                         format = "bam",
                         threads = 4,
                         dockerImage = dockerImages["fastqc"]
@@ -91,7 +94,7 @@ workflow SubreadsProcessing {
             }
 
             if (!runIsoseq3Refine) {
-                call fastqc.Fastqc as executeFastqcLima {
+                call fastqc.Fastqc as fastqcLima {
                     input:
                         seqFile = bamFile,
                         outdirPath = outputDirectory + "/" + subreads.subreads_id + "/" + basename(bamFile, ".bam") + "-fastqc",
@@ -101,8 +104,8 @@ workflow SubreadsProcessing {
                 }
             }
 
-            File fastqcHtmlReport = select_first([executeFastqcRefine.htmlReport, executeFastqcLima.htmlReport])
-            File fastqcZipReport = select_first([executeFastqcRefine.reportZip, executeFastqcLima.reportZip])
+            File fastqcHtmlReport = select_first([fastqcRefine.htmlReport, fastqcLima.htmlReport])
+            File fastqcZipReport = select_first([fastqcRefine.reportZip, fastqcLima.reportZip])
 
             # Determine the sample name from the bam file name. This is needed
             # because the sample names are determine from the headers in the
@@ -111,27 +114,38 @@ workflow SubreadsProcessing {
         }
     }
 
+    Array[File] outputReports = flatten([flatten(fastqcHtmlReport), flatten(fastqcZipReport)])
+
+    call multiqc.MultiQC as multiqcTask {
+        input:
+            reports = outputReports,
+            outDir = outputDirectory + "/multiqc",
+            dataDir = true,
+            dockerImage = dockerImages["multiqc"]
+    }
+
     output {
-        Array[File] outputCCS = executeCCS.outputCCSfile
-        Array[File] outputCCSindex = executeCCS.outputCCSindexFile
-        Array[File] outputCCSreport = executeCCS.outputReportFile
-        Array[File] outputCCSstderr = executeCCS.outputSTDERRfile
-        Array[File] outputLima = flatten(executeLima.outputFLfile)
-        Array[File] outputLimaIndex = flatten(executeLima.outputFLindexFile)
-        Array[File] outputLimaSubreadset = flatten(executeLima.outputFLxmlFile)
-        Array[File] outputLimaStderr = executeLima.outputSTDERRfile
-        Array[File] outputLimaJson = executeLima.outputJSONfile
-        Array[File] outputLimaCounts = executeLima.outputCountsFile
-        Array[File] outputLimaReport = executeLima.outputReportFile
-        Array[File] outputLimaSummary = executeLima.outputSummaryFile
-        Array[File] outputHtmlReport = flatten(fastqcHtmlReport)
-        Array[File] outputZipReport = flatten(fastqcZipReport)
-        Array[File?] outputRefine = flatten(executeRefine.outputFLNCfile)
-        Array[File?] outputRefineIndex = flatten(executeRefine.outputFLNCindexFile)
-        Array[File?] outputRefineConsensusReadset = flatten(executeRefine.outputConsensusReadsetFile)
-        Array[File?] outputRefineSummary = flatten(executeRefine.outputFilterSummaryFile)
-        Array[File?] outputRefineReport = flatten(executeRefine.outputReportFile)
-        Array[File?] outputRefineStderr = flatten(executeRefine.outputSTDERRfile)
+        Array[File] outputCCS = ccs.outputCCSfile
+        Array[File] outputCCSindex = ccs.outputCCSindexFile
+        Array[File] outputCCSreport = ccs.outputReportFile
+        Array[File] outputCCSstderr = ccs.outputSTDERRfile
+        Array[File] outputLima = flatten(lima.outputFLfile)
+        Array[File] outputLimaIndex = flatten(lima.outputFLindexFile)
+        Array[File] outputLimaSubreadset = flatten(lima.outputFLxmlFile)
+        Array[File] outputLimaStderr = lima.outputSTDERRfile
+        Array[File] outputLimaJson = lima.outputJSONfile
+        Array[File] outputLimaCounts = lima.outputCountsFile
+        Array[File] outputLimaReport = lima.outputReportFile
+        Array[File] outputLimaSummary = lima.outputSummaryFile
+        Array[File] outputWorkflowReports = outputReports
+        File outputMultiqcReport = multiqcTask.multiqcReport
+        File? outputMultiqcReportZip = multiqcTask.multiqcDataDirZip
+        Array[File?] outputRefine = flatten(refine.outputFLNCfile)
+        Array[File?] outputRefineIndex = flatten(refine.outputFLNCindexFile)
+        Array[File?] outputRefineConsensusReadset = flatten(refine.outputConsensusReadsetFile)
+        Array[File?] outputRefineSummary = flatten(refine.outputFilterSummaryFile)
+        Array[File?] outputRefineReport = flatten(refine.outputReportFile)
+        Array[File?] outputRefineStderr = flatten(refine.outputSTDERRfile)
         Array[String] outputSamples = flatten(sampleName)
     }
 
@@ -164,8 +178,9 @@ workflow SubreadsProcessing {
         outputRefineSummary: {description: "Refine summary file(s)."}
         outputRefineReport: {description: "Refine report file(s)."}
         outputRefineStderr: {description: "Refine STDERR log file(s)."}
-        outputHtmlReport: {description: "FastQC output HTML file(s)."}
-        outputZipReport: {description: "FastQC output support file(s)."}
+        outputWorkflowReports: {description: "A collection of all metrics outputs."}
+        outputMultiqcReport: {description: "The MultiQC html report."}
+        outputMultiqcReportZip: {description: "The MultiQC data zip file."}
         outputSamples: {description: "The name(s) of the sample(s)."}
     }
 }

@@ -1,4 +1,5 @@
 {
     "SubreadsProcessing.subreadsConfigFile": "tests/samplesheets/batches.json",
-    "SubreadsProcessing.dockerImagesFile": "dockerImages.yml"
+    "SubreadsProcessing.dockerImagesFile": "dockerImages.yml",
+    "SubreadsProcessing.runIsoseq3Refine": false
 }
