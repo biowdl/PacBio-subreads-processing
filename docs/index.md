@@ -5,7 +5,7 @@ title: Home
 
 This pipeline can be used to process Pacific Biosciences subread BAM files.
 It generates ccs reads (using pbccs), demultiplexes the ccs reads into samples
-(using lima) and polishes the reads (using isoseq3-refine for RNA).
+(using lima) and polishes the reads (using isoseq3 refine for RNA).
 
 This pipeline is part of [BioWDL](https://biowdl.github.io/)
 developed by the SASC team
