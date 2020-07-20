@@ -137,7 +137,7 @@ workflow SubreadsProcessing {
         Array[File] outputLimaCounts = lima.outputCountsFile
         Array[File] outputLimaReport = lima.outputReportFile
         Array[File] outputLimaSummary = lima.outputSummaryFile
-        Array[File] outputSampleWorkflowReports = outputReports
+        Array[File] outputWorkflowReports = outputReports
         File outputMultiqcReport = multiqcTask.multiqcReport
         File? outputMultiqcReportZip = multiqcTask.multiqcDataDirZip
         Array[File?] outputRefine = flatten(refine.outputFLNCfile)
@@ -178,7 +178,7 @@ workflow SubreadsProcessing {
         outputRefineSummary: {description: "Refine summary file(s)."}
         outputRefineReport: {description: "Refine report file(s)."}
         outputRefineStderr: {description: "Refine STDERR log file(s)."}
-        outputSampleWorkflowReports: {description: "A collection of all metrics outputs."}
+        outputWorkflowReports: {description: "A collection of all metrics outputs."}
         outputMultiqcReport: {description: "The MultiQC html report."}
         outputMultiqcReportZip: {description: "The MultiQC data zip file."}
         outputSamples: {description: "The name(s) of the sample(s)."}
