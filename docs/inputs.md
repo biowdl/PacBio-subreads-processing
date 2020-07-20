@@ -519,7 +519,7 @@
 <p name="SubreadsProcessing.splitBamNamed">
         <b>SubreadsProcessing.splitBamNamed</b><br />
         <i>Boolean &mdash; Default: true</i><br />
-        Split BAM output by resolved barcode pair name.
+        Split BAM file(s) by resolved barcode pair name.
 </p>
 </details>
 
