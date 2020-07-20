@@ -26,6 +26,7 @@ import "tasks/common.wdl" as common
 import "tasks/fastqc.wdl" as fastqc
 import "tasks/isoseq3.wdl" as isoseq3
 import "tasks/lima.wdl" as lima
+import "tasks/multiqc.wdl" as multiqc
 
 workflow SubreadsProcessing {
     input {
@@ -113,6 +114,16 @@ workflow SubreadsProcessing {
         }
     }
 
+    Array[File] outputReports = flatten([flatten(fastqcHtmlReport), flatten(fastqcZipReport)])
+
+    call multiqc.MultiQC as multiqcTask {
+        input:
+            reports = outputReports,
+            outDir = outputDirectory + "/multiqc",
+            dataDir = true,
+            dockerImage = dockerImages["multiqc"]
+    }
+
     output {
         Array[File] outputCCS = ccs.outputCCSfile
         Array[File] outputCCSindex = ccs.outputCCSindexFile
@@ -128,6 +139,8 @@ workflow SubreadsProcessing {
         Array[File] outputLimaSummary = lima.outputSummaryFile
         Array[File] outputHtmlReport = flatten(fastqcHtmlReport)
         Array[File] outputZipReport = flatten(fastqcZipReport)
+        File outputMultiqcReport = multiqcTask.multiqcReport
+        File? outputMultiqcReportZip = multiqcTask.multiqcDataDirZip
         Array[File?] outputRefine = flatten(refine.outputFLNCfile)
         Array[File?] outputRefineIndex = flatten(refine.outputFLNCindexFile)
         Array[File?] outputRefineConsensusReadset = flatten(refine.outputConsensusReadsetFile)
@@ -168,6 +181,8 @@ workflow SubreadsProcessing {
         outputRefineStderr: {description: "Refine STDERR log file(s)."}
         outputHtmlReport: {description: "FastQC output HTML file(s)."}
         outputZipReport: {description: "FastQC output support file(s)."}
+        outputMultiqcReport: {description: "The MultiQC html report."}
+        outputMultiqcReportZip: {description: "The MultiQC data zip file."}
         outputSamples: {description: "The name(s) of the sample(s)."}
     }
 }

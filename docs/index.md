@@ -4,19 +4,23 @@ title: Home
 ---
 
 This pipeline can be used to process Pacific Biosciences subread BAM files.
-It generates CCS reads (using CCS), demultiplexes the CCS reads into samples
-(using LIMA) and polishes the reads (using IsoSeq3-Refine).
+It generates ccs reads (using pbccs), demultiplexes the ccs reads into samples
+(using lima) and polishes the reads (using isoseq3-refine for RNA).
 
 This pipeline is part of [BioWDL](https://biowdl.github.io/)
 developed by the SASC team
 at [Leiden University Medical Center](https://www.lumc.nl/).
 
 ## Usage
-You can run the pipeline using
+You can run this pipeline using
 [Cromwell](http://cromwell.readthedocs.io/en/stable/):
 
 ```bash
-java -jar cromwell-<version>.jar run -i inputs.json PacBio-subreads-processing.wdl
+java \
+    -jar cromwell-<version>.jar \
+    run \
+    -i inputs.json \
+    talon-wdl.wdl
 ```
 
 ### Inputs
@@ -101,7 +105,7 @@ biowdl pipelines. The list of default images for this pipeline can be
 found in the default for the `dockerImages` input.
 
 ### Output
-The workflow will output polished CCS reads split into their respective sample.
+The workflow will output polished ccs reads split into their respective sample.
 Along with these BAM files, the workflow will also output all intermediate
 generated files.
 
