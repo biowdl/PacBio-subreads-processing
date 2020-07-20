@@ -17,13 +17,13 @@ version develop
 + Remove `execute` from the naming structure for calls of tasks and workflows.
 + Add sample names to workflow output as `outputSamples`.
 + Rename fastqc tasks to correctly reflect what input they process.
-+ Rename test files to show PacBio file structure more clearly.
++ Rename test files to show pacbio file structure more clearly.
 + Increase the number of fastqc threads. This prevents java heapspace memory
   errors.
 + Make running isoseq3 refine optional. This changes the default behaviour
   to not running isoseq3 refine.
-+ Add FastQC to the pipeline.
++ Add fastqc to the pipeline.
 + Tasks were updated to contain the `time_minutes` runtime attribute and
   associated `timeMinutes` input, describing the maximum time the task will
   take to run.
-+ Setup PacBio subreads processing pipeline.
++ Setup pacbio subreads processing pipeline.
