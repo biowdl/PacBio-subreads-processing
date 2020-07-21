@@ -137,10 +137,10 @@ workflow SubreadsProcessing {
         Array[File] limaCounts = lima.outputCountsFile
         Array[File] limaReport = lima.outputReportFile
         Array[File] limaSummary = lima.outputSummaryFile
+        Array[String] samples = flatten(sampleName)
         Array[File] workflowReports = qualityReports
         File multiqcReport = multiqcTask.multiqcReport
         File? multiqcZip = multiqcTask.multiqcDataDirZip
-        Array[String] samples = flatten(sampleName)
         Array[File?] refineReads = flatten(refine.outputFLNCfile)
         Array[File?] refineIndex = flatten(refine.outputFLNCindexFile)
         Array[File?] refineConsensusReadset = flatten(refine.outputConsensusReadsetFile)
@@ -155,32 +155,32 @@ workflow SubreadsProcessing {
         outputDirectory: {description: "The directory to which the outputs will be written.", category: "advanced"}
         dockerImagesFile: {description: "The docker image used for this workflow. Changing this may result in errors which the developers may choose not to address.", category: "required"}
         libraryDesign: {description: "Barcode structure of the library design.", category: "advanced"}
-        ccsMode: {description: "CCS mode, use optimal alignment options.", category: "advanced"}
-        splitBamNamed: {description: "Split BAM file(s) by resolved barcode pair name.", category: "advanced"}
-        runIsoseq3Refine: {description: "Run isoseq3 refine for de-novo transcript reconstruction. Do not set this to true when analysing DNA reads.", category: "advanced"}
+        ccsMode: {description: "Ccs mode, use optimal alignment options.", category: "advanced"}
+        splitBamNamed: {description: "Split bam file(s) by resolved barcode pair name.", category: "advanced"}
+        runIsoseq3Refine: {description: "Run isoseq3 refine for de-novo transcript reconstruction. Do not set this to true when analysing dna reads.", category: "advanced"}
 
         # outputs
         ccsReads: {description: "Consensus reads file(s)."}
         ccsIndex: {description: "Index of consensus reads file(s)."}
-        ccsReport: {description: "CCS results report file(s)."}
-        ccsStderr: {description: "CCS STDERR log file(s)."}
+        ccsReport: {description: "Ccs results report file(s)."}
+        ccsStderr: {description: "Ccs stderr log file(s)."}
         limaReads: {description: "Demultiplexed reads file(s)."}
         limaIndex: {description: "Index of demultiplexed reads file(s)."}
-        limaSubreadset: {description: "XML file of the subreadset(s)."}
-        limaStderr: {description: "Lima STDERR log file(s)."}
-        limaJson: {description: "Lima JSON file(s)."}
+        limaSubreadset: {description: "Xml file of the subreadset(s)."}
+        limaStderr: {description: "Lima stderr log file(s)."}
+        limaJson: {description: "Lima json file(s)."}
         limaCounts: {description: "Lima counts file(s)."}
         limaReport: {description: "Lima report file(s)."}
         limaSummary: {description: "Lima summary file(s)."}
-        workflowReports: {description: "A collection of all metrics."}
-        multiqcReport: {description: "The MultiQC html report."}
-        multiqcZip: {description: "The MultiQC data zip file."}
         samples: {description: "The name(s) of the sample(s)."}
+        workflowReports: {description: "A collection of all metrics."}
+        multiqcReport: {description: "The multiqc html report."}
+        multiqcZip: {description: "The multiqc data zip file."}
         refineReads: {description: "Filtered reads file(s)."}
         refineIndex: {description: "Index of filtered reads file(s)."}
-        refineConsensusReadset: {description: "Refine consensus readset XML file(s)."}
+        refineConsensusReadset: {description: "Refine consensus readset xml file(s)."}
         refineSummary: {description: "Refine summary file(s)."}
         refineReport: {description: "Refine report file(s)."}
-        refineStderr: {description: "Refine STDERR log file(s)."}
+        refineStderr: {description: "Refine stderr log file(s)."}
     }
 }
