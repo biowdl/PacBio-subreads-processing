@@ -114,39 +114,39 @@ workflow SubreadsProcessing {
         }
     }
 
-    Array[File] outputReports = flatten([flatten(fastqcHtmlReport), flatten(fastqcZipReport)])
+    Array[File] qualityReports = flatten([flatten(fastqcHtmlReport), flatten(fastqcZipReport)])
 
     call multiqc.MultiQC as multiqcTask {
         input:
-            reports = outputReports,
+            reports = qualityReports,
             outDir = outputDirectory + "/multiqc",
             dataDir = true,
             dockerImage = dockerImages["multiqc"]
     }
 
     output {
-        Array[File] outputCCS = ccs.outputCCSfile
-        Array[File] outputCCSindex = ccs.outputCCSindexFile
-        Array[File] outputCCSreport = ccs.outputReportFile
-        Array[File] outputCCSstderr = ccs.outputSTDERRfile
-        Array[File] outputLima = flatten(lima.outputFLfile)
-        Array[File] outputLimaIndex = flatten(lima.outputFLindexFile)
-        Array[File] outputLimaSubreadset = flatten(lima.outputFLxmlFile)
-        Array[File] outputLimaStderr = lima.outputSTDERRfile
-        Array[File] outputLimaJson = lima.outputJSONfile
-        Array[File] outputLimaCounts = lima.outputCountsFile
-        Array[File] outputLimaReport = lima.outputReportFile
-        Array[File] outputLimaSummary = lima.outputSummaryFile
-        Array[File] outputWorkflowReports = outputReports
-        File outputMultiqcReport = multiqcTask.multiqcReport
-        File? outputMultiqcReportZip = multiqcTask.multiqcDataDirZip
-        Array[File?] outputRefine = flatten(refine.outputFLNCfile)
-        Array[File?] outputRefineIndex = flatten(refine.outputFLNCindexFile)
-        Array[File?] outputRefineConsensusReadset = flatten(refine.outputConsensusReadsetFile)
-        Array[File?] outputRefineSummary = flatten(refine.outputFilterSummaryFile)
-        Array[File?] outputRefineReport = flatten(refine.outputReportFile)
-        Array[File?] outputRefineStderr = flatten(refine.outputSTDERRfile)
-        Array[String] outputSamples = flatten(sampleName)
+        Array[File] ccsReads = ccs.outputCCSfile
+        Array[File] ccsIndex = ccs.outputCCSindexFile
+        Array[File] ccsReport = ccs.outputReportFile
+        Array[File] ccsStderr = ccs.outputSTDERRfile
+        Array[File] limaReads = flatten(lima.outputFLfile)
+        Array[File] limaIndex = flatten(lima.outputFLindexFile)
+        Array[File] limaSubreadset = flatten(lima.outputFLxmlFile)
+        Array[File] limaStderr = lima.outputSTDERRfile
+        Array[File] limaJson = lima.outputJSONfile
+        Array[File] limaCounts = lima.outputCountsFile
+        Array[File] limaReport = lima.outputReportFile
+        Array[File] limaSummary = lima.outputSummaryFile
+        Array[String] samples = flatten(sampleName)
+        Array[File] workflowReports = qualityReports
+        File multiqcReport = multiqcTask.multiqcReport
+        File? multiqcZip = multiqcTask.multiqcDataDirZip
+        Array[File?] refineReads = flatten(refine.outputFLNCfile)
+        Array[File?] refineIndex = flatten(refine.outputFLNCindexFile)
+        Array[File?] refineConsensusReadset = flatten(refine.outputConsensusReadsetFile)
+        Array[File?] refineSummary = flatten(refine.outputFilterSummaryFile)
+        Array[File?] refineReport = flatten(refine.outputReportFile)
+        Array[File?] refineStderr = flatten(refine.outputSTDERRfile)
     }
 
     parameter_meta {
@@ -155,32 +155,32 @@ workflow SubreadsProcessing {
         outputDirectory: {description: "The directory to which the outputs will be written.", category: "advanced"}
         dockerImagesFile: {description: "The docker image used for this workflow. Changing this may result in errors which the developers may choose not to address.", category: "required"}
         libraryDesign: {description: "Barcode structure of the library design.", category: "advanced"}
-        ccsMode: {description: "CCS mode, use optimal alignment options.", category: "advanced"}
-        splitBamNamed: {description: "Split BAM output by resolved barcode pair name.", category: "advanced"}
-        runIsoseq3Refine: {description: "Run isoseq3 refine for de-novo transcript reconstruction. Do not set this to true when analysing DNA reads.", category: "advanced"}
+        ccsMode: {description: "Ccs mode, use optimal alignment options.", category: "advanced"}
+        splitBamNamed: {description: "Split bam file(s) by resolved barcode pair name.", category: "advanced"}
+        runIsoseq3Refine: {description: "Run isoseq3 refine for de-novo transcript reconstruction. Do not set this to true when analysing dna reads.", category: "advanced"}
 
         # outputs
-        outputCCS: {description: "Consensus reads output file(s)."}
-        outputCCSindex: {description: "Index of consensus reads output file(s)."}
-        outputCCSreport: {description: "CCS results report file(s)."}
-        outputCCSstderr: {description: "CCS STDERR log file(s)."}
-        outputLima: {description: "Demultiplexed reads output file(s)."}
-        outputLimaIndex: {description: "Index of demultiplexed reads output file(s)."}
-        outputLimaSubreadset: {description: "XML file of the subreadset(s)."}
-        outputLimaStderr: {description: "Lima STDERR log file(s)."}
-        outputLimaJson: {description: "Lima JSON file(s)."}
-        outputLimaCounts: {description: "Lima counts file(s)."}
-        outputLimaReport: {description: "Lima report file(s)."}
-        outputLimaSummary: {description: "Lima summary file(s)."}
-        outputRefine: {description: "Filtered reads output file(s)."}
-        outputRefineIndex: {description: "Index of filtered reads output file(s)."}
-        outputRefineConsensusReadset: {description: "Refine consensus readset XML file(s)."}
-        outputRefineSummary: {description: "Refine summary file(s)."}
-        outputRefineReport: {description: "Refine report file(s)."}
-        outputRefineStderr: {description: "Refine STDERR log file(s)."}
-        outputWorkflowReports: {description: "A collection of all metrics outputs."}
-        outputMultiqcReport: {description: "The MultiQC html report."}
-        outputMultiqcReportZip: {description: "The MultiQC data zip file."}
-        outputSamples: {description: "The name(s) of the sample(s)."}
+        ccsReads: {description: "Consensus reads file(s)."}
+        ccsIndex: {description: "Index of consensus reads file(s)."}
+        ccsReport: {description: "Ccs results report file(s)."}
+        ccsStderr: {description: "Ccs stderr log file(s)."}
+        limaReads: {description: "Demultiplexed reads file(s)."}
+        limaIndex: {description: "Index of demultiplexed reads file(s)."}
+        limaSubreadset: {description: "Xml file of the subreadset(s)."}
+        limaStderr: {description: "Lima stderr log file(s)."}
+        limaJson: {description: "Lima json file(s)."}
+        limaCounts: {description: "Lima counts file(s)."}
+        limaReport: {description: "Lima report file(s)."}
+        limaSummary: {description: "Lima summary file(s)."}
+        samples: {description: "The name(s) of the sample(s)."}
+        workflowReports: {description: "A collection of all metrics."}
+        multiqcReport: {description: "The multiqc html report."}
+        multiqcZip: {description: "The multiqc data zip file."}
+        refineReads: {description: "Filtered reads file(s)."}
+        refineIndex: {description: "Index of filtered reads file(s)."}
+        refineConsensusReadset: {description: "Refine consensus readset xml file(s)."}
+        refineSummary: {description: "Refine summary file(s)."}
+        refineReport: {description: "Refine report file(s)."}
+        refineStderr: {description: "Refine stderr log file(s)."}
     }
 }

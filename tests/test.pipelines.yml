@@ -6,7 +6,7 @@
     -i tests/integration/dna.json PacBio-subreads-processing.wdl
   stdout:
     contains_regex:
-      - 'SubreadsProcessing.outputSamples.*"Sample_1_3p"'
+      - 'SubreadsProcessing.samples.*"Sample_1_3p"'
   files:
     - path: test-output/batch.1.march/batch.1.march.ccs.bam
     - path: test-output/batch.1.march/batch.1.march.ccs.bam.pbi
@@ -106,7 +106,7 @@
     -i tests/integration/rna.json PacBio-subreads-processing.wdl
   stdout:
     contains_regex:
-      - 'SubreadsProcessing.outputSamples.*"Sample_1_3p"'
+      - 'SubreadsProcessing.samples.*"Sample_1_3p"'
   files:
     - path: test-output/batch.1.march/batch.1.march.ccs.bam
     - path: test-output/batch.1.march/batch.1.march.ccs.bam.pbi

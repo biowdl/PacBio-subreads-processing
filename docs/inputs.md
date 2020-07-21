@@ -94,7 +94,7 @@
 <p name="SubreadsProcessing.ccsMode">
         <b>SubreadsProcessing.ccsMode</b><br />
         <i>Boolean &mdash; Default: true</i><br />
-        CCS mode, use optimal alignment options.
+        Ccs mode, use optimal alignment options.
 </p>
 <p name="SubreadsProcessing.convertDockerImagesFile.dockerImage">
         <b>SubreadsProcessing.convertDockerImagesFile.dockerImage</b><br />
@@ -514,12 +514,12 @@
 <p name="SubreadsProcessing.runIsoseq3Refine">
         <b>SubreadsProcessing.runIsoseq3Refine</b><br />
         <i>Boolean &mdash; Default: false</i><br />
-        Run isoseq3 refine for de-novo transcript reconstruction. Do not set this to true when analysing DNA reads.
+        Run isoseq3 refine for de-novo transcript reconstruction. Do not set this to true when analysing dna reads.
 </p>
 <p name="SubreadsProcessing.splitBamNamed">
         <b>SubreadsProcessing.splitBamNamed</b><br />
         <i>Boolean &mdash; Default: true</i><br />
-        Split BAM output by resolved barcode pair name.
+        Split bam file(s) by resolved barcode pair name.
 </p>
 </details>
 
