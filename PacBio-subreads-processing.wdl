@@ -65,13 +65,13 @@ workflow SubreadsProcessing {
                 libraryDesign = libraryDesign,
                 ccsMode = ccsMode,
                 splitBamNamed = splitBamNamed,
-                inputBamFile = ccs.outputCCSfile,
+                inputBamFile = ccs.ccsBam,
                 barcodeFile = subreads.barcodes_file,
                 outputPrefix = outputDirectory + "/" + subreads.subreads_id + "/" + subreads.subreads_id,
                 dockerImage = dockerImages["lima"]
         }
 
-        scatter (bamFile in lima.outputFLfile) {
+        scatter (bamFile in lima.limaBam) {
             if (runIsoseq3Refine) {
                 String refineOutputPrefix = sub(basename(bamFile, ".bam"), "fl", "flnc")
                 call isoseq3.Refine as refine {
@@ -85,8 +85,8 @@ workflow SubreadsProcessing {
 
                 call fastqc.Fastqc as fastqcRefine {
                     input:
-                        seqFile = refine.outputFLNCfile,
-                        outdirPath = outputDirectory + "/" + subreads.subreads_id + "/" + basename(refine.outputFLNCfile, ".bam") + "-fastqc",
+                        seqFile = refine.refineBam,
+                        outdirPath = outputDirectory + "/" + subreads.subreads_id + "/" + basename(refine.refineBam, ".bam") + "-fastqc",
                         format = "bam",
                         threads = 4,
                         dockerImage = dockerImages["fastqc"]
@@ -125,28 +125,28 @@ workflow SubreadsProcessing {
     }
 
     output {
-        Array[File] ccsReads = ccs.outputCCSfile
-        Array[File] ccsIndex = ccs.outputCCSindexFile
-        Array[File] ccsReport = ccs.outputReportFile
-        Array[File] ccsStderr = ccs.outputSTDERRfile
-        Array[File] limaReads = flatten(lima.outputFLfile)
-        Array[File] limaIndex = flatten(lima.outputFLindexFile)
-        Array[File] limaSubreadset = flatten(lima.outputFLxmlFile)
-        Array[File] limaStderr = lima.outputSTDERRfile
-        Array[File] limaJson = lima.outputJSONfile
-        Array[File] limaCounts = lima.outputCountsFile
-        Array[File] limaReport = lima.outputReportFile
-        Array[File] limaSummary = lima.outputSummaryFile
+        Array[File] ccsReads = ccs.ccsBam
+        Array[File] ccsIndex = ccs.ccsBamIndex
+        Array[File] ccsReport = ccs.ccsReport
+        Array[File] ccsStderr = ccs.ccsStderr
+        Array[File] limaReads = flatten(lima.limaBam)
+        Array[File] limaIndex = flatten(lima.limaBamIndex)
+        Array[File] limaSubreadset = flatten(lima.limaXml)
+        Array[File] limaStderr = lima.limaStderr
+        Array[File] limaJson = lima.limaJson
+        Array[File] limaCounts = lima.limaCounts
+        Array[File] limaReport = lima.limaReport
+        Array[File] limaSummary = lima.limaSummary
         Array[String] samples = flatten(sampleName)
         Array[File] workflowReports = qualityReports
         File multiqcReport = multiqcTask.multiqcReport
         File? multiqcZip = multiqcTask.multiqcDataDirZip
-        Array[File?] refineReads = flatten(refine.outputFLNCfile)
-        Array[File?] refineIndex = flatten(refine.outputFLNCindexFile)
-        Array[File?] refineConsensusReadset = flatten(refine.outputConsensusReadsetFile)
-        Array[File?] refineSummary = flatten(refine.outputFilterSummaryFile)
-        Array[File?] refineReport = flatten(refine.outputReportFile)
-        Array[File?] refineStderr = flatten(refine.outputSTDERRfile)
+        Array[File?] refineReads = flatten(refine.refineBam)
+        Array[File?] refineIndex = flatten(refine.refineBamIndex)
+        Array[File?] refineConsensusReadset = flatten(refine.refineConsensusReadset)
+        Array[File?] refineSummary = flatten(refine.refineFilterSummary)
+        Array[File?] refineReport = flatten(refine.refineReport)
+        Array[File?] refineStderr = flatten(refine.refineStderr)
     }
 
     parameter_meta {
