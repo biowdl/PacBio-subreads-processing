@@ -45,7 +45,7 @@
 <p name="SubreadsProcessing.refine.requirePolyA">
         <b>SubreadsProcessing.refine.requirePolyA</b><br />
         <i>Boolean &mdash; Default: false</i><br />
-        Require FL reads to have a poly(A) tail and remove it.
+        Require fl reads to have a poly(A) tail and remove it.
 </p>
 
 ### Advanced inputs
@@ -84,7 +84,7 @@
 <p name="SubreadsProcessing.ccs.minPasses">
         <b>SubreadsProcessing.ccs.minPasses</b><br />
         <i>Int &mdash; Default: 3</i><br />
-        Minimum number of full-length subreads required to generate CCS for a ZMW.
+        Minimum number of full-length subreads required to generate ccs for a ZMW.
 </p>
 <p name="SubreadsProcessing.ccs.timeMinutes">
         <b>SubreadsProcessing.ccs.timeMinutes</b><br />
@@ -501,8 +501,8 @@
         <i>String &mdash; Default: "2G"</i><br />
         The amount of memory available to the job.
 </p>
-<p name="SubreadsProcessing.refine.minPolyAlength">
-        <b>SubreadsProcessing.refine.minPolyAlength</b><br />
+<p name="SubreadsProcessing.refine.minPolyALength">
+        <b>SubreadsProcessing.refine.minPolyALength</b><br />
         <i>Int &mdash; Default: 20</i><br />
         Minimum poly(A) tail length.
 </p>
