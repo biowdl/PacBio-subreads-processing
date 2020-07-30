@@ -37,6 +37,7 @@ workflow SubreadsProcessing {
         Boolean ccsMode = true
         Boolean splitBamNamed = true
         Boolean runIsoseq3Refine = false
+        Int lima_cores = 2
     }
 
     meta {allowNestedInputs: true}
@@ -68,6 +69,7 @@ workflow SubreadsProcessing {
                 inputBamFile = ccs.ccsBam,
                 barcodeFile = subreads.barcodes_file,
                 outputPrefix = outputDirectory + "/" + subreads.subreads_id + "/" + subreads.subreads_id,
+                cores = lima_cores,
                 dockerImage = dockerImages["lima"]
         }
 
