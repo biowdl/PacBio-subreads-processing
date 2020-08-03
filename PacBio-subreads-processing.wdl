@@ -160,6 +160,7 @@ workflow SubreadsProcessing {
         ccsMode: {description: "Ccs mode, use optimal alignment options.", category: "advanced"}
         splitBamNamed: {description: "Split bam file(s) by resolved barcode pair name.", category: "advanced"}
         runIsoseq3Refine: {description: "Run isoseq3 refine for de-novo transcript reconstruction. Do not set this to true when analysing dna reads.", category: "advanced"}
+        lima_cores: {description: "The number of CPU cores to be used by lima", category: "advanced"}
 
         # outputs
         ccsReads: {description: "Consensus reads file(s)."}
