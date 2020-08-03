@@ -10,6 +10,7 @@ that users understand how the changes affect the new version.
 
 version develop
 ---------------------------
++ Make CPU cores for lima configurable.
 + Update tasks and the input/output names.
 + Rename workflow outputs to shorter names.
 + Add multiqc to the pipeline.
