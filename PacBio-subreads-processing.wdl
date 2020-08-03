@@ -37,7 +37,7 @@ workflow SubreadsProcessing {
         Boolean ccsMode = true
         Boolean splitBamNamed = true
         Boolean runIsoseq3Refine = false
-        Int lima_cores = 2
+        Int limaCores = 2
     }
 
     meta {allowNestedInputs: true}
@@ -69,7 +69,7 @@ workflow SubreadsProcessing {
                 inputBamFile = ccs.ccsBam,
                 barcodeFile = subreads.barcodes_file,
                 outputPrefix = outputDirectory + "/" + subreads.subreads_id + "/" + subreads.subreads_id,
-                cores = lima_cores,
+                cores = limaCores,
                 dockerImage = dockerImages["lima"]
         }
 
@@ -160,7 +160,7 @@ workflow SubreadsProcessing {
         ccsMode: {description: "Ccs mode, use optimal alignment options.", category: "advanced"}
         splitBamNamed: {description: "Split bam file(s) by resolved barcode pair name.", category: "advanced"}
         runIsoseq3Refine: {description: "Run isoseq3 refine for de-novo transcript reconstruction. Do not set this to true when analysing dna reads.", category: "advanced"}
-        lima_cores: {description: "The number of CPU cores to be used by lima", category: "advanced"}
+        limaCores: {description: "The number of CPU cores to be used by lima", category: "advanced"}
 
         # outputs
         ccsReads: {description: "Consensus reads file(s)."}
