@@ -136,7 +136,7 @@ workflow SubreadsProcessing {
             # fasta file, which is not accessible from the WDL.
             String sampleName = sub(sub(bamFile, ".*--", ""),".bam", "")
 
-            File fastqFile = select_first([bam2FastqRefine.fastqFile, bam2FastqLima.fastqFile])
+            File? fastqFile = select_first([bam2FastqRefine.fastqFile, bam2FastqLima.fastqFile])
         }
     }
 
@@ -165,9 +165,10 @@ workflow SubreadsProcessing {
         Array[File] limaSummary = lima.limaSummary
         Array[String] samples = flatten(sampleName)
         Array[File] workflowReports = qualityReports
-        Array[File] fastqFiles = flatten(fastqFile)
+        Array[File]? fastqFiles = flatten(fastqFile)
         File multiqcReport = multiqcTask.multiqcReport
         File? multiqcZip = multiqcTask.multiqcDataDirZip
+        Array[File?] fastqFiles = flatten(fastqFile)
         Array[File?] refineReads = flatten(refine.refineBam)
         Array[File?] refineIndex = flatten(refine.refineBamIndex)
         Array[File?] refineConsensusReadset = flatten(refine.refineConsensusReadset)
@@ -184,6 +185,7 @@ workflow SubreadsProcessing {
         libraryDesign: {description: "Barcode structure of the library design.", category: "advanced"}
         ccsMode: {description: "Ccs mode, use optimal alignment options.", category: "advanced"}
         splitBamNamed: {description: "Split bam file(s) by resolved barcode pair name.", category: "advanced"}
+        generateFastq: {description: "Generate fastq files from demultiplexed bam files.", category: "common"}
         runIsoseq3Refine: {description: "Run isoseq3 refine for de-novo transcript reconstruction. Do not set this to true when analysing dna reads.", category: "advanced"}
         limaCores: {description: "The number of CPU cores to be used by lima.", category: "advanced"}
 
