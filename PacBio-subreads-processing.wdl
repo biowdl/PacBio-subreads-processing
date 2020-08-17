@@ -21,6 +21,7 @@ version 1.0
 # SOFTWARE.
 
 import "structs.wdl" as structs
+import "tasks/bam2fastx.wdl" as bam2fastx
 import "tasks/ccs.wdl" as ccs
 import "tasks/common.wdl" as common
 import "tasks/fastqc.wdl" as fastqc
@@ -45,7 +46,8 @@ workflow SubreadsProcessing {
     call common.YamlToJson as convertDockerImagesFile {
         input:
             yaml = dockerImagesFile,
-            outputJson = outputDirectory + "/dockerImages.json"
+            outputJson = outputDirectory + "/dockerImages.json",
+            dockerImage = "quay.io/biocontainers/biowdl-input-converter:0.2.1--py_0"
     }
 
     Map[String, String] dockerImages = read_json(convertDockerImagesFile.json)
@@ -93,9 +95,17 @@ workflow SubreadsProcessing {
                         threads = 4,
                         dockerImage = dockerImages["fastqc"]
                 }
+
+                call bam2fastx.Bam2Fastq as bam2FastqRefine {
+                    input:
+                        bam = [refine.refineBam],
+                        bamIndex = [refine.refineBamIndex],
+                        outputPrefix = outputDirectory + "/" + subreads.subreads_id + "/fastq-files/" + basename(refine.refineBam, ".bam"),
+                        dockerImage = dockerImages["bam2fastx"]
+                }
             }
 
-            if (!runIsoseq3Refine) {
+            if (! runIsoseq3Refine) {
                 call fastqc.Fastqc as fastqcLima {
                     input:
                         seqFile = bamFile,
@@ -103,6 +113,14 @@ workflow SubreadsProcessing {
                         format = "bam",
                         threads = 4,
                         dockerImage = dockerImages["fastqc"]
+                }
+
+                call bam2fastx.Bam2Fastq as bam2FastqLima {
+                    input:
+                        bam = [bamFile],
+                        bamIndex = lima.limaBamIndex,
+                        outputPrefix = outputDirectory + "/" + subreads.subreads_id + "/fastq-files/" + basename(bamFile, ".bam"),
+                        dockerImage = dockerImages["bam2fastx"]
                 }
             }
 
@@ -141,6 +159,9 @@ workflow SubreadsProcessing {
         Array[File] limaSummary = lima.limaSummary
         Array[String] samples = flatten(sampleName)
         Array[File] workflowReports = qualityReports
+        Array[File] fastqFiles = if (runIsoseq3Refine)
+                    then select_all(bam2FastqRefine.fastqFile)
+                    else select_all(bam2FastqLima.fastqFile)
         File multiqcReport = multiqcTask.multiqcReport
         File? multiqcZip = multiqcTask.multiqcDataDirZip
         Array[File?] refineReads = flatten(refine.refineBam)
@@ -177,6 +198,7 @@ workflow SubreadsProcessing {
         limaSummary: {description: "Lima summary file(s)."}
         samples: {description: "The name(s) of the sample(s)."}
         workflowReports: {description: "A collection of all metrics."}
+        fastqFiles: {description: "Fastq files extracted from bam files."}
         multiqcReport: {description: "The multiqc html report."}
         multiqcZip: {description: "The multiqc data zip file."}
         refineReads: {description: "Filtered reads file(s)."}

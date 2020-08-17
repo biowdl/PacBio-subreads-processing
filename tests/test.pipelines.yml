@@ -20,6 +20,9 @@
     - path: test-output/batch.1.march/batch.1.march.fl.Sample_3_3p--Sample_3_3p-fastqc
     - path: test-output/batch.1.march/batch.1.march.fl.Sample_4_3p--Sample_4_3p-fastqc
     - path: test-output/batch.1.march/batch.1.march.fl.stderr.log
+    - path: test-output/batch.1.march/fastq-files/batch.1.march.fl.Sample_1_3p--Sample_1_3p.fastq.gz
+    - path: test-output/batch.1.march/fastq-files/batch.1.march.fl.Sample_3_3p--Sample_3_3p.fastq.gz
+    - path: test-output/batch.1.march/fastq-files/batch.1.march.fl.Sample_4_3p--Sample_4_3p.fastq.gz
     - path: test-output/batch.1.march/batch.1.march.flnc.Sample_1_3p--Sample_1_3p.bam
       should_exist: false
     - path: test-output/batch.1.march/batch.1.march.flnc.Sample_3_3p--Sample_3_3p.bam
@@ -37,6 +40,8 @@
     - path: test-output/batch.2.february/batch.2.february.fl.Sample_8_3p--Sample_8_3p-fastqc
     - path: test-output/batch.2.february/batch.2.february.fl.Sample_9_3p--Sample_9_3p-fastqc
     - path: test-output/batch.2.february/batch.2.february.fl.stderr.log
+    - path: test-output/batch.2.february/fastq-files/batch.2.february.fl.Sample_8_3p--Sample_8_3p.fastq.gz
+    - path: test-output/batch.2.february/fastq-files/batch.2.february.fl.Sample_9_3p--Sample_9_3p.fastq.gz
     - path: test-output/batch.2.february/batch.2.february.flnc.Sample_8_3p--Sample_8_3p.bam
       should_exist: false
     - path: test-output/batch.2.february/batch.2.february.flnc.Sample_9_3p--Sample_9_3p.bam
@@ -65,6 +70,21 @@
     - path: test-output/batch.3.august/batch.3.august.fl.Sample_4_3p--Sample_4_3p-fastqc
     - path: test-output/batch.3.august/batch.3.august.fl.Sample_7_3p--Sample_7_3p-fastqc
     - path: test-output/batch.3.august/batch.3.august.fl.stderr.log
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.fl.Sample_10_3p--Sample_10_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.fl.Sample_11_3p--Sample_11_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.fl.Sample_12_3p--Sample_12_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.fl.Sample_14_3p--Sample_14_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.fl.Sample_15_3p--Sample_15_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.fl.Sample_17_3p--Sample_17_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.fl.Sample_20_3p--Sample_20_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.fl.Sample_21_3p--Sample_21_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.fl.Sample_2_3p--Sample_2_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.fl.Sample_24_3p--Sample_24_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.fl.Sample_25_3p--Sample_25_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.fl.Sample_26_3p--Sample_26_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.fl.Sample_3_3p--Sample_3_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.fl.Sample_4_3p--Sample_4_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.fl.Sample_7_3p--Sample_7_3p.fastq.gz
     - path: test-output/batch.3.august/batch.3.august.flnc.Sample_10_3p--Sample_10_3p.bam
       should_exist: false
     - path: test-output/batch.3.august/batch.3.august.flnc.Sample_11_3p--Sample_11_3p.bam
@@ -144,6 +164,9 @@
     - path: test-output/batch.1.march/batch.1.march.flnc.Sample_4_3p--Sample_4_3p.filter_summary.json
     - path: test-output/batch.1.march/batch.1.march.flnc.Sample_4_3p--Sample_4_3p.report.csv
     - path: test-output/batch.1.march/batch.1.march.flnc.Sample_4_3p--Sample_4_3p.stderr.log
+    - path: test-output/batch.1.march/fastq-files/batch.1.march.flnc.Sample_1_3p--Sample_1_3p.fastq.gz
+    - path: test-output/batch.1.march/fastq-files/batch.1.march.flnc.Sample_3_3p--Sample_3_3p.fastq.gz
+    - path: test-output/batch.1.march/fastq-files/batch.1.march.flnc.Sample_4_3p--Sample_4_3p.fastq.gz
     - path: test-output/batch.2.february/batch.2.february.ccs.bam
     - path: test-output/batch.2.february/batch.2.february.ccs.bam.pbi
     - path: test-output/batch.2.february/batch.2.february.ccs.report.txt
@@ -171,6 +194,8 @@
     - path: test-output/batch.2.february/batch.2.february.flnc.Sample_9_3p--Sample_9_3p.filter_summary.json
     - path: test-output/batch.2.february/batch.2.february.flnc.Sample_9_3p--Sample_9_3p.report.csv
     - path: test-output/batch.2.february/batch.2.february.flnc.Sample_9_3p--Sample_9_3p.stderr.log
+    - path: test-output/batch.2.february/fastq-files/batch.2.february.flnc.Sample_8_3p--Sample_8_3p.fastq.gz
+    - path: test-output/batch.2.february/fastq-files/batch.2.february.flnc.Sample_9_3p--Sample_9_3p.fastq.gz
     - path: test-output/batch.3.august/batch.3.august.ccs.bam
     - path: test-output/batch.3.august/batch.3.august.ccs.bam.pbi
     - path: test-output/batch.3.august/batch.3.august.ccs.report.txt
@@ -315,5 +340,20 @@
     - path: test-output/batch.3.august/batch.3.august.flnc.Sample_7_3p--Sample_7_3p.filter_summary.json
     - path: test-output/batch.3.august/batch.3.august.flnc.Sample_7_3p--Sample_7_3p.report.csv
     - path: test-output/batch.3.august/batch.3.august.flnc.Sample_7_3p--Sample_7_3p.stderr.log
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.flnc.Sample_10_3p--Sample_10_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.flnc.Sample_11_3p--Sample_11_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.flnc.Sample_12_3p--Sample_12_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.flnc.Sample_14_3p--Sample_14_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.flnc.Sample_15_3p--Sample_15_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.flnc.Sample_17_3p--Sample_17_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.flnc.Sample_20_3p--Sample_20_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.flnc.Sample_21_3p--Sample_21_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.flnc.Sample_2_3p--Sample_2_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.flnc.Sample_24_3p--Sample_24_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.flnc.Sample_25_3p--Sample_25_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.flnc.Sample_26_3p--Sample_26_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.flnc.Sample_3_3p--Sample_3_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.flnc.Sample_4_3p--Sample_4_3p.fastq.gz
+    - path: test-output/batch.3.august/fastq-files/batch.3.august.flnc.Sample_7_3p--Sample_7_3p.fastq.gz
     - path: test-output/multiqc/multiqc_data.zip
     - path: test-output/multiqc/multiqc_report.html
