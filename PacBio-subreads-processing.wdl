@@ -136,7 +136,9 @@ workflow SubreadsProcessing {
             # fasta file, which is not accessible from the WDL.
             String sampleName = sub(sub(bamFile, ".*--", ""),".bam", "")
 
-            File? fastqFile = select_first([bam2FastqRefine.fastqFile, bam2FastqLima.fastqFile])
+            if (generateFastq) {
+                File? fastqFile = select_first([bam2FastqRefine.fastqFile, bam2FastqLima.fastqFile])
+            }
         }
     }
 
