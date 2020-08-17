@@ -46,8 +46,7 @@ workflow SubreadsProcessing {
     call common.YamlToJson as convertDockerImagesFile {
         input:
             yaml = dockerImagesFile,
-            outputJson = outputDirectory + "/dockerImages.json",
-            dockerImage = "quay.io/biocontainers/biowdl-input-converter:0.2.1--py_0"
+            outputJson = outputDirectory + "/dockerImages.json"
     }
 
     Map[String, String] dockerImages = read_json(convertDockerImagesFile.json)
