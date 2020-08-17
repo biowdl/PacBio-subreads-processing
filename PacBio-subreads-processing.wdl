@@ -39,7 +39,7 @@ workflow SubreadsProcessing {
         Boolean splitBamNamed = true
         Boolean runIsoseq3Refine = false
         Int limaCores = 2
-        Boolean generateFastq = false
+        Boolean generateFastq = true
     }
 
     meta {allowNestedInputs: true}
