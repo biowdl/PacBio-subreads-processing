@@ -130,6 +130,8 @@ workflow SubreadsProcessing {
             # because the sample names are determine from the headers in the
             # fasta file, which is not accessible from the WDL.
             String sampleName = sub(sub(bamFile, ".*--", ""),".bam", "")
+
+            File fastqFile = select_first([bam2FastqRefine.fastqFile, bam2FastqLima.fastqFile])
         }
     }
 
@@ -158,9 +160,7 @@ workflow SubreadsProcessing {
         Array[File] limaSummary = lima.limaSummary
         Array[String] samples = flatten(sampleName)
         Array[File] workflowReports = qualityReports
-        Array[File] fastqFiles = if (runIsoseq3Refine)
-                    then select_all(bam2FastqRefine.fastqFile)
-                    else select_all(bam2FastqLima.fastqFile)
+        Array[File] fastqFiles = flatten(fastqFile)
         File multiqcReport = multiqcTask.multiqcReport
         File? multiqcZip = multiqcTask.multiqcDataDirZip
         Array[File?] refineReads = flatten(refine.refineBam)
