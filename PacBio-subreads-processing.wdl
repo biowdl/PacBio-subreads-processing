@@ -165,7 +165,7 @@ workflow SubreadsProcessing {
         Array[File] limaSummary = lima.limaSummary
         Array[String] samples = flatten(sampleName)
         Array[File] workflowReports = qualityReports
-        Array[File]? fastqFiles = flatten(fastqFile)
+        Array[File?] fastqFiles = flatten(fastqFile)
         File multiqcReport = multiqcTask.multiqcReport
         File? multiqcZip = multiqcTask.multiqcDataDirZip
         Array[File?] fastqFiles = flatten(fastqFile)
