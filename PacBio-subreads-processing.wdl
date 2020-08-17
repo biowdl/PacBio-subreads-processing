@@ -39,6 +39,7 @@ workflow SubreadsProcessing {
         Boolean splitBamNamed = true
         Boolean runIsoseq3Refine = false
         Int limaCores = 2
+        Boolean generateFastq = false
     }
 
     meta {allowNestedInputs: true}
@@ -95,12 +96,14 @@ workflow SubreadsProcessing {
                         dockerImage = dockerImages["fastqc"]
                 }
 
-                call bam2fastx.Bam2Fastq as bam2FastqRefine {
-                    input:
-                        bam = [refine.refineBam],
-                        bamIndex = [refine.refineBamIndex],
-                        outputPrefix = outputDirectory + "/" + subreads.subreads_id + "/fastq-files/" + basename(refine.refineBam, ".bam"),
-                        dockerImage = dockerImages["bam2fastx"]
+                if (generateFastq) {
+                    call bam2fastx.Bam2Fastq as bam2FastqRefine {
+                        input:
+                            bam = [refine.refineBam],
+                            bamIndex = [refine.refineBamIndex],
+                            outputPrefix = outputDirectory + "/" + subreads.subreads_id + "/fastq-files/" + basename(refine.refineBam, ".bam"),
+                            dockerImage = dockerImages["bam2fastx"]
+                    }
                 }
             }
 
@@ -114,12 +117,14 @@ workflow SubreadsProcessing {
                         dockerImage = dockerImages["fastqc"]
                 }
 
-                call bam2fastx.Bam2Fastq as bam2FastqLima {
-                    input:
-                        bam = [bamFile],
-                        bamIndex = lima.limaBamIndex,
-                        outputPrefix = outputDirectory + "/" + subreads.subreads_id + "/fastq-files/" + basename(bamFile, ".bam"),
-                        dockerImage = dockerImages["bam2fastx"]
+                if (generateFastq) {
+                    call bam2fastx.Bam2Fastq as bam2FastqLima {
+                        input:
+                            bam = [bamFile],
+                            bamIndex = lima.limaBamIndex,
+                            outputPrefix = outputDirectory + "/" + subreads.subreads_id + "/fastq-files/" + basename(bamFile, ".bam"),
+                            dockerImage = dockerImages["bam2fastx"]
+                    }
                 }
             }
 
