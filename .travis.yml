@@ -48,3 +48,7 @@ matrix:
       - TEST="dna"
     - env:
       - TEST="rna"
+    - env:
+      - TEST="dna_plus_fastq"
+    - env:
+      - TEST="rna_plus_fastq"
