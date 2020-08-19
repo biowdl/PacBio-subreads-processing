@@ -2,5 +2,7 @@
     "SubreadsProcessing.subreadsConfigFile": "tests/samplesheets/batches.json",
     "SubreadsProcessing.dockerImagesFile": "dockerImages.yml",
     "SubreadsProcessing.runIsoseq3Refine": false,
+    "SubreadsProcessing.limaCores": "3",
+    "SubreadsProcessing.ccsCores": "4",
     "SubreadsProcessing.generateFastq": false
 }

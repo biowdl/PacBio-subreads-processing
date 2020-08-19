@@ -7,6 +7,9 @@
   stdout:
     contains_regex:
       - 'SubreadsProcessing.samples.*"Sample_1_3p"'
+    contains:
+      - '--num-threads 3'
+      - '--num-threads 4'
   files:
     - path: test-output/batch.1.march/batch.1.march.ccs.bam
     - path: test-output/batch.1.march/batch.1.march.ccs.bam.pbi
@@ -267,6 +270,9 @@
   stdout:
     contains_regex:
       - 'SubreadsProcessing.samples.*"Sample_1_3p"'
+    must_not_contain:
+      - '--num-threads 3'
+      - '--num-threads 4'
   files:
     - path: test-output/batch.1.march/batch.1.march.ccs.bam
     - path: test-output/batch.1.march/batch.1.march.ccs.bam.pbi
