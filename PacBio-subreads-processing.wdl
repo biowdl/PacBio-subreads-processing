@@ -21,6 +21,7 @@ version 1.0
 # SOFTWARE.
 
 import "structs.wdl" as structs
+import "tasks/bam2fastx.wdl" as bam2fastx
 import "tasks/ccs.wdl" as ccs
 import "tasks/common.wdl" as common
 import "tasks/fastqc.wdl" as fastqc
@@ -38,6 +39,7 @@ workflow SubreadsProcessing {
         Boolean splitBamNamed = true
         Boolean runIsoseq3Refine = false
         Int limaCores = 2
+        Boolean generateFastq = false
     }
 
     meta {allowNestedInputs: true}
@@ -93,9 +95,19 @@ workflow SubreadsProcessing {
                         threads = 4,
                         dockerImage = dockerImages["fastqc"]
                 }
+
+                if (generateFastq) {
+                    call bam2fastx.Bam2Fastq as bam2FastqRefine {
+                        input:
+                            bam = [refine.refineBam],
+                            bamIndex = [refine.refineBamIndex],
+                            outputPrefix = outputDirectory + "/" + subreads.subreads_id + "/fastq-files/" + basename(refine.refineBam, ".bam"),
+                            dockerImage = dockerImages["bam2fastx"]
+                    }
+                }
             }
 
-            if (!runIsoseq3Refine) {
+            if (! runIsoseq3Refine) {
                 call fastqc.Fastqc as fastqcLima {
                     input:
                         seqFile = bamFile,
@@ -103,6 +115,16 @@ workflow SubreadsProcessing {
                         format = "bam",
                         threads = 4,
                         dockerImage = dockerImages["fastqc"]
+                }
+
+                if (generateFastq) {
+                    call bam2fastx.Bam2Fastq as bam2FastqLima {
+                        input:
+                            bam = [bamFile],
+                            bamIndex = lima.limaBamIndex,
+                            outputPrefix = outputDirectory + "/" + subreads.subreads_id + "/fastq-files/" + basename(bamFile, ".bam"),
+                            dockerImage = dockerImages["bam2fastx"]
+                    }
                 }
             }
 
@@ -113,6 +135,10 @@ workflow SubreadsProcessing {
             # because the sample names are determine from the headers in the
             # fasta file, which is not accessible from the WDL.
             String sampleName = sub(sub(bamFile, ".*--", ""),".bam", "")
+
+            if (generateFastq) {
+                File? fastqFile = select_first([bam2FastqRefine.fastqFile, bam2FastqLima.fastqFile])
+            }
         }
     }
 
@@ -143,6 +169,7 @@ workflow SubreadsProcessing {
         Array[File] workflowReports = qualityReports
         File multiqcReport = multiqcTask.multiqcReport
         File? multiqcZip = multiqcTask.multiqcDataDirZip
+        Array[File?] fastqFiles = flatten(fastqFile)
         Array[File?] refineReads = flatten(refine.refineBam)
         Array[File?] refineIndex = flatten(refine.refineBamIndex)
         Array[File?] refineConsensusReadset = flatten(refine.refineConsensusReadset)
@@ -159,6 +186,7 @@ workflow SubreadsProcessing {
         libraryDesign: {description: "Barcode structure of the library design.", category: "advanced"}
         ccsMode: {description: "Ccs mode, use optimal alignment options.", category: "advanced"}
         splitBamNamed: {description: "Split bam file(s) by resolved barcode pair name.", category: "advanced"}
+        generateFastq: {description: "Generate fastq files from demultiplexed bam files.", category: "common"}
         runIsoseq3Refine: {description: "Run isoseq3 refine for de-novo transcript reconstruction. Do not set this to true when analysing dna reads.", category: "advanced"}
         limaCores: {description: "The number of CPU cores to be used by lima.", category: "advanced"}
 
@@ -177,6 +205,7 @@ workflow SubreadsProcessing {
         limaSummary: {description: "Lima summary file(s)."}
         samples: {description: "The name(s) of the sample(s)."}
         workflowReports: {description: "A collection of all metrics."}
+        fastqFiles: {description: "Fastq files extracted from bam files."}
         multiqcReport: {description: "The multiqc html report."}
         multiqcZip: {description: "The multiqc data zip file."}
         refineReads: {description: "Filtered reads file(s)."}
