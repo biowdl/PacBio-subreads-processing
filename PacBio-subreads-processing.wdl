@@ -191,6 +191,7 @@ workflow SubreadsProcessing {
         generateFastq: {description: "Generate fastq files from demultiplexed bam files.", category: "common"}
         runIsoseq3Refine: {description: "Run isoseq3 refine for de-novo transcript reconstruction. Do not set this to true when analysing dna reads.", category: "advanced"}
         limaCores: {description: "The number of CPU cores to be used by lima.", category: "advanced"}
+        ccsCores: {description: "The number of CPU cores to be used by ccs.", category: "advanced"}
 
         # outputs
         ccsReads: {description: "Consensus reads file(s)."}
