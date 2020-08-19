@@ -39,6 +39,7 @@ workflow SubreadsProcessing {
         Boolean splitBamNamed = true
         Boolean runIsoseq3Refine = false
         Int limaCores = 2
+        Int ccsCores = 2
         Boolean generateFastq = false
     }
 
@@ -60,6 +61,7 @@ workflow SubreadsProcessing {
             input:
                 subreadsFile = subreads.subreads_file,
                 outputPrefix = outputDirectory + "/" + subreads.subreads_id + "/" + subreads.subreads_id,
+                cores = ccsCores,
                 dockerImage = dockerImages["ccs"]
         }
 
