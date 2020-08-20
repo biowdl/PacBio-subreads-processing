@@ -33,7 +33,7 @@ workflow SubreadsProcessing {
     input {
         File subreadsConfigFile
         String outputDirectory = "."
-        File dockerImagesFile
+        File dockerImagesFile = "dockerImages.yml"
         String libraryDesign = "same"
         Boolean ccsMode = true
         Boolean splitBamNamed = true
