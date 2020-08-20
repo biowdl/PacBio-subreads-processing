@@ -184,7 +184,7 @@ workflow SubreadsProcessing {
         # inputs
         subreadsConfigFile: {description: "Configuration file describing input subread BAMs and barcode files.", category: "required"}
         outputDirectory: {description: "The directory to which the outputs will be written.", category: "advanced"}
-        dockerImagesFile: {description: "The docker image used for this workflow. Changing this may result in errors which the developers may choose not to address.", category: "required"}
+        dockerImagesFile: {description: "The docker image used for this workflow. Changing this may result in errors which the developers may choose not to address.", category: "advanced"}
         libraryDesign: {description: "Barcode structure of the library design.", category: "advanced"}
         ccsMode: {description: "Ccs mode, use optimal alignment options.", category: "advanced"}
         splitBamNamed: {description: "Split bam file(s) by resolved barcode pair name.", category: "advanced"}

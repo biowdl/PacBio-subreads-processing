@@ -10,6 +10,7 @@ that users understand how the changes affect the new version.
 
 version develop
 ---------------------------
++ Make YAML file with docker images optional.
 + Make CPU cores for ccs configurable.
 + Add bam to fastq tasks to the pipeline.
 + Make CPU cores for lima configurable.
