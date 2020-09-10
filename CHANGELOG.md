@@ -10,7 +10,8 @@ that users understand how the changes affect the new version.
 
 version develop
 ---------------------------
-+ Make YAML file with docker images optional.
++ Remove YAML file with docker images and set defaults within
+  `PacBio-subreads-processing.wdl` inputs.
 + Make CPU cores for ccs configurable.
 + Add bam to fastq tasks to the pipeline.
 + Make CPU cores for lima configurable.
