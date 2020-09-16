@@ -23,7 +23,6 @@ version 1.0
 import "structs.wdl" as structs
 import "tasks/bam2fastx.wdl" as bam2fastx
 import "tasks/ccs.wdl" as ccs
-import "tasks/common.wdl" as common
 import "tasks/fastqc.wdl" as fastqc
 import "tasks/isoseq3.wdl" as isoseq3
 import "tasks/lima.wdl" as lima
@@ -33,7 +32,6 @@ workflow SubreadsProcessing {
     input {
         File subreadsConfigFile
         String outputDirectory = "."
-        File dockerImagesFile
         String libraryDesign = "same"
         Boolean ccsMode = true
         Boolean splitBamNamed = true
@@ -41,17 +39,18 @@ workflow SubreadsProcessing {
         Int limaCores = 2
         Int ccsCores = 2
         Boolean generateFastq = false
+        Map[String, String] dockerImages = {
+            "bam2fastx": "quay.io/biocontainers/bam2fastx:1.3.0--he1c1bb9_8",
+            "biowdl-input-converter": "quay.io/biocontainers/biowdl-input-converter:0.2.1--py_0",
+            "ccs": "quay.io/biocontainers/pbccs:4.2.0--1",
+            "fastqc": "quay.io/biocontainers/fastqc:0.11.9--0",
+            "isoseq3": "quay.io/biocontainers/isoseq3:3.3.0--0",
+            "lima": "quay.io/biocontainers/lima:1.11.0--0",
+            "multiqc": "quay.io/biocontainers/multiqc:1.9--pyh9f0ad1d_0"
+        }
     }
 
     meta {allowNestedInputs: true}
-
-    call common.YamlToJson as convertDockerImagesFile {
-        input:
-            yaml = dockerImagesFile,
-            outputJson = outputDirectory + "/dockerImages.json"
-    }
-
-    Map[String, String] dockerImages = read_json(convertDockerImagesFile.json)
 
     SubreadsConfig subreadsConfig = read_json(subreadsConfigFile)
     Array[Subreads] allSubreads = subreadsConfig.subreads
@@ -184,7 +183,6 @@ workflow SubreadsProcessing {
         # inputs
         subreadsConfigFile: {description: "Configuration file describing input subread BAMs and barcode files.", category: "required"}
         outputDirectory: {description: "The directory to which the outputs will be written.", category: "advanced"}
-        dockerImagesFile: {description: "The docker image used for this workflow. Changing this may result in errors which the developers may choose not to address.", category: "required"}
         libraryDesign: {description: "Barcode structure of the library design.", category: "advanced"}
         ccsMode: {description: "Ccs mode, use optimal alignment options.", category: "advanced"}
         splitBamNamed: {description: "Split bam file(s) by resolved barcode pair name.", category: "advanced"}
@@ -192,6 +190,7 @@ workflow SubreadsProcessing {
         runIsoseq3Refine: {description: "Run isoseq3 refine for de-novo transcript reconstruction. Do not set this to true when analysing dna reads.", category: "advanced"}
         limaCores: {description: "The number of CPU cores to be used by lima.", category: "advanced"}
         ccsCores: {description: "The number of CPU cores to be used by ccs.", category: "advanced"}
+        dockerImages: {description: "The docker image(s) used for this workflow. Changing this may result in errors which the developers may choose not to address.", category: "advanced"}
 
         # outputs
         ccsReads: {description: "Consensus reads file(s)."}
