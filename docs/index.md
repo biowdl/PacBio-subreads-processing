@@ -15,12 +15,24 @@ at [Leiden University Medical Center](https://www.lumc.nl/).
 You can run this pipeline using
 [Cromwell](http://cromwell.readthedocs.io/en/stable/):
 
+First download the latest version of the pipeline wdl file(s) and 
+from the
+[releases page](https://github.com/biowdl/PacBio-subreads-processing/releases).
+
 ```bash
 java \
     -jar cromwell-<version>.jar \
     run \
+    -o options.json \
     -i inputs.json \
-    talon-wdl.wdl
+    pacbio-subreads-processing.wdl
+```
+
+Where `options.json` contains the following json:
+```json
+{
+    "final_workflow_log_dir": "/path/to/logs/folder"
+}
 ```
 
 ### Inputs
@@ -34,15 +46,9 @@ For an overview of all available inputs, see [this page](./inputs.html).
 ```json
 {
     "SubreadsProcessing.subreadsConfigFile": "Configuration file describing input subread BAMs and barcode files.",
-    "SubreadsProcessing.dockerImagesFile": "A file listing the used docker images.",
-    "SubreadsProcessing.outputDirectory": "The path to the output directory."
-}
-```
-
-Optional settings:
-```json
-{
-    "SubreadsProcessing.runIsoseq3Refine": "In the case of RNA, polish the reads."
+    "SubreadsProcessing.runIsoseq3Refine": "Option to run isoseq3 refine for de-novo transcript reconstruction.",
+    "SubreadsProcessing.outputDirectory": "The path to the output directory.",
+    "SubreadsProcessing.generateFastq": "Option to generate fastq files from demultiplexed bam files."
 }
 ```
 
@@ -85,9 +91,9 @@ The following is an example of what an inputs JSON might look like:
 ```json
 {
     "SubreadsProcessing.subreadsConfigFile": "tests/samplesheets/batches.json",
-    "SubreadsProcessing.dockerImagesFile": "dockerImages.yml",
+    "SubreadsProcessing.runIsoseq3Refine": "true",
     "SubreadsProcessing.outputDirectory": "tests/test-output",
-    "SubreadsProcessing.runIsoseq3Refine": true 
+    "SubreadsProcessing.generateFastq": "true"
 }
 ```
 
@@ -106,8 +112,9 @@ found in the default for the `dockerImages` input.
 
 ### Output
 The workflow will output polished ccs reads split into their respective sample.
-Along with these BAM files, the workflow will also output all intermediate
-generated files.
+Along with these BAM files, the workflow will also output all
+intermediate files. Depending on the options set, the pipeline can also output
+fastq files.
 
 ## Contact
 <p>

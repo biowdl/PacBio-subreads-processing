@@ -5,11 +5,6 @@
 
 
 ### Required inputs
-<p name="SubreadsProcessing.dockerImagesFile">
-        <b>SubreadsProcessing.dockerImagesFile</b><br />
-        <i>File &mdash; Default: None</i><br />
-        The docker image used for this workflow. Changing this may result in errors which the developers may choose not to address.
-</p>
 <p name="SubreadsProcessing.subreadsConfigFile">
         <b>SubreadsProcessing.subreadsConfigFile</b><br />
         <i>File &mdash; Default: None</i><br />
@@ -21,6 +16,11 @@
         <b>SubreadsProcessing.ccs.minReadQuality</b><br />
         <i>Float &mdash; Default: 0.99</i><br />
         Minimum predicted accuracy in [0, 1].
+</p>
+<p name="SubreadsProcessing.generateFastq">
+        <b>SubreadsProcessing.generateFastq</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Generate fastq files from demultiplexed bam files.
 </p>
 <p name="SubreadsProcessing.lima.minLength">
         <b>SubreadsProcessing.lima.minLength</b><br />
@@ -51,15 +51,60 @@
 ### Advanced inputs
 <details>
 <summary> Show/Hide </summary>
+<p name="SubreadsProcessing.bam2FastqLima.compressionLevel">
+        <b>SubreadsProcessing.bam2FastqLima.compressionLevel</b><br />
+        <i>Int &mdash; Default: 1</i><br />
+        Gzip compression level [1-9]
+</p>
+<p name="SubreadsProcessing.bam2FastqLima.memory">
+        <b>SubreadsProcessing.bam2FastqLima.memory</b><br />
+        <i>String &mdash; Default: "2G"</i><br />
+        The amount of memory available to the job.
+</p>
+<p name="SubreadsProcessing.bam2FastqLima.seqIdPrefix">
+        <b>SubreadsProcessing.bam2FastqLima.seqIdPrefix</b><br />
+        <i>String? &mdash; Default: None</i><br />
+        Prefix for sequence IDs in headers.
+</p>
+<p name="SubreadsProcessing.bam2FastqLima.splitByBarcode">
+        <b>SubreadsProcessing.bam2FastqLima.splitByBarcode</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Split output into multiple fastq files, by barcode pairs.
+</p>
+<p name="SubreadsProcessing.bam2FastqLima.timeMinutes">
+        <b>SubreadsProcessing.bam2FastqLima.timeMinutes</b><br />
+        <i>Int &mdash; Default: 15</i><br />
+        The maximum amount of time the job will run in minutes.
+</p>
+<p name="SubreadsProcessing.bam2FastqRefine.compressionLevel">
+        <b>SubreadsProcessing.bam2FastqRefine.compressionLevel</b><br />
+        <i>Int &mdash; Default: 1</i><br />
+        Gzip compression level [1-9]
+</p>
+<p name="SubreadsProcessing.bam2FastqRefine.memory">
+        <b>SubreadsProcessing.bam2FastqRefine.memory</b><br />
+        <i>String &mdash; Default: "2G"</i><br />
+        The amount of memory available to the job.
+</p>
+<p name="SubreadsProcessing.bam2FastqRefine.seqIdPrefix">
+        <b>SubreadsProcessing.bam2FastqRefine.seqIdPrefix</b><br />
+        <i>String? &mdash; Default: None</i><br />
+        Prefix for sequence IDs in headers.
+</p>
+<p name="SubreadsProcessing.bam2FastqRefine.splitByBarcode">
+        <b>SubreadsProcessing.bam2FastqRefine.splitByBarcode</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Split output into multiple fastq files, by barcode pairs.
+</p>
+<p name="SubreadsProcessing.bam2FastqRefine.timeMinutes">
+        <b>SubreadsProcessing.bam2FastqRefine.timeMinutes</b><br />
+        <i>Int &mdash; Default: 15</i><br />
+        The maximum amount of time the job will run in minutes.
+</p>
 <p name="SubreadsProcessing.ccs.byStrand">
         <b>SubreadsProcessing.ccs.byStrand</b><br />
         <i>Boolean &mdash; Default: false</i><br />
         Generate a consensus for each strand.
-</p>
-<p name="SubreadsProcessing.ccs.cores">
-        <b>SubreadsProcessing.ccs.cores</b><br />
-        <i>Int &mdash; Default: 2</i><br />
-        The number of cores to be used.
 </p>
 <p name="SubreadsProcessing.ccs.logLevel">
         <b>SubreadsProcessing.ccs.logLevel</b><br />
@@ -91,25 +136,20 @@
         <i>Int &mdash; Default: 1440</i><br />
         The maximum amount of time the job will run in minutes.
 </p>
+<p name="SubreadsProcessing.ccsCores">
+        <b>SubreadsProcessing.ccsCores</b><br />
+        <i>Int &mdash; Default: 2</i><br />
+        The number of CPU cores to be used by ccs.
+</p>
 <p name="SubreadsProcessing.ccsMode">
         <b>SubreadsProcessing.ccsMode</b><br />
         <i>Boolean &mdash; Default: true</i><br />
         Ccs mode, use optimal alignment options.
 </p>
-<p name="SubreadsProcessing.convertDockerImagesFile.dockerImage">
-        <b>SubreadsProcessing.convertDockerImagesFile.dockerImage</b><br />
-        <i>String &mdash; Default: "quay.io/biocontainers/biowdl-input-converter:0.2.1--py_0"</i><br />
-        The docker image used for this task. Changing this may result in errors which the developers may choose not to address.
-</p>
-<p name="SubreadsProcessing.convertDockerImagesFile.memory">
-        <b>SubreadsProcessing.convertDockerImagesFile.memory</b><br />
-        <i>String &mdash; Default: "128M"</i><br />
-        The maximum amount of memory the job will need.
-</p>
-<p name="SubreadsProcessing.convertDockerImagesFile.timeMinutes">
-        <b>SubreadsProcessing.convertDockerImagesFile.timeMinutes</b><br />
-        <i>Int &mdash; Default: 1</i><br />
-        The maximum amount of time the job will run in minutes.
+<p name="SubreadsProcessing.dockerImages">
+        <b>SubreadsProcessing.dockerImages</b><br />
+        <i>Map[String,String] &mdash; Default: {"bam2fastx": "quay.io/biocontainers/bam2fastx:1.3.0--he1c1bb9_8", "biowdl-input-converter": "quay.io/biocontainers/biowdl-input-converter:0.2.1--py_0", "ccs": "quay.io/biocontainers/pbccs:4.2.0--1", "fastqc": "quay.io/biocontainers/fastqc:0.11.9--0", "isoseq3": "quay.io/biocontainers/isoseq3:3.3.0--0", "lima": "quay.io/biocontainers/lima:1.11.0--0", "multiqc": "quay.io/biocontainers/multiqc:1.9--pyh9f0ad1d_0"}</i><br />
+        The docker image(s) used for this workflow. Changing this may result in errors which the developers may choose not to address.
 </p>
 <p name="SubreadsProcessing.fastqcLima.adapters">
         <b>SubreadsProcessing.fastqcLima.adapters</b><br />
@@ -256,11 +296,6 @@
         <i>String &mdash; Default: "same"</i><br />
         Barcode structure of the library design.
 </p>
-<p name="SubreadsProcessing.lima.cores">
-        <b>SubreadsProcessing.lima.cores</b><br />
-        <i>Int &mdash; Default: 2</i><br />
-        The number of cores to be used.
-</p>
 <p name="SubreadsProcessing.lima.guess">
         <b>SubreadsProcessing.lima.guess</b><br />
         <i>Int &mdash; Default: 0</i><br />
@@ -345,6 +380,11 @@
         <b>SubreadsProcessing.lima.timeMinutes</b><br />
         <i>Int &mdash; Default: 30</i><br />
         The maximum amount of time the job will run in minutes.
+</p>
+<p name="SubreadsProcessing.limaCores">
+        <b>SubreadsProcessing.limaCores</b><br />
+        <i>Int &mdash; Default: 2</i><br />
+        The number of CPU cores to be used by lima.
 </p>
 <p name="SubreadsProcessing.multiqcTask.clConfig">
         <b>SubreadsProcessing.multiqcTask.clConfig</b><br />
