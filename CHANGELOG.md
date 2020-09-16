@@ -12,6 +12,7 @@ version develop
 ---------------------------
 + Remove YAML file with docker images and set defaults within
   `pacbio-subreads-processing.wdl` inputs.
++ Rename main pipeline file to `pacbio-subreads-processing.wdl`.
 + Make CPU cores for ccs configurable.
 + Add bam to fastq tasks to the pipeline.
 + Make CPU cores for lima configurable.
