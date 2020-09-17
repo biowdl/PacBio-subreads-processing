@@ -91,9 +91,9 @@ The following is an example of what an inputs JSON might look like:
 ```json
 {
     "SubreadsProcessing.subreadsConfigFile": "tests/samplesheets/batches.json",
-    "SubreadsProcessing.runIsoseq3Refine": "true",
+    "SubreadsProcessing.runIsoseq3Refine": true,
     "SubreadsProcessing.outputDirectory": "tests/test-output",
-    "SubreadsProcessing.generateFastq": "true"
+    "SubreadsProcessing.generateFastq": true
 }
 ```
 
