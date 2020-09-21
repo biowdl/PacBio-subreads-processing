@@ -1,7 +1,7 @@
 {
     "SubreadsProcessing.subreadsConfigFile": "tests/samplesheets/batches.json",
     "SubreadsProcessing.runIsoseq3Refine": false,
+    "SubreadsProcessing.generateFastq": false,
     "SubreadsProcessing.limaCores": "3",
-    "SubreadsProcessing.ccsCores": "4",
-    "SubreadsProcessing.generateFastq": false
+    "SubreadsProcessing.ccsCores": "4"
 }

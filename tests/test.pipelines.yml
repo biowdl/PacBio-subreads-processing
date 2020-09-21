@@ -3,7 +3,7 @@
     - integration
   command: >-
     cromwell run -o tests/cromwell.options.json
-    -i tests/integration/dna.json PacBio-subreads-processing.wdl
+    -i tests/integration/dna.json pacbio-subreads-processing.wdl
   stdout:
     contains_regex:
       - 'SubreadsProcessing.samples.*"Sample_1_3p"'
@@ -141,12 +141,12 @@
     - path: test-output/multiqc/multiqc_data.zip
     - path: test-output/multiqc/multiqc_report.html
 
-- name: dna_plus_fastq
+- name: dna.plus.fastq
   tags:
     - integration
   command: >-
     cromwell run -o tests/cromwell.options.json
-    -i tests/integration/dna_plus_fastq.json PacBio-subreads-processing.wdl
+    -i tests/integration/dna.plus.fastq.json pacbio-subreads-processing.wdl
   stdout:
     contains_regex:
       - 'SubreadsProcessing.samples.*"Sample_1_3p"'
@@ -266,7 +266,7 @@
     - integration
   command: >-
     cromwell run -o tests/cromwell.options.json
-    -i tests/integration/rna.json PacBio-subreads-processing.wdl
+    -i tests/integration/rna.json pacbio-subreads-processing.wdl
   stdout:
     contains_regex:
       - 'SubreadsProcessing.samples.*"Sample_1_3p"'
@@ -524,12 +524,12 @@
     - path: test-output/multiqc/multiqc_data.zip
     - path: test-output/multiqc/multiqc_report.html
 
-- name: rna_plus_fastq
+- name: rna.plus.fastq
   tags:
     - integration
   command: >-
     cromwell run -o tests/cromwell.options.json
-    -i tests/integration/rna_plus_fastq.json PacBio-subreads-processing.wdl
+    -i tests/integration/rna.plus.fastq.json pacbio-subreads-processing.wdl
   stdout:
     contains_regex:
       - 'SubreadsProcessing.samples.*"Sample_1_3p"'
