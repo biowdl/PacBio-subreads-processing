@@ -141,7 +141,7 @@
     - path: test-output/multiqc/multiqc_data.zip
     - path: test-output/multiqc/multiqc_report.html
 
-- name: dna_plus_fastq
+- name: dna.plus.fastq
   tags:
     - integration
   command: >-
@@ -524,7 +524,7 @@
     - path: test-output/multiqc/multiqc_data.zip
     - path: test-output/multiqc/multiqc_report.html
 
-- name: rna_plus_fastq
+- name: rna.plus.fastq
   tags:
     - integration
   command: >-
