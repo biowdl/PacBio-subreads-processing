@@ -146,7 +146,7 @@
     - integration
   command: >-
     cromwell run -o tests/cromwell.options.json
-    -i tests/integration/dna_plus_fastq.json pacbio-subreads-processing.wdl
+    -i tests/integration/dna.plus.fastq.json pacbio-subreads-processing.wdl
   stdout:
     contains_regex:
       - 'SubreadsProcessing.samples.*"Sample_1_3p"'
@@ -529,7 +529,7 @@
     - integration
   command: >-
     cromwell run -o tests/cromwell.options.json
-    -i tests/integration/rna_plus_fastq.json pacbio-subreads-processing.wdl
+    -i tests/integration/rna.plus.fastq.json pacbio-subreads-processing.wdl
   stdout:
     contains_regex:
       - 'SubreadsProcessing.samples.*"Sample_1_3p"'
