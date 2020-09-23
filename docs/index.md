@@ -15,7 +15,7 @@ at [Leiden University Medical Center](https://www.lumc.nl/).
 You can run this pipeline using
 [Cromwell](http://cromwell.readthedocs.io/en/stable/):
 
-First download the latest version of the pipeline wdl file(s) and 
+First download the latest version of the pipeline wdl file(s)
 from the
 [releases page](https://github.com/biowdl/PacBio-subreads-processing/releases).
 
