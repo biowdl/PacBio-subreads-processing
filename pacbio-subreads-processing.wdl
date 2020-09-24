@@ -22,7 +22,7 @@ version 1.0
 
 import "structs.wdl" as structs
 import "tasks/bam2fastx.wdl" as bam2fastx
-import "tasks/ccs.wdl" as ccs
+import "ccs.wdl" as ccs
 import "tasks/fastqc.wdl" as fastqc
 import "tasks/isoseq3.wdl" as isoseq3
 import "tasks/lima.wdl" as lima
@@ -38,6 +38,7 @@ workflow SubreadsProcessing {
         Boolean runIsoseq3Refine = false
         Int limaCores = 2
         Int ccsCores = 2
+        Int ccsChunks = 2
         Boolean generateFastq = false
         Map[String, String] dockerImages = {
             "bam2fastx": "quay.io/biocontainers/bam2fastx:1.3.0--he1c1bb9_8",
@@ -46,6 +47,7 @@ workflow SubreadsProcessing {
             "fastqc": "quay.io/biocontainers/fastqc:0.11.9--0",
             "isoseq3": "quay.io/biocontainers/isoseq3:3.3.0--0",
             "lima": "quay.io/biocontainers/lima:1.11.0--0",
+            "python3": "python:3.7-slim",
             "multiqc": "quay.io/biocontainers/multiqc:1.9--pyh9f0ad1d_0"
         }
     }
@@ -56,6 +58,13 @@ workflow SubreadsProcessing {
     Array[Subreads] allSubreads = subreadsConfig.subreads
 
     scatter (subreads in allSubreads) {
+        # Get the CCS chunks
+        call ccsChunks {
+            input:
+                chunkCount = ccsChunks,
+                dockerImage = dockerImages["python3"]
+        }
+
         call ccs.CCS as ccs {
             input:
                 subreadsFile = subreads.subreads_file,
@@ -216,5 +225,32 @@ workflow SubreadsProcessing {
         refineSummary: {description: "Refine summary file(s)."}
         refineReport: {description: "Refine report file(s)."}
         refineStderr: {description: "Refine stderr log file(s)."}
+    }
+}
+
+task ccsChunks {
+    input {
+        Int chunkCount
+        String dockerImage = "python:3.7-slim"
+    }
+
+    command {
+        set -e
+        python <<CODE
+
+        count = int("~{chunkCount}")
+
+        chunks = list()
+        for i in range(1, count + 1):
+            print(i,"/",count,sep="")
+        CODE
+    }
+
+    runtime {
+        docker: dockerImage
+    }
+
+    output {
+        Array[String] chunks = read_lines(stdout())
     }
 }
