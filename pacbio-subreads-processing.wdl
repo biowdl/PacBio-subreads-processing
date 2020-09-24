@@ -24,9 +24,11 @@ import "structs.wdl" as structs
 import "tasks/bam2fastx.wdl" as bam2fastx
 import "ccs.wdl" as ccs
 import "tasks/fastqc.wdl" as fastqc
+import "tasks/samtools.wdl" as samtools
 import "tasks/isoseq3.wdl" as isoseq3
 import "tasks/lima.wdl" as lima
 import "tasks/multiqc.wdl" as multiqc
+import "pbbam.wdl" as pbbam
 
 workflow SubreadsProcessing {
     input {
@@ -59,26 +61,44 @@ workflow SubreadsProcessing {
 
     scatter (subreads in allSubreads) {
         # Get the CCS chunks
-        call ccsChunks {
+        call ccsChunks as createChunks {
             input:
                 chunkCount = ccsChunks,
                 dockerImage = dockerImages["python3"]
         }
 
-        call ccs.CCS as ccs {
+        # Index the input bamfile
+        call pbbam.Index as pbindex {
             input:
-                subreadsFile = subreads.subreads_file,
-                outputPrefix = outputDirectory + "/" + subreads.subreads_id + "/" + subreads.subreads_id,
-                cores = ccsCores,
-                dockerImage = dockerImages["ccs"]
+                bamFile = subreads.subreads_file
         }
 
+        scatter (chunk in createChunks.chunks) {
+            # Convert chunk from 1/10 to 1 to determine output filename
+            String chunkNumber = sub(chunk, "/.*$", "")
+
+            call ccs.CCS as ccs {
+                input:
+                    subreadsFile = pbindex.indexedBam,
+                    subreadsIndexFile = pbindex.index,
+                    outputPrefix = outputDirectory + "/" + subreads.subreads_id + "_chunk" + chunkNumber,
+                    cores = ccsCores,
+                    chunkString = chunk,
+                    dockerImage = dockerImages["ccs"]
+            }
+        }
+        # Merge the bam files again
+        call samtools.Merge as merge {
+            input:
+                bamFiles = ccs.ccsBam,
+                outputBamPath= outputDirectory + "/" + subreads.subreads_id + "_ccs.bam"
+        }
         call lima.Lima as lima {
             input:
                 libraryDesign = libraryDesign,
                 ccsMode = ccsMode,
                 splitBamNamed = splitBamNamed,
-                inputBamFile = ccs.ccsBam,
+                inputBamFile = merge.outputBam,
                 barcodeFile = subreads.barcodes_file,
                 outputPrefix = outputDirectory + "/" + subreads.subreads_id + "/" + subreads.subreads_id,
                 cores = limaCores,
@@ -163,10 +183,10 @@ workflow SubreadsProcessing {
     }
 
     output {
-        Array[File] ccsReads = ccs.ccsBam
-        Array[File] ccsIndex = ccs.ccsBamIndex
-        Array[File] ccsReport = ccs.ccsReport
-        Array[File] ccsStderr = ccs.ccsStderr
+        Array[File] ccsReads = merge.outputBam
+        Array[File] ccsIndex = merge.outputBamIndex
+        Array[File] ccsReport = flatten(ccs.ccsReport)
+        Array[File] ccsStderr = flatten(ccs.ccsStderr)
         Array[File] limaReads = flatten(lima.limaBam)
         Array[File] limaIndex = flatten(lima.limaBamIndex)
         Array[File] limaSubreadset = flatten(lima.limaXml)
@@ -186,6 +206,8 @@ workflow SubreadsProcessing {
         Array[File?] refineSummary = flatten(refine.refineFilterSummary)
         Array[File?] refineReport = flatten(refine.refineReport)
         Array[File?] refineStderr = flatten(refine.refineStderr)
+        Array[String] chunkNumber = flatten(chunkNumber)
+        Array[String] chunks = flatten(createChunks.chunks)
     }
 
     parameter_meta {
@@ -238,11 +260,8 @@ task ccsChunks {
         set -e
         python <<CODE
 
-        count = int("~{chunkCount}")
-
-        chunks = list()
-        for i in range(1, count + 1):
-            print(i,"/",count,sep="")
+        for i in range(1, ~{chunkCount} + 1):
+            print(i, ~{chunkCount}, sep="/")
         CODE
     }
 
