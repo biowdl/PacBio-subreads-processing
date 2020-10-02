@@ -12,9 +12,7 @@
       - '--num-threads 4'
   files:
     - path: test-output/batch.1.march/batch.1.march.ccs.bam
-    - path: test-output/batch.1.march/batch.1.march.ccs.bam.pbi
-    - path: test-output/batch.1.march/batch.1.march.ccs.report.txt
-    - path: test-output/batch.1.march/batch.1.march.ccs.stderr.log
+    - path: test-output/batch.1.march/batch.1.march.ccs.report.merged.txt
     - path: test-output/batch.1.march/batch.1.march.fl.json
     - path: test-output/batch.1.march/batch.1.march.fl.lima.counts
     - path: test-output/batch.1.march/batch.1.march.fl.lima.report
@@ -36,9 +34,7 @@
     - path: test-output/batch.1.march/batch.1.march.flnc.Sample_4_3p--Sample_4_3p.bam
       should_exist: false
     - path: test-output/batch.2.february/batch.2.february.ccs.bam
-    - path: test-output/batch.2.february/batch.2.february.ccs.bam.pbi
-    - path: test-output/batch.2.february/batch.2.february.ccs.report.txt
-    - path: test-output/batch.2.february/batch.2.february.ccs.stderr.log
+    - path: test-output/batch.2.february/batch.2.february.ccs.report.merged.txt
     - path: test-output/batch.2.february/batch.2.february.fl.json
     - path: test-output/batch.2.february/batch.2.february.fl.lima.counts
     - path: test-output/batch.2.february/batch.2.february.fl.lima.report
@@ -55,9 +51,7 @@
     - path: test-output/batch.2.february/batch.2.february.flnc.Sample_9_3p--Sample_9_3p.bam
       should_exist: false
     - path: test-output/batch.3.august/batch.3.august.ccs.bam
-    - path: test-output/batch.3.august/batch.3.august.ccs.bam.pbi
-    - path: test-output/batch.3.august/batch.3.august.ccs.report.txt
-    - path: test-output/batch.3.august/batch.3.august.ccs.stderr.log
+    - path: test-output/batch.3.august/batch.3.august.ccs.report.merged.txt
     - path: test-output/batch.3.august/batch.3.august.fl.json
     - path: test-output/batch.3.august/batch.3.august.fl.lima.counts
     - path: test-output/batch.3.august/batch.3.august.fl.lima.report
@@ -152,9 +146,7 @@
       - 'SubreadsProcessing.samples.*"Sample_1_3p"'
   files:
     - path: test-output/batch.1.march/batch.1.march.ccs.bam
-    - path: test-output/batch.1.march/batch.1.march.ccs.bam.pbi
-    - path: test-output/batch.1.march/batch.1.march.ccs.report.txt
-    - path: test-output/batch.1.march/batch.1.march.ccs.stderr.log
+    - path: test-output/batch.1.march/batch.1.march.ccs.report.merged.txt
     - path: test-output/batch.1.march/batch.1.march.fl.json
     - path: test-output/batch.1.march/batch.1.march.fl.lima.counts
     - path: test-output/batch.1.march/batch.1.march.fl.lima.report
@@ -173,9 +165,7 @@
     - path: test-output/batch.1.march/batch.1.march.flnc.Sample_4_3p--Sample_4_3p.bam
       should_exist: false
     - path: test-output/batch.2.february/batch.2.february.ccs.bam
-    - path: test-output/batch.2.february/batch.2.february.ccs.bam.pbi
-    - path: test-output/batch.2.february/batch.2.february.ccs.report.txt
-    - path: test-output/batch.2.february/batch.2.february.ccs.stderr.log
+    - path: test-output/batch.2.february/batch.2.february.ccs.report.merged.txt
     - path: test-output/batch.2.february/batch.2.february.fl.json
     - path: test-output/batch.2.february/batch.2.february.fl.lima.counts
     - path: test-output/batch.2.february/batch.2.february.fl.lima.report
@@ -190,9 +180,7 @@
     - path: test-output/batch.2.february/batch.2.february.flnc.Sample_9_3p--Sample_9_3p.bam
       should_exist: false
     - path: test-output/batch.3.august/batch.3.august.ccs.bam
-    - path: test-output/batch.3.august/batch.3.august.ccs.bam.pbi
-    - path: test-output/batch.3.august/batch.3.august.ccs.report.txt
-    - path: test-output/batch.3.august/batch.3.august.ccs.stderr.log
+    - path: test-output/batch.3.august/batch.3.august.ccs.report.merged.txt
     - path: test-output/batch.3.august/batch.3.august.fl.json
     - path: test-output/batch.3.august/batch.3.august.fl.lima.counts
     - path: test-output/batch.3.august/batch.3.august.fl.lima.report
@@ -275,9 +263,7 @@
       - '--num-threads 4'
   files:
     - path: test-output/batch.1.march/batch.1.march.ccs.bam
-    - path: test-output/batch.1.march/batch.1.march.ccs.bam.pbi
-    - path: test-output/batch.1.march/batch.1.march.ccs.report.txt
-    - path: test-output/batch.1.march/batch.1.march.ccs.stderr.log
+    - path: test-output/batch.1.march/batch.1.march.ccs.report.merged.txt
     - path: test-output/batch.1.march/batch.1.march.fl.json
     - path: test-output/batch.1.march/batch.1.march.fl.lima.counts
     - path: test-output/batch.1.march/batch.1.march.fl.lima.report
@@ -317,9 +303,7 @@
     - path: test-output/batch.1.march/fastq-files/batch.1.march.flnc.Sample_4_3p--Sample_4_3p.fastq.gz
       should_exist: false
     - path: test-output/batch.2.february/batch.2.february.ccs.bam
-    - path: test-output/batch.2.february/batch.2.february.ccs.bam.pbi
-    - path: test-output/batch.2.february/batch.2.february.ccs.report.txt
-    - path: test-output/batch.2.february/batch.2.february.ccs.stderr.log
+    - path: test-output/batch.2.february/batch.2.february.ccs.report.merged.txt
     - path: test-output/batch.2.february/batch.2.february.fl.json
     - path: test-output/batch.2.february/batch.2.february.fl.lima.counts
     - path: test-output/batch.2.february/batch.2.february.fl.lima.report
@@ -348,9 +332,7 @@
     - path: test-output/batch.2.february/fastq-files/batch.2.february.flnc.Sample_9_3p--Sample_9_3p.fastq.gz
       should_exist: false
     - path: test-output/batch.3.august/batch.3.august.ccs.bam
-    - path: test-output/batch.3.august/batch.3.august.ccs.bam.pbi
-    - path: test-output/batch.3.august/batch.3.august.ccs.report.txt
-    - path: test-output/batch.3.august/batch.3.august.ccs.stderr.log
+    - path: test-output/batch.3.august/batch.3.august.ccs.report.merged.txt
     - path: test-output/batch.3.august/batch.3.august.fl.json
     - path: test-output/batch.3.august/batch.3.august.fl.lima.counts
     - path: test-output/batch.3.august/batch.3.august.fl.lima.report
@@ -535,9 +517,7 @@
       - 'SubreadsProcessing.samples.*"Sample_1_3p"'
   files:
     - path: test-output/batch.1.march/batch.1.march.ccs.bam
-    - path: test-output/batch.1.march/batch.1.march.ccs.bam.pbi
-    - path: test-output/batch.1.march/batch.1.march.ccs.report.txt
-    - path: test-output/batch.1.march/batch.1.march.ccs.stderr.log
+    - path: test-output/batch.1.march/batch.1.march.ccs.report.merged.txt
     - path: test-output/batch.1.march/batch.1.march.fl.json
     - path: test-output/batch.1.march/batch.1.march.fl.lima.counts
     - path: test-output/batch.1.march/batch.1.march.fl.lima.report
@@ -574,9 +554,7 @@
     - path: test-output/batch.1.march/fastq-files/batch.1.march.flnc.Sample_3_3p--Sample_3_3p.fastq.gz
     - path: test-output/batch.1.march/fastq-files/batch.1.march.flnc.Sample_4_3p--Sample_4_3p.fastq.gz
     - path: test-output/batch.2.february/batch.2.february.ccs.bam
-    - path: test-output/batch.2.february/batch.2.february.ccs.bam.pbi
-    - path: test-output/batch.2.february/batch.2.february.ccs.report.txt
-    - path: test-output/batch.2.february/batch.2.february.ccs.stderr.log
+    - path: test-output/batch.2.february/batch.2.february.ccs.report.merged.txt
     - path: test-output/batch.2.february/batch.2.february.fl.json
     - path: test-output/batch.2.february/batch.2.february.fl.lima.counts
     - path: test-output/batch.2.february/batch.2.february.fl.lima.report
@@ -603,9 +581,7 @@
     - path: test-output/batch.2.february/fastq-files/batch.2.february.flnc.Sample_8_3p--Sample_8_3p.fastq.gz
     - path: test-output/batch.2.february/fastq-files/batch.2.february.flnc.Sample_9_3p--Sample_9_3p.fastq.gz
     - path: test-output/batch.3.august/batch.3.august.ccs.bam
-    - path: test-output/batch.3.august/batch.3.august.ccs.bam.pbi
-    - path: test-output/batch.3.august/batch.3.august.ccs.report.txt
-    - path: test-output/batch.3.august/batch.3.august.ccs.stderr.log
+    - path: test-output/batch.3.august/batch.3.august.ccs.report.merged.txt
     - path: test-output/batch.3.august/batch.3.august.fl.json
     - path: test-output/batch.3.august/batch.3.august.fl.lima.counts
     - path: test-output/batch.3.august/batch.3.august.fl.lima.report

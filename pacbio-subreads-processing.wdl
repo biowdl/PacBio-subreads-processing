@@ -50,7 +50,8 @@ workflow SubreadsProcessing {
             "isoseq3": "quay.io/biocontainers/isoseq3:3.3.0--0",
             "lima": "quay.io/biocontainers/lima:1.11.0--0",
             "python3": "python:3.7-slim",
-            "multiqc": "quay.io/biocontainers/multiqc:1.9--pyh9f0ad1d_0"
+            "multiqc": "quay.io/biocontainers/multiqc:1.9--pyh9f0ad1d_0",
+            "pacbio-merge": "lumc/pacbio-merge:0.1"
         }
     }
 
@@ -91,8 +92,16 @@ workflow SubreadsProcessing {
         call samtools.Merge as merge {
             input:
                 bamFiles = ccs.ccsBam,
-                outputBamPath= outputDirectory + "/" + subreads.subreads_id + "_ccs.bam"
+                outputBamPath = outputDirectory + "/" + subreads.subreads_id + "/" + subreads.subreads_id + ".ccs.bam"
         }
+
+        # Merge the report for MultiQC
+        call mergePacBio as MergeCCSReport {
+            input:
+                reports = ccs.ccsReport,
+                mergedReport = outputDirectory + "/" + subreads.subreads_id + "/" + subreads.subreads_id + ".ccs.report.merged.txt"
+        }
+
         call lima.Lima as lima {
             input:
                 libraryDesign = libraryDesign,
@@ -185,7 +194,7 @@ workflow SubreadsProcessing {
     output {
         Array[File] ccsReads = merge.outputBam
         Array[File] ccsIndex = merge.outputBamIndex
-        Array[File] ccsReport = flatten(ccs.ccsReport)
+        Array[File] ccsReport = MergeCCSReport.MergedReport
         Array[File] ccsStderr = flatten(ccs.ccsStderr)
         Array[File] limaReads = flatten(lima.limaBam)
         Array[File] limaIndex = flatten(lima.limaBamIndex)
@@ -271,5 +280,29 @@ task ccsChunks {
 
     output {
         Array[String] chunks = read_lines(stdout())
+    }
+}
+
+task mergePacBio {
+    input {
+        Array[File]+ reports
+        String mergedReport
+        String dockerImage = "lumc/pacbio-merge:0.1"
+    }
+
+    command {
+        set -e
+        mkdir -p $(dirname ~{mergedReport})
+        pacbio_merge \
+            --reports ~{sep=" " reports} \
+            --PacBio-output ~{mergedReport}
+    }
+
+    runtime {
+        docker: dockerImage
+    }
+
+    output {
+        File MergedReport = mergedReport
     }
 }
