@@ -215,7 +215,7 @@ workflow SubreadsProcessing {
         Array[File?] refineSummary = flatten(refine.refineFilterSummary)
         Array[File?] refineReport = flatten(refine.refineReport)
         Array[File?] refineStderr = flatten(refine.refineStderr)
-        Array[String] chunkNumber = flatten(chunkNumber)
+        Array[String] ChunkNumber = flatten(chunkNumber)
         Array[String] chunks = flatten(createChunks.chunks)
     }
 
@@ -230,6 +230,7 @@ workflow SubreadsProcessing {
         runIsoseq3Refine: {description: "Run isoseq3 refine for de-novo transcript reconstruction. Do not set this to true when analysing dna reads.", category: "advanced"}
         limaCores: {description: "The number of CPU cores to be used by lima.", category: "advanced"}
         ccsCores: {description: "The number of CPU cores to be used by ccs.", category: "advanced"}
+        ccsChunks: {description: "The number of chunks to be used by ccs.", category: "advanced"}
         dockerImages: {description: "The docker image(s) used for this workflow. Changing this may result in errors which the developers may choose not to address.", category: "advanced"}
 
         # outputs
@@ -304,5 +305,13 @@ task mergePacBio {
 
     output {
         File MergedReport = mergedReport
+    }
+
+    parameter_meta {
+        # inputs
+        reports: {description: "The PacBio report files to merge.", category: "required"}
+        mergedReport: {description: "The location the merged PacBio report file should be written to.", category: "common"}
+        dockerImage: {description: "The docker image used for this task. Changing this may result in errors which the developers may choose not to address.",
+                      category: "advanced"}
     }
 }
