@@ -1,0 +1,31 @@
+- name: womtool.dna
+  tags:
+    - sanity
+  command: >-
+    womtool validate
+    --inputs tests/integration/dna.json
+    pacbio-subreads-processing.wdl
+
+- name: womtool.dna.plus.fastq
+  tags:
+    - sanity
+  command: >-
+    womtool validate
+    --inputs tests/integration/dna.plus.fastq.json
+    pacbio-subreads-processing.wdl
+
+- name: womtool.rna
+  tags:
+    - sanity
+  command: >-
+    womtool validate
+    --inputs tests/integration/rna.json
+    pacbio-subreads-processing.wdl
+
+- name: womtool.rna.plus.fastq
+  tags:
+    - sanity
+  command: >-
+    womtool validate
+    --inputs tests/integration/rna.plus.fastq.json
+    pacbio-subreads-processing.wdl

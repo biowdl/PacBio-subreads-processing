@@ -45,6 +45,8 @@ matrix:
       after_failure:
         - echo "Linting failed"
     - env:
+      - TEST="sanity"
+    - env:
       - TEST="dna"
     - env:
       - TEST="rna"
