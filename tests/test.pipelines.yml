@@ -35,6 +35,8 @@
   stdout:
     contains_regex:
       - 'SubreadsProcessing.samples.*"Sample_1_3p"'
+    contains:
+      - 'pbindex batch.1.march.subreads.bam batch.1.march.subreads.bam.pbi'
   files:
     - path: test-output/batch.1.march.ccs.bam
     - path: test-output/batch.1.march.ccs.report.txt
@@ -157,5 +159,35 @@
     - path: test-output/fastq-files/batch.1.march.Sample_1_3p--Sample_1_3p.fastq.gz
     - path: test-output/fastq-files/batch.1.march.Sample_3_3p--Sample_3_3p.fastq.gz
     - path: test-output/fastq-files/batch.1.march.Sample_4_3p--Sample_4_3p.fastq.gz
+    - path: test-output/multiqc/multiqc_data.zip
+    - path: test-output/multiqc/multiqc_report.html
+
+- name: dna.pbi
+  tags:
+    - integration
+  command: >-
+    cromwell run -o tests/cromwell.options.json
+    -i tests/integration/dna.pbi.json pacbio-subreads-processing.wdl
+  stdout:
+    must_not_contain:
+      - 'pbindex batch.1.march.subreads.bam batch.1.march.subreads.bam.pbi'
+    contains_regex:
+      - 'SubreadsProcessing.samples.*"Sample_1_3p"'
+    contains:
+      - '--num-threads 3'
+      - '--num-threads 4'
+  files:
+    - path: test-output/batch.1.march.ccs.bam
+    - path: test-output/batch.1.march.ccs.report.txt
+    - path: test-output/batch.1.march.json
+    - path: test-output/batch.1.march.lima.counts
+    - path: test-output/batch.1.march.lima.report
+    - path: test-output/batch.1.march.lima.summary
+    - path: test-output/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc
+    - path: test-output/batch.1.march.stderr.log
+    - path: test-output/fastq-files/batch.1.march.Sample_1_3p--Sample_1_3p.fastq.gz
+      should_exist: false
+    - path: test-output/batch.1.march/batch.1.march.Sample_1_3p--Sample_1_3p.bam
+      should_exist: false
     - path: test-output/multiqc/multiqc_data.zip
     - path: test-output/multiqc/multiqc_report.html
