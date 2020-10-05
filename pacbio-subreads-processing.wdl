@@ -132,7 +132,7 @@ workflow SubreadsProcessing {
             call fastqc.Fastqc as fastqcRefine {
                 input:
                     seqFile = refine.refineBam,
-                    outdirPath = basename(refine.refineBam, ".bam") + "-fastqc",
+                    outdirPath = "refine/" + basename(refine.refineBam, ".bam") + "-fastqc",
                     format = "bam",
                     threads = 4,
                     dockerImage = dockerImages["fastqc"]
