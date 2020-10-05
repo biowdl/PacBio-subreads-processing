@@ -13,6 +13,14 @@
   files:
     - path: test-output/batch.1.march.ccs.bam
     - path: test-output/batch.1.march.ccs.report.txt
+      contains_regex:
+        - 'ZMWs input.* : 93'
+        - 'ZMWs generating CCS.* : 44'
+        - 'ZMWs filtered.* : 49'
+        - 'Median length filter.* : 0'
+        - 'Lacking full passes.* : 42'
+        - 'Draft generation error.* : 1'
+        - 'CCS below minimum RQ.* : 6'
     - path: test-output/batch.1.march.json
     - path: test-output/batch.1.march.lima.counts
     - path: test-output/batch.1.march.lima.report
