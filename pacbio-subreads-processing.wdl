@@ -33,6 +33,7 @@ import "pbbam.wdl" as pbbam
 workflow SubreadsProcessing {
     input {
         File subreadsFile
+        File? subreadsIndexFile
         File barcodesFasta
         String libraryDesign = "same"
         Boolean ccsMode = true
@@ -68,10 +69,15 @@ workflow SubreadsProcessing {
     }
 
     # Index the input bamfile
-    call pbbam.Index as pbindex {
-        input:
-            bamFile = subreadsFile
+    if (!defined(subreadsIndexFile)) {
+        call pbbam.Index as pbindex {
+            input:
+                bamFile = subreadsFile
+        }
     }
+
+    File subreadsIndex = select_first([pbindex.index, subreadsIndexFile])
+    File subreadsBam = select_first([pbindex.indexedBam, subreadsFile])
 
     scatter (chunk in createChunks.chunks) {
         # Convert chunk from 1/10 to 1 to determine output filename
@@ -79,8 +85,8 @@ workflow SubreadsProcessing {
 
         call ccs.CCS as ccs {
             input:
-                subreadsFile = pbindex.indexedBam,
-                subreadsIndexFile = pbindex.index,
+                subreadsFile = subreadsBam,
+                subreadsIndexFile = subreadsIndex,
                 outputPrefix = subreadsName + "_chunk" + chunkNumber,
                 cores = ccsCores,
                 chunkString = chunk,

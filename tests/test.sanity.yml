@@ -6,6 +6,14 @@
     --inputs tests/integration/dna.json
     pacbio-subreads-processing.wdl
 
+- name: womtool.dna.pbi
+  tags:
+    - sanity
+  command: >-
+    womtool validate
+    --inputs tests/integration/dna.pbi.json
+    pacbio-subreads-processing.wdl
+
 - name: womtool.dna.plus.fastq
   tags:
     - sanity
