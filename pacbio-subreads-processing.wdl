@@ -113,12 +113,16 @@ workflow SubreadsProcessing {
             dockerImage = dockerImages["lima"]
     }
 
-    scatter (bamFile in lima.limaBam) {
+    scatter (pair in zip(lima.limaBam, lima.limaBamIndex)) {
+        File bamFile = pair.left
+        File bamFileIndex = pair.right
+
         if (runIsoseq3Refine) {
             String refineOutputPrefix = sub(basename(bamFile, ".bam"), "fl", "flnc")
             call isoseq3.Refine as refine {
                 input:
                     inputBamFile = bamFile,
+                    inputBamIndex = bamFileIndex,
                     primerFile = barcodesFasta,
                     outputDir = "refine",
                     outputNamePrefix = refineOutputPrefix,
@@ -159,7 +163,7 @@ workflow SubreadsProcessing {
                 call bam2fastx.Bam2Fastq as bam2FastqLima {
                     input:
                         bam = [bamFile],
-                        bamIndex = lima.limaBamIndex,
+                        bamIndex = [bamFileIndex],
                         outputPrefix = "fastq-files/" + basename(bamFile, ".bam"),
                         dockerImage = dockerImages["bam2fastx"]
                 }
