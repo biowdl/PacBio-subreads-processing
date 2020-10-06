@@ -36,7 +36,7 @@ task CCS {
         Int cores = 2
         String memory = "2G"
         Int timeMinutes = 1440
-        String dockerImage = "quay.io/biocontainers/pbccs:4.2.0--0"
+        String dockerImage = "quay.io/biocontainers/pbccs:5.0.0--0"
     }
 
     command {
@@ -51,7 +51,7 @@ task CCS {
         --log-level ~{logLevel} \
         --num-threads ~{cores} \
         ~{"--chunk " + chunkString} \
-        ~{"--report-file " + outputPrefix + ".ccs.report.txt"} \
+        ~{"--report-json " + outputPrefix + ".ccs.report.json"} \
         ~{"--log-file " + outputPrefix + ".ccs.stderr.log"} \
         ~{subreadsFile} \
         ~{outputPrefix + ".ccs.bam"}
@@ -60,7 +60,7 @@ task CCS {
     output {
         File ccsBam = outputPrefix + ".ccs.bam"
         File ccsBamIndex = outputPrefix + ".ccs.bam.pbi"
-        File ccsReport = outputPrefix + ".ccs.report.txt"
+        File ccsReport = outputPrefix + ".ccs.report.json"
         File ccsStderr = outputPrefix + ".ccs.stderr.log"
     }
 

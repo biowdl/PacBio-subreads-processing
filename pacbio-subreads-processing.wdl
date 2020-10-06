@@ -46,7 +46,7 @@ workflow SubreadsProcessing {
         Map[String, String] dockerImages = {
             "bam2fastx": "quay.io/biocontainers/bam2fastx:1.3.0--he1c1bb9_8",
             "biowdl-input-converter": "quay.io/biocontainers/biowdl-input-converter:0.2.1--py_0",
-            "ccs": "quay.io/biocontainers/pbccs:4.2.0--1",
+            "ccs": "quay.io/biocontainers/pbccs:5.0.0--0",
             "fastqc": "quay.io/biocontainers/fastqc:0.11.9--0",
             "isoseq3": "quay.io/biocontainers/isoseq3:3.3.0--0",
             "lima": "quay.io/biocontainers/lima:1.11.0--0",
