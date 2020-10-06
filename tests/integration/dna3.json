@@ -1,0 +1,9 @@
+{
+    "SubreadsProcessing.subreadsFile": "tests/data/batch.1.march.subreads.bam",
+    "SubreadsProcessing.barcodesFasta": "tests/data/batch.1.march.barcodes.fasta",
+    "SubreadsProcessing.runIsoseq3Refine": false,
+    "SubreadsProcessing.generateFastq": false,
+    "SubreadsProcessing.limaCores": "3",
+    "SubreadsProcessing.ccsChunks": "3",
+    "SubreadsProcessing.ccsCores": "4"
+}
