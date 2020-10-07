@@ -228,6 +228,9 @@ workflow SubreadsProcessing {
 
     parameter_meta {
         # inputs
+        barcodesFasta: {description: "Fasta file with the barcodes used in the PacBio experiment.", category: "common"}
+        subreadsFile: {description: "The PacBio subreads file that contains the raw PacBio reads.", category: "common"}
+        subreadsIndexFile: {description: ".pbi file for the subreadsFile. If not specified, the subreadsFile will be indexed automatically." , category: "advanced"}
         libraryDesign: {description: "Barcode structure of the library design.", category: "advanced"}
         ccsMode: {description: "Ccs mode, use optimal alignment options.", category: "advanced"}
         splitBamNamed: {description: "Split bam file(s) by resolved barcode pair name.", category: "advanced"}
