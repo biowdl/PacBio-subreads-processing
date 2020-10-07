@@ -52,7 +52,7 @@ workflow SubreadsProcessing {
             "lima": "quay.io/biocontainers/lima:1.11.0--0",
             "python3": "python:3.7-slim",
             "multiqc": "quay.io/biocontainers/multiqc:1.9--pyh9f0ad1d_0",
-            "pacbio-merge": "lumc/pacbio-merge:0.1"
+            "pacbio-merge": "lumc/pacbio-merge:0.2"
         }
     }
 
@@ -104,7 +104,7 @@ workflow SubreadsProcessing {
     call mergePacBio as MergeCCSReport {
         input:
             reports = ccs.ccsReport,
-            mergedReport = subreadsName + ".ccs.report.txt"
+            mergedReport = subreadsName + ".ccs.report.json"
     }
 
     call lima.Lima as lima {
@@ -293,7 +293,7 @@ task mergePacBio {
     input {
         Array[File]+ reports
         String mergedReport
-        String dockerImage = "lumc/pacbio-merge:0.1"
+        String dockerImage = "lumc/pacbio-merge:0.2"
     }
 
     command {
@@ -301,7 +301,7 @@ task mergePacBio {
         mkdir -p $(dirname ~{mergedReport})
         pacbio_merge \
             --reports ~{sep=" " reports} \
-            --PacBio-output ~{mergedReport}
+            --json-output ~{mergedReport}
     }
 
     runtime {

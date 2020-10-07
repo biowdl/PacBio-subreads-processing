@@ -12,15 +12,22 @@
       - '--num-threads 4'
   files:
     - path: test-output/batch.1.march.ccs.bam
-    - path: test-output/batch.1.march.ccs.report.txt
+    - path: test-output/batch.1.march.ccs.report.json
       contains_regex:
-        - 'ZMWs input.* : 93'
-        - 'ZMWs generating CCS.* : 44'
-        - 'ZMWs filtered.* : 49'
-        - 'Median length filter.* : 0'
-        - 'Lacking full passes.* : 42'
-        - 'Draft generation error.* : 1'
-        - 'CCS below minimum RQ.* : 6'
+        - 'ZMWs input'
+        - 'value.*: 93'
+        - 'ZMWs pass filters'
+        - 'value.*: 44'
+        - 'ZMWs fail filters'
+        - 'value.*: 49'
+        - 'Median length filter'
+        - 'value.*: 0'
+        - 'Lacking full passes'
+        - 'value.*: 42'
+        - 'Draft generation error'
+        - 'value.*: 1'
+        - 'CCS below minimum RQ'
+        - 'value.*: 6'
     - path: test-output/batch.1.march.json
     - path: test-output/batch.1.march.lima.counts
     - path: test-output/batch.1.march.lima.report
@@ -47,7 +54,7 @@
       - 'pbindex batch.1.march.subreads.bam batch.1.march.subreads.bam.pbi'
   files:
     - path: test-output/batch.1.march.ccs.bam
-    - path: test-output/batch.1.march.ccs.report.txt
+    - path: test-output/batch.1.march.ccs.report.json
     - path: test-output/batch.1.march.json
     - path: test-output/batch.1.march.lima.counts
     - path: test-output/batch.1.march.lima.report
@@ -78,7 +85,7 @@
       - '--num-threads 4'
   files:
     - path: test-output/batch.1.march.ccs.bam
-    - path: test-output/batch.1.march.ccs.report.txt
+    - path: test-output/batch.1.march.ccs.report.json
     - path: test-output/batch.1.march.json
     - path: test-output/batch.1.march.lima.counts
     - path: test-output/batch.1.march.lima.report
@@ -131,7 +138,7 @@
       - 'SubreadsProcessing.samples.*"Sample_1_3p"'
   files:
     - path: test-output/batch.1.march.ccs.bam
-    - path: test-output/batch.1.march.ccs.report.txt
+    - path: test-output/batch.1.march.ccs.report.json
     - path: test-output/batch.1.march.json
     - path: test-output/batch.1.march.lima.counts
     - path: test-output/batch.1.march.lima.report
@@ -186,7 +193,7 @@
       - '--num-threads 4'
   files:
     - path: test-output/batch.1.march.ccs.bam
-    - path: test-output/batch.1.march.ccs.report.txt
+    - path: test-output/batch.1.march.ccs.report.json
     - path: test-output/batch.1.march.json
     - path: test-output/batch.1.march.lima.counts
     - path: test-output/batch.1.march.lima.report
@@ -200,121 +207,74 @@
     - path: test-output/multiqc/multiqc_data.zip
     - path: test-output/multiqc/multiqc_report.html
 
-- name: dna1
+- name: dna.ccs.1
   tags:
     - CCS
   command: >-
     cromwell run -o tests/cromwell.options.json
     -i tests/integration/dna1.json pacbio-subreads-processing.wdl
   files:
-    - path: test-output/batch.1.march.ccs.report.txt
+    - path: test-output/batch.1.march.ccs.report.json
       contains_regex:
-        - 'ZMWs input.* : 93'
-        - 'ZMWs generating CCS.* : 44'
-        - 'ZMWs filtered.* : 49'
-        - 'Median length filter.* : 0'
-        - 'Lacking full passes.* : 42'
-        - 'Draft generation error.* : 1'
-        - 'CCS below minimum RQ.* : 6'
+        - 'ZMWs input'
+        - 'value.*: 93'
+        - 'ZMWs pass filters'
+        - 'value.*: 44'
+        - 'ZMWs fail filters'
+        - 'value.*: 49'
+        - 'Median length filter'
+        - 'value.*: 0'
+        - 'Lacking full passes'
+        - 'value.*: 42'
+        - 'Draft generation error'
+        - 'value.*: 1'
+        - 'CCS below minimum RQ'
+        - 'value.*: 6'
 
-- name: dna2
-  tags:
-    - CCS
-  command: >-
-    cromwell run -o tests/cromwell.options.json
-    -i tests/integration/dna2.json pacbio-subreads-processing.wdl
-  files:
-    - path: test-output/batch.1.march.ccs.report.txt
-      contains_regex:
-        - 'ZMWs input.* : 93'
-        - 'ZMWs generating CCS.* : 44'
-        - 'ZMWs filtered.* : 49'
-        - 'Median length filter.* : 0'
-        - 'Lacking full passes.* : 42'
-        - 'Draft generation error.* : 1'
-        - 'CCS below minimum RQ.* : 6'
-
-- name: dna3
-  tags:
-    - CCS
-  command: >-
-    cromwell run -o tests/cromwell.options.json
-    -i tests/integration/dna3.json pacbio-subreads-processing.wdl
-  files:
-    - path: test-output/batch.1.march.ccs.report.txt
-      contains_regex:
-        - 'ZMWs input.* : 93'
-        - 'ZMWs generating CCS.* : 44'
-        - 'ZMWs filtered.* : 49'
-        - 'Median length filter.* : 0'
-        - 'Lacking full passes.* : 42'
-        - 'Draft generation error.* : 1'
-        - 'CCS below minimum RQ.* : 6'
-
-- name: dna4
-  tags:
-    - CCS
-  command: >-
-    cromwell run -o tests/cromwell.options.json
-    -i tests/integration/dna4.json pacbio-subreads-processing.wdl
-  files:
-    - path: test-output/batch.1.march.ccs.report.txt
-      contains_regex:
-        - 'ZMWs input.* : 93'
-        - 'ZMWs generating CCS.* : 44'
-        - 'ZMWs filtered.* : 49'
-        - 'Median length filter.* : 0'
-        - 'Lacking full passes.* : 42'
-        - 'Draft generation error.* : 1'
-        - 'CCS below minimum RQ.* : 6'
-
-- name: dna5
+- name: dna.ccs.5
   tags:
     - CCS
   command: >-
     cromwell run -o tests/cromwell.options.json
     -i tests/integration/dna5.json pacbio-subreads-processing.wdl
   files:
-    - path: test-output/batch.1.march.ccs.report.txt
+    - path: test-output/batch.1.march.ccs.report.json
       contains_regex:
-        - 'ZMWs input.* : 93'
-        - 'ZMWs generating CCS.* : 44'
-        - 'ZMWs filtered.* : 49'
-        - 'Median length filter.* : 0'
-        - 'Lacking full passes.* : 42'
-        - 'Draft generation error.* : 1'
-        - 'CCS below minimum RQ.* : 6'
+        - 'ZMWs input'
+        - 'value.*: 93'
+        - 'ZMWs pass filters'
+        - 'value.*: 44'
+        - 'ZMWs fail filters'
+        - 'value.*: 49'
+        - 'Median length filter'
+        - 'value.*: 0'
+        - 'Lacking full passes'
+        - 'value.*: 42'
+        - 'Draft generation error'
+        - 'value.*: 1'
+        - 'CCS below minimum RQ'
+        - 'value.*: 6'
 
-- name: dna10
+- name: dna.ccs.93
   tags:
     - CCS
   command: >-
     cromwell run -o tests/cromwell.options.json
-    -i tests/integration/dna10.json pacbio-subreads-processing.wdl
+    -i tests/integration/dna93.json pacbio-subreads-processing.wdl
   files:
-    - path: test-output/batch.1.march.ccs.report.txt
+    - path: test-output/batch.1.march.ccs.report.json
       contains_regex:
-        - 'ZMWs input.* : 93'
-        - 'ZMWs generating CCS.* : 44'
-        - 'ZMWs filtered.* : 49'
-        - 'Median length filter.* : 0'
-        - 'Lacking full passes.* : 42'
-        - 'Draft generation error.* : 1'
-        - 'CCS below minimum RQ.* : 6'
-
-- name: dna100
-  tags:
-    - CCS
-  command: >-
-    cromwell run -o tests/cromwell.options.json
-    -i tests/integration/dna100.json pacbio-subreads-processing.wdl
-  files:
-    - path: test-output/batch.1.march.ccs.report.txt
-      contains_regex:
-        - 'ZMWs input.* : 93'
-        - 'ZMWs generating CCS.* : 44'
-        - 'ZMWs filtered.* : 49'
-        - 'Median length filter.* : 0'
-        - 'Lacking full passes.* : 42'
-        - 'Draft generation error.* : 1'
-        - 'CCS below minimum RQ.* : 6'
+        - 'ZMWs input'
+        - 'value.*: 93'
+        - 'ZMWs pass filters'
+        - 'value.*: 44'
+        - 'ZMWs fail filters'
+        - 'value.*: 49'
+        - 'Median length filter'
+        - 'value.*: 0'
+        - 'Lacking full passes'
+        - 'value.*: 42'
+        - 'Draft generation error'
+        - 'value.*: 1'
+        - 'CCS below minimum RQ'
+        - 'value.*: 6'
