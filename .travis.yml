@@ -46,3 +46,9 @@ matrix:
       - TEST="dna.plus.fastq"
     - env:
       - TEST="rna.plus.fastq"
+    - env:
+      - TEST="dna.ccs.1"
+    - env:
+      - TEST="dna.ccs.5"
+    - env:
+      - TEST="dna.ccs.93"
