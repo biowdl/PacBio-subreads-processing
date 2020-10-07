@@ -21,12 +21,12 @@ version 1.0
 # SOFTWARE.
 
 import "structs.wdl" as structs
-import "tasks/bam2fastx.wdl" as bam2fastx
+import "bam2fastx.wdl" as bam2fastx
 import "ccs.wdl" as ccs
 import "tasks/fastqc.wdl" as fastqc
-import "tasks/samtools.wdl" as samtools
-import "tasks/isoseq3.wdl" as isoseq3
-import "tasks/lima.wdl" as lima
+import "samtools.wdl" as samtools
+import "isoseq3.wdl" as isoseq3
+import "lima.wdl" as lima
 import "tasks/multiqc.wdl" as multiqc
 import "pbbam.wdl" as pbbam
 
