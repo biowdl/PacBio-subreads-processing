@@ -101,7 +101,7 @@ workflow SubreadsProcessing {
     }
 
     # Merge the report for MultiQC.
-    call mergePacBio as MergeCCSReport {
+    call mergePacBio as mergeCCSReport {
         input:
             reports = ccs.ccsReport,
             mergedReport = subreadsName + ".ccs.report.json"
@@ -203,7 +203,7 @@ workflow SubreadsProcessing {
     output {
         File ccsReads = merge.outputBam
         File ccsIndex = merge.outputBamIndex
-        File ccsReport = MergeCCSReport.MergedReport
+        File ccsReport = mergeCCSReport.MergedReport
         Array[File] ccsStderr = ccs.ccsStderr
         Array[File] limaReads = lima.limaBam
         Array[File] limaIndex = lima.limaBamIndex
