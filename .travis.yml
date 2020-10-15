@@ -22,7 +22,6 @@ before_install:
 stages:
   - test
 
-
 stage: test
 
 install:
