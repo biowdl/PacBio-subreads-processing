@@ -5,7 +5,7 @@
 # http://bioconda.github.io/#install-conda
 # This file can be installed with "conda install --file requirements.txt".
 
-cromwell>=53
+cromwell>=51
 womtool
 pytest-workflow
 miniwdl
