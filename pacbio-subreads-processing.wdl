@@ -189,7 +189,6 @@ workflow SubreadsProcessing {
         }
     }
 
-
     Array[File] qualityReports = flatten([fastqcHtmlReport, fastqcZipReport])
 
     call multiqc.MultiQC as multiqcTask {
