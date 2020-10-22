@@ -58,17 +58,17 @@ workflow SubreadsProcessing {
 
     meta {allowNestedInputs: true}
 
-    # The name of the subreads, to be used to determine output filenames
+    # The name of the subreads, to be used to determine output filenames.
     File subreadsName = basename(subreadsFile, ".subreads.bam")
 
-    # Get the CCS chunks
+    # Get the CCS chunks.
     call ccsChunks as createChunks {
         input:
             chunkCount = ccsChunks,
             dockerImage = dockerImages["python3"]
     }
 
-    # Index the input bamfile
+    # Index the input bamfile.
     if (!defined(subreadsIndexFile)) {
         call pbbam.Index as pbindex {
             input:
@@ -80,7 +80,7 @@ workflow SubreadsProcessing {
     File subreadsBam = select_first([pbindex.indexedBam, subreadsFile])
 
     scatter (chunk in createChunks.chunks) {
-        # Convert chunk from 1/10 to 1 to determine output filename
+        # Convert chunk from 1/10 to 1 to determine output filename.
         String chunkNumber = sub(chunk, "/.*$", "")
 
         call ccs.CCS as ccs {
@@ -93,15 +93,15 @@ workflow SubreadsProcessing {
                 dockerImage = dockerImages["ccs"]
         }
     }
-    # Merge the bam files again
+    # Merge the bam files again.
     call samtools.Merge as merge {
         input:
             bamFiles = ccs.ccsBam,
             outputBamPath = subreadsName + ".ccs.bam"
     }
 
-    # Merge the report for MultiQC
-    call mergePacBio as MergeCCSReport {
+    # Merge the report for MultiQC.
+    call mergePacBio as mergeCCSReport {
         input:
             reports = ccs.ccsReport,
             mergedReport = subreadsName + ".ccs.report.json"
@@ -189,7 +189,6 @@ workflow SubreadsProcessing {
         }
     }
 
-
     Array[File] qualityReports = flatten([fastqcHtmlReport, fastqcZipReport])
 
     call multiqc.MultiQC as multiqcTask {
@@ -203,7 +202,7 @@ workflow SubreadsProcessing {
     output {
         File ccsReads = merge.outputBam
         File ccsIndex = merge.outputBamIndex
-        File ccsReport = MergeCCSReport.MergedReport
+        File ccsReport = mergeCCSReport.MergedReport
         Array[File] ccsStderr = ccs.ccsStderr
         Array[File] limaReads = lima.limaBam
         Array[File] limaIndex = lima.limaBamIndex
