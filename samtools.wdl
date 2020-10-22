@@ -332,6 +332,7 @@ task Merge {
         Int threads = 1
 
         Int timeMinutes = 1 + ceil(size(bamFiles, "G") * 2)
+        String memory = "4G"
         String dockerImage = "quay.io/biocontainers/samtools:1.10--h9402c20_2"
     }
     String indexPath = sub(outputBamPath, "\.bam$",".bai")
@@ -355,6 +356,7 @@ task Merge {
     runtime {
         cpu: threads
         docker: dockerImage
+        memory: memory
         time_minutes: timeMinutes
     }
 
