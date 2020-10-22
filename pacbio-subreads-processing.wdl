@@ -272,6 +272,7 @@ task ccsChunks {
     input {
         Int chunkCount
         String dockerImage = "python:3.7-slim"
+        String memory = "4G"
     }
 
     command {
@@ -285,6 +286,7 @@ task ccsChunks {
 
     runtime {
         docker: dockerImage
+        memory: memory
     }
 
     output {
@@ -297,6 +299,7 @@ task mergePacBio {
         Array[File]+ reports
         String mergedReport
         String dockerImage = "lumc/pacbio-merge:0.2"
+        String memory = "4G"
     }
 
     command {
@@ -309,6 +312,7 @@ task mergePacBio {
 
     runtime {
         docker: dockerImage
+        memory: memory
     }
 
     output {
