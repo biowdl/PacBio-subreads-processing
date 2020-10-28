@@ -291,6 +291,12 @@ task ccsChunks {
     output {
         Array[String] chunks = read_lines(stdout())
     }
+
+    parameter_meta {
+        chunkCount: {description: "The number of chunks to create.", category: "required"}
+        dockerImage: {description: "The docker image used for this task.  Changing this may result in errors which the developers may choose not to address."}
+        memory: {description: "The amount of memory this job will use.", category: "advanced"}
+    }
 }
 
 task mergePacBio {
@@ -322,7 +328,7 @@ task mergePacBio {
         # inputs
         reports: {description: "The PacBio report files to merge.", category: "required"}
         mergedReport: {description: "The location the merged PacBio report file should be written to.", category: "common"}
-        dockerImage: {description: "The docker image used for this task. Changing this may result in errors which the developers may choose not to address.",
-                      category: "advanced"}
+        memory: {description: "The amount of memory this job will use.", category: "advanced"}
+        dockerImage: {description: "The docker image used for this task. Changing this may result in errors which the developers may choose not to address.", category: "advanced"}
     }
 }
