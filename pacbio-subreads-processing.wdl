@@ -22,7 +22,7 @@ version 1.0
 
 import "structs.wdl" as structs
 import "tasks/bam2fastx.wdl" as bam2fastx
-import "ccs.wdl" as ccs
+import "tasks/ccs.wdl" as ccs
 import "tasks/fastqc.wdl" as fastqc
 import "tasks/samtools.wdl" as samtools
 import "tasks/isoseq3.wdl" as isoseq3
