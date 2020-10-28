@@ -93,6 +93,7 @@ workflow SubreadsProcessing {
                 dockerImage = dockerImages["ccs"]
         }
     }
+
     # Merge the bam files again.
     call samtools.Merge as merge {
         input:
