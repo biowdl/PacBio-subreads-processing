@@ -1,5 +1,6 @@
 {
     "SubreadsProcessing.subreadsFile": "tests/data/batch.1.march.subreads.bam",
+    "SubreadsProcessing.subreadsIndexFile": "tests/data/batch.1.march.subreads.bam.pbi",
     "SubreadsProcessing.barcodesFasta": "tests/data/batch.1.march.barcodes.fasta",
     "SubreadsProcessing.runIsoseq3Refine": false,
     "SubreadsProcessing.generateFastq": false,

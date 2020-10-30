@@ -1,5 +1,6 @@
 {
-    "SubreadsProcessing.subreadsConfigFile": "tests/samplesheets/batches.json",
+    "SubreadsProcessing.subreadsFile": "tests/data/batch.1.march.subreads.bam",
+    "SubreadsProcessing.barcodesFasta": "tests/data/batch.1.march.barcodes.fasta",
     "SubreadsProcessing.runIsoseq3Refine": false,
     "SubreadsProcessing.generateFastq": true
 }

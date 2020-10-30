@@ -4,5 +4,6 @@
     "SubreadsProcessing.runIsoseq3Refine": false,
     "SubreadsProcessing.generateFastq": false,
     "SubreadsProcessing.limaCores": "3",
+    "SubreadsProcessing.ccsChunks": "1",
     "SubreadsProcessing.ccsCores": "4"
 }
