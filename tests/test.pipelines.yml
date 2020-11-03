@@ -41,12 +41,12 @@
     - path: test-output/multiqc/multiqc_data.zip
     - path: test-output/multiqc/multiqc_report.html
 
-- name: dna.plus.fastq
+- name: dna.fastq
   tags:
     - integration
   command: >-
     cromwell run -o tests/cromwell.options.json
-    -i tests/integration/dna.plus.fastq.json pacbio-subreads-processing.wdl
+    -i tests/integration/dna.fastq.json pacbio-subreads-processing.wdl
   stdout:
     contains_regex:
       - 'SubreadsProcessing.samples.*"Sample_1_3p"'
@@ -127,12 +127,12 @@
     - path: test-output/multiqc/multiqc_data.zip
     - path: test-output/multiqc/multiqc_report.html
 
-- name: rna.plus.fastq
+- name: rna.fastq
   tags:
     - integration
   command: >-
     cromwell run -o tests/cromwell.options.json
-    -i tests/integration/rna.plus.fastq.json pacbio-subreads-processing.wdl
+    -i tests/integration/rna.fastq.json pacbio-subreads-processing.wdl
   stdout:
     contains_regex:
       - 'SubreadsProcessing.samples.*"Sample_1_3p"'
@@ -207,12 +207,12 @@
     - path: test-output/multiqc/multiqc_data.zip
     - path: test-output/multiqc/multiqc_report.html
 
-- name: dna.ccs.1
+- name: dna.chunks.1
   tags:
     - CCS
   command: >-
     cromwell run -o tests/cromwell.options.json
-    -i tests/integration/dna1.json pacbio-subreads-processing.wdl
+    -i tests/integration/dna.chunks.1.json pacbio-subreads-processing.wdl
   files:
     - path: test-output/batch.1.march.ccs.report.json
       contains_regex:
@@ -231,12 +231,12 @@
         - 'CCS below minimum RQ'
         - 'value.*: 6'
 
-- name: dna.ccs.5
+- name: dna.chunks.5
   tags:
     - CCS
   command: >-
     cromwell run -o tests/cromwell.options.json
-    -i tests/integration/dna5.json pacbio-subreads-processing.wdl
+    -i tests/integration/dna.chunks.5.json pacbio-subreads-processing.wdl
   files:
     - path: test-output/batch.1.march.ccs.report.json
       contains_regex:
@@ -255,12 +255,12 @@
         - 'CCS below minimum RQ'
         - 'value.*: 6'
 
-- name: dna.ccs.93
+- name: dna.chunks.93
   tags:
     - CCS
   command: >-
     cromwell run -o tests/cromwell.options.json
-    -i tests/integration/dna93.json pacbio-subreads-processing.wdl
+    -i tests/integration/dna.chunks.93.json pacbio-subreads-processing.wdl
   files:
     - path: test-output/batch.1.march.ccs.report.json
       contains_regex:

@@ -48,14 +48,14 @@ matrix:
     - env:
       - TEST="dna"
     - env:
+      - TEST="dna.fastq"
+    - env:
       - TEST="rna"
     - env:
-      - TEST="dna.plus.fastq"
+      - TEST="rna.fastq"
     - env:
-      - TEST="rna.plus.fastq"
+      - TEST="dna.chunks.1"
     - env:
-      - TEST="dna.ccs.1"
+      - TEST="dna.chunks.5"
     - env:
-      - TEST="dna.ccs.5"
-    - env:
-      - TEST="dna.ccs.93"
+      - TEST="dna.chunks.93"

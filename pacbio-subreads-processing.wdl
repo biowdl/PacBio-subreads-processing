@@ -20,7 +20,6 @@ version 1.0
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import "structs.wdl" as structs
 import "tasks/bam2fastx.wdl" as bam2fastx
 import "tasks/ccs.wdl" as ccs
 import "tasks/fastqc.wdl" as fastqc

@@ -19,7 +19,7 @@
     - sanity
   command: >-
     womtool validate
-    --inputs tests/integration/dna.plus.fastq.json
+    --inputs tests/integration/dna.fastq.json
     pacbio-subreads-processing.wdl
 
 - name: womtool.rna
@@ -35,5 +35,5 @@
     - sanity
   command: >-
     womtool validate
-    --inputs tests/integration/rna.plus.fastq.json
+    --inputs tests/integration/rna.fastq.json
     pacbio-subreads-processing.wdl
