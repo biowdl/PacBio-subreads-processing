@@ -25,7 +25,7 @@ stages:
 stage: test
 
 install:
-  - conda install --file requirements.txt
+  - conda install --file requirements-test.txt
 
 script:
   - travis_wait 30 pytest --keep-workflow-wd-on-fail --tag $TEST tests/
@@ -36,7 +36,7 @@ after_failure:
 
 matrix:
   include:
-    - env: TEST="womtool validate and submodule up to date"
+    - env: TEST="Womtool validate and submodule up to date."
       if: branch = master OR branch = develop
       install:
         - conda install cromwell miniwdl wdl-aid

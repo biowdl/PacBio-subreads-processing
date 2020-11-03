@@ -1,6 +1,6 @@
 # PacBio-subreads-processing
 This repository contains the [Biowdl](https://github.com/biowdl) pipeline
-usable for processing PacBio subread BAMs using
+usable for processing a PacBio subreads BAM file using
 [ccs](https://github.com/PacificBiosciences/ccs),
 [lima](https://github.com/PacificBiosciences/barcoding) and
 [isoseq3](https://github.com/PacificBiosciences/IsoSeq).

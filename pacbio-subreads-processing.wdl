@@ -1,6 +1,6 @@
 version 1.0
 
-# Copyright (c) 2020 Sequencing Analysis Support Core - Leiden University Medical Center
+# Copyright (c) 2019 Leiden University Medical Center
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -8,10 +8,10 @@ version 1.0
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,20 +29,24 @@ import "tasks/isoseq3.wdl" as isoseq3
 import "tasks/lima.wdl" as lima
 import "tasks/multiqc.wdl" as multiqc
 import "tasks/pbbam.wdl" as pbbam
+import "tasks/pacbio.wdl" as pacbio
 
 workflow SubreadsProcessing {
     input {
         File subreadsFile
-        File? subreadsIndexFile
         File barcodesFasta
         String libraryDesign = "same"
         Boolean ccsMode = true
         Boolean splitBamNamed = true
         Boolean runIsoseq3Refine = false
-        Int limaCores = 2
-        Int ccsCores = 2
         Int ccsChunks = 2
         Boolean generateFastq = false
+        String outputDirectory = "."
+
+        File? subreadsIndexFile
+
+        Int limaThreads = 2
+        Int ccsThreads = 2
         Map[String, String] dockerImages = {
             "bam2fastx": "quay.io/biocontainers/bam2fastx:1.3.0--he1c1bb9_8",
             "biowdl-input-converter": "quay.io/biocontainers/biowdl-input-converter:0.2.1--py_0",
@@ -52,7 +56,9 @@ workflow SubreadsProcessing {
             "lima": "quay.io/biocontainers/lima:1.11.0--0",
             "python3": "python:3.7-slim",
             "multiqc": "quay.io/biocontainers/multiqc:1.9--pyh9f0ad1d_0",
-            "pacbio-merge": "lumc/pacbio-merge:0.2"
+            "pacbio-merge": "lumc/pacbio-merge:0.2",
+            "pbbam": "quay.io/biocontainers/pbbam:1.6.0--h5b7e6e0_0",
+            "samtools": "quay.io/biocontainers/samtools:1.10--h9402c20_2"
         }
     }
 
@@ -62,7 +68,7 @@ workflow SubreadsProcessing {
     File subreadsName = basename(subreadsFile, ".subreads.bam")
 
     # Get the CCS chunks.
-    call ccsChunks as createChunks {
+    call pacbio.ccsChunks as createChunks {
         input:
             chunkCount = ccsChunks,
             dockerImage = dockerImages["python3"]
@@ -72,7 +78,8 @@ workflow SubreadsProcessing {
     if (!defined(subreadsIndexFile)) {
         call pbbam.Index as pbindex {
             input:
-                bamFile = subreadsFile
+                bamFile = subreadsFile,
+                dockerImage = dockerImages["pbbam"]
         }
     }
 
@@ -87,8 +94,8 @@ workflow SubreadsProcessing {
             input:
                 subreadsFile = subreadsBam,
                 subreadsIndexFile = subreadsIndex,
-                outputPrefix = subreadsName + "_chunk" + chunkNumber,
-                cores = ccsCores,
+                outputPrefix = outputDirectory + "/" + subreadsName + "_chunk" + chunkNumber,
+                threads = ccsThreads,
                 chunkString = chunk,
                 dockerImage = dockerImages["ccs"]
         }
@@ -98,14 +105,16 @@ workflow SubreadsProcessing {
     call samtools.Merge as merge {
         input:
             bamFiles = ccs.ccsBam,
-            outputBamPath = subreadsName + ".ccs.bam"
+            outputBamPath = subreadsName + ".ccs.bam",
+            dockerImage = dockerImages["samtools"]
     }
 
     # Merge the report for MultiQC.
-    call mergePacBio as mergeCCSReport {
+    call pacbio.mergePacBio as mergeCCSReport {
         input:
             reports = ccs.ccsReport,
-            mergedReport = subreadsName + ".ccs.report.json"
+            mergedReport = subreadsName + ".ccs.report.json",
+            dockerImage = dockerImages["pacbio-merge"]
     }
 
     call lima.Lima as lima {
@@ -115,8 +124,8 @@ workflow SubreadsProcessing {
             splitBamNamed = splitBamNamed,
             inputBamFile = merge.outputBam,
             barcodeFile = barcodesFasta,
-            outputPrefix = subreadsName,
-            cores = limaCores,
+            outputPrefix = outputDirectory + "/" + subreadsName,
+            threads = limaThreads,
             dockerImage = dockerImages["lima"]
     }
 
@@ -132,14 +141,14 @@ workflow SubreadsProcessing {
                     inputBamIndex = bamFileIndex,
                     primerFile = barcodesFasta,
                     outputDir = "refine",
-                    outputNamePrefix = refineOutputPrefix,
+                    outputNamePrefix = outputDirectory + "/" + refineOutputPrefix,
                     dockerImage = dockerImages["isoseq3"]
             }
 
             call fastqc.Fastqc as fastqcRefine {
                 input:
                     seqFile = refine.refineBam,
-                    outdirPath = "refine/" + basename(refine.refineBam, ".bam") + "-fastqc",
+                    outdirPath = outputDirectory + "/" + "refine/" + basename(refine.refineBam, ".bam") + "-fastqc",
                     format = "bam",
                     threads = 4,
                     dockerImage = dockerImages["fastqc"]
@@ -150,7 +159,7 @@ workflow SubreadsProcessing {
                     input:
                         bam = [refine.refineBam],
                         bamIndex = [refine.refineBamIndex],
-                        outputPrefix =  "fastq-files/" + basename(refine.refineBam, ".bam"),
+                        outputPrefix =  outputDirectory + "/" + "fastq-files/" + basename(refine.refineBam, ".bam"),
                         dockerImage = dockerImages["bam2fastx"]
                 }
             }
@@ -160,7 +169,7 @@ workflow SubreadsProcessing {
             call fastqc.Fastqc as fastqcLima {
                 input:
                     seqFile = bamFile,
-                    outdirPath = basename(bamFile, ".bam") + "-fastqc",
+                    outdirPath = outputDirectory + "/" + basename(bamFile, ".bam") + "-fastqc",
                     format = "bam",
                     threads = 4,
                     dockerImage = dockerImages["fastqc"]
@@ -171,7 +180,7 @@ workflow SubreadsProcessing {
                     input:
                         bam = [bamFile],
                         bamIndex = [bamFileIndex],
-                        outputPrefix = "fastq-files/" + basename(bamFile, ".bam"),
+                        outputPrefix = outputDirectory + "/" + "fastq-files/" + basename(bamFile, ".bam"),
                         dockerImage = dockerImages["bam2fastx"]
                 }
             }
@@ -195,7 +204,7 @@ workflow SubreadsProcessing {
     call multiqc.MultiQC as multiqcTask {
         input:
             reports = qualityReports,
-            outDir = "multiqc",
+            outDir = outputDirectory + "/" + "multiqc",
             dataDir = true,
             dockerImage = dockerImages["multiqc"]
     }
@@ -228,17 +237,17 @@ workflow SubreadsProcessing {
 
     parameter_meta {
         # inputs
-        barcodesFasta: {description: "Fasta file with the barcodes used in the PacBio experiment.", category: "common"}
         subreadsFile: {description: "The PacBio subreads file that contains the raw PacBio reads.", category: "common"}
-        subreadsIndexFile: {description: ".pbi file for the subreadsFile. If not specified, the subreadsFile will be indexed automatically." , category: "advanced"}
+        barcodesFasta: {description: "Fasta file with the barcodes used in the PacBio experiment.", category: "common"}
         libraryDesign: {description: "Barcode structure of the library design.", category: "advanced"}
         ccsMode: {description: "Ccs mode, use optimal alignment options.", category: "advanced"}
         splitBamNamed: {description: "Split bam file(s) by resolved barcode pair name.", category: "advanced"}
         generateFastq: {description: "Generate fastq files from demultiplexed bam files.", category: "common"}
         runIsoseq3Refine: {description: "Run isoseq3 refine for de-novo transcript reconstruction. Do not set this to true when analysing dna reads.", category: "advanced"}
-        limaCores: {description: "The number of CPU cores to be used by lima.", category: "advanced"}
-        ccsCores: {description: "The number of CPU cores to be used by ccs.", category: "advanced"}
         ccsChunks: {description: "The number of chunks to be used by ccs.", category: "advanced"}
+        subreadsIndexFile: {description: ".pbi file for the subreadsFile. If not specified, the subreadsFile will be indexed automatically." , category: "advanced"}
+        limaThreads: {description: "The number of CPU threads to be used by lima.", category: "advanced"}
+        ccsThreads: {description: "The number of CPU threads to be used by ccs.", category: "advanced"}
         dockerImages: {description: "The docker image(s) used for this workflow. Changing this may result in errors which the developers may choose not to address.", category: "advanced"}
 
         # outputs
@@ -265,71 +274,5 @@ workflow SubreadsProcessing {
         refineSummary: {description: "Refine summary file(s)."}
         refineReport: {description: "Refine report file(s)."}
         refineStderr: {description: "Refine stderr log file(s)."}
-    }
-}
-
-task ccsChunks {
-    input {
-        Int chunkCount
-        String dockerImage = "python:3.7-slim"
-        String memory = "4G"
-    }
-
-    command {
-        set -e
-        python <<CODE
-
-        for i in range(1, ~{chunkCount} + 1):
-            print(i, ~{chunkCount}, sep="/")
-        CODE
-    }
-
-    runtime {
-        docker: dockerImage
-        memory: memory
-    }
-
-    output {
-        Array[String] chunks = read_lines(stdout())
-    }
-
-    parameter_meta {
-        chunkCount: {description: "The number of chunks to create.", category: "required"}
-        dockerImage: {description: "The docker image used for this task.  Changing this may result in errors which the developers may choose not to address."}
-        memory: {description: "The amount of memory this job will use.", category: "advanced"}
-    }
-}
-
-task mergePacBio {
-    input {
-        Array[File]+ reports
-        String mergedReport
-        String dockerImage = "lumc/pacbio-merge:0.2"
-        String memory = "4G"
-    }
-
-    command {
-        set -e
-        mkdir -p $(dirname ~{mergedReport})
-        pacbio_merge \
-            --reports ~{sep=" " reports} \
-            --json-output ~{mergedReport}
-    }
-
-    runtime {
-        docker: dockerImage
-        memory: memory
-    }
-
-    output {
-        File MergedReport = mergedReport
-    }
-
-    parameter_meta {
-        # inputs
-        reports: {description: "The PacBio report files to merge.", category: "required"}
-        mergedReport: {description: "The location the merged PacBio report file should be written to.", category: "common"}
-        memory: {description: "The amount of memory this job will use.", category: "advanced"}
-        dockerImage: {description: "The docker image used for this task. Changing this may result in errors which the developers may choose not to address.", category: "advanced"}
     }
 }
