@@ -43,19 +43,11 @@ matrix:
       script: bash scripts/biowdl_lint.sh
       after_failure:
         - echo "Linting failed"
-    - env:
-      - TEST="sanity"
-    - env:
-      - TEST="dna"
-    - env:
-      - TEST="dna.fastq"
-    - env:
-      - TEST="rna"
-    - env:
-      - TEST="rna.fastq"
-    - env:
-      - TEST="dna.chunks.1"
-    - env:
-      - TEST="dna.chunks.5"
-    - env:
-      - TEST="dna.chunks.93"
+    - env: TEST="sanity"
+    - env: TEST="dna"
+    - env: TEST="dna.fastq"
+    - env: TEST="rna"
+    - env: TEST="rna.fastq"
+    - env: TEST="dna.chunks.1"
+    - env: TEST="dna.chunks.5"
+    - env: TEST="dna.chunks.93"
