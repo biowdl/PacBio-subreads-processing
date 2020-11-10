@@ -211,7 +211,7 @@ workflow SubreadsProcessing {
     output {
         File ccsReads = merge.outputBam
         File ccsIndex = merge.outputBamIndex
-        File ccsReport = mergeCCSReport.MergedReport
+        File ccsReport = mergeCCSReport.outputMergedReport
         Array[File] ccsStderr = ccs.ccsStderr
         Array[File] limaReads = lima.limaBam
         Array[File] limaIndex = lima.limaBamIndex

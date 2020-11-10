@@ -3,11 +3,11 @@ layout: default
 title: Home
 ---
 
-This pipeline can be used to process a Pacific Biosciences subreads BAM file.
+This workflow can be used to process a Pacific Biosciences subreads BAM file.
 It generates ccs reads (using pbccs), demultiplexes the ccs reads into samples
 (using lima) and polishes the reads (using isoseq3 refine for RNA).
 
-This pipeline is part of [BioWDL](https://biowdl.github.io/)
+This workflow is part of [BioWDL](https://biowdl.github.io/)
 developed by the SASC team
 at [Leiden University Medical Center](https://www.lumc.nl/).
 
@@ -15,11 +15,11 @@ at [Leiden University Medical Center](https://www.lumc.nl/).
 This workflow can be run using
 [Cromwell](http://cromwell.readthedocs.io/en/stable/):
 
-First download the latest version of the pipeline wdl file(s)
+First download the latest version of the workflow wdl file(s)
 from the
 [github page](https://github.com/biowdl/PacBio-subreads-processing).
 
-The pipeline can then be run with the following command:
+The workflow can then be run with the following command:
 ```bash
 java \
     -jar cromwell-<version>.jar \
@@ -79,8 +79,8 @@ The following is an example of what an inputs JSON might look like:
 ```
 
 ## Dependency requirements and tool versions
-Biowdl pipelines use docker images to ensure  reproducibility. This
-means that biowdl pipelines will run on any system that has docker
+Biowdl workflows use docker images to ensure  reproducibility. This
+means that biowdl workflows will run on any system that has docker
 installed. Alternatively they can be run with singularity.
 
 For more advanced configuration of docker or singularity please check
@@ -88,13 +88,13 @@ the [cromwell documentation on containers](
 https://cromwell.readthedocs.io/en/stable/tutorials/Containers/).
 
 Images from [biocontainers](https://biocontainers.pro) are preferred for
-biowdl pipelines. The list of default images for this pipeline can be
+biowdl workflows. The list of default images for this workflow can be
 found in the default for the `dockerImages` input.
 
 ## Output
 The workflow will output polished ccs reads split into their respective sample.
 Along with these (split on sample) BAM files, the workflow will also output all
-intermediate files. Depending on the options set, the pipeline can also output
+intermediate files. Depending on the options set, the workflow can also output
 fastq files.
 
 ## Contact
