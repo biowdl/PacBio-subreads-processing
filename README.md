@@ -7,7 +7,7 @@ usable for processing a PacBio subreads BAM file using
 
 ## Documentation
 Documentation for this workflow can be
-found [here](https://biowdl.github.io/PacBio-subreads-processing).
+found [here](https://biowdl.github.io/PacBio-subreads-processing/).
 
 ## About
 This workflow is part of [Biowdl](https://github.com/biowdl) developed by the
