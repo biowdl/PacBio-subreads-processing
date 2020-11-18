@@ -10,7 +10,7 @@ that users understand how the changes affect the new version.
 
 version develop
 ---------------------------
-+ Update 
++ Update IsoSeq3 to version 3.4.0, Lima to version 2.0.0.
 + The pipeline now only supports a single input subreads bamfile
   and barcodes fasta file.
 + Rename main pipeline file to `pacbio-subreads-processing.wdl`.
