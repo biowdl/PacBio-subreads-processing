@@ -51,13 +51,13 @@ workflow SubreadsProcessing {
             "biowdl-input-converter": "quay.io/biocontainers/biowdl-input-converter:0.2.1--py_0",
             "ccs": "quay.io/biocontainers/pbccs:5.0.0--0",
             "fastqc": "quay.io/biocontainers/fastqc:0.11.9--0",
-            "isoseq3": "quay.io/biocontainers/isoseq3:3.3.0--0",
-            "lima": "quay.io/biocontainers/lima:1.11.0--0",
+            "isoseq3": "quay.io/biocontainers/isoseq3:3.4.0--0",
+            "lima": "quay.io/biocontainers/lima:2.0.0--0",
             "python3": "python:3.7-slim",
-            "multiqc": "quay.io/biocontainers/multiqc:1.9--pyh9f0ad1d_0",
+            "multiqc": "quay.io/biocontainers/multiqc:1.9--py_1",
             "pacbio-merge": "lumc/pacbio-merge:0.2",
             "pbbam": "quay.io/biocontainers/pbbam:1.6.0--h5b7e6e0_0",
-            "samtools": "quay.io/biocontainers/samtools:1.10--h9402c20_2"
+            "samtools": "quay.io/biocontainers/samtools:1.11--h6270b1f_0"
         }
     }
 

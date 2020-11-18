@@ -10,6 +10,7 @@ that users understand how the changes affect the new version.
 
 version develop
 ---------------------------
++ Update 
 + The pipeline now only supports a single input subreads bamfile
   and barcodes fasta file.
 + Rename main pipeline file to `pacbio-subreads-processing.wdl`.
