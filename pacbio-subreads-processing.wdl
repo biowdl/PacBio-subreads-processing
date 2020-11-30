@@ -25,10 +25,10 @@ import "tasks/ccs.wdl" as ccs
 import "tasks/fastqc.wdl" as fastqc
 import "tasks/samtools.wdl" as samtools
 import "tasks/isoseq3.wdl" as isoseq3
-import "/exports/sasc/jboom/Develop/tasks/lima.wdl" as lima
+import "tasks/lima.wdl" as lima
 import "tasks/multiqc.wdl" as multiqc
-import "/exports/sasc/jboom/Develop/tasks/pbbam.wdl" as pbbam
-import "/exports/sasc/jboom/Develop/tasks/pacbio.wdl" as pacbio
+import "tasks/pbbam.wdl" as pbbam
+import "tasks/pacbio.wdl" as pacbio
 
 workflow SubreadsProcessing {
     input {
@@ -46,6 +46,7 @@ workflow SubreadsProcessing {
 
         Int limaThreads = 2
         Int ccsThreads = 2
+        Int fastqcThreads = 4
         Map[String, String] dockerImages = {
             "bam2fastx": "quay.io/biocontainers/bam2fastx:1.3.0--he1c1bb9_8",
             "biowdl-input-converter": "quay.io/biocontainers/biowdl-input-converter:0.2.1--py_0",
@@ -139,17 +140,17 @@ workflow SubreadsProcessing {
                     inputBamFile = bamFile,
                     inputBamIndex = bamFileIndex,
                     primerFile = barcodesFasta,
-                    outputDir = "refine",
-                    outputNamePrefix = outputDirectory + "/" + refineOutputPrefix,
+                    outputDir = outputDirectory,
+                    outputNamePrefix = refineOutputPrefix,
                     dockerImage = dockerImages["isoseq3"]
             }
 
             call fastqc.Fastqc as fastqcRefine {
                 input:
                     seqFile = refine.refineBam,
-                    outdirPath = outputDirectory + "/" + "refine/" + basename(refine.refineBam, ".bam") + "-fastqc",
+                    outdirPath = outputDirectory + "/" + "fastqc/" + basename(refine.refineBam, ".bam") + "-fastqc",
                     format = "bam",
-                    threads = 4,
+                    threads = fastqcThreads,
                     dockerImage = dockerImages["fastqc"]
             }
 
@@ -164,13 +165,13 @@ workflow SubreadsProcessing {
             }
         }
 
-        if (! runIsoseq3Refine) {
+        if (!runIsoseq3Refine) {
             call fastqc.Fastqc as fastqcLima {
                 input:
                     seqFile = bamFile,
-                    outdirPath = outputDirectory + "/" + basename(bamFile, ".bam") + "-fastqc",
+                    outdirPath = outputDirectory + "/" + "fastqc/" + basename(bamFile, ".bam") + "-fastqc",
                     format = "bam",
-                    threads = 4,
+                    threads = fastqcThreads,
                     dockerImage = dockerImages["fastqc"]
             }
 
@@ -190,7 +191,7 @@ workflow SubreadsProcessing {
 
         # Determine the sample name from the bam file name. This is needed
         # because the sample names are determine from the headers in the
-        # fasta file, which is not accessible from WDL.
+        # fasta file, which is not accessible from the WDL.
         String sampleName = sub(sub(bamFile, ".*--", ""),".bam", "")
 
         if (generateFastq) {
@@ -198,7 +199,7 @@ workflow SubreadsProcessing {
         }
     }
 
-    Array[File] qualityReports = flatten([fastqcHtmlReport, fastqcZipReport])
+    Array[File] qualityReports = flatten([fastqcHtmlReport, fastqcZipReport, [mergeCCSReport.outputMergedReport]])
 
     call multiqc.MultiQC as multiqcTask {
         input:
@@ -247,6 +248,7 @@ workflow SubreadsProcessing {
         subreadsIndexFile: {description: ".pbi file for the subreadsFile. If not specified, the subreadsFile will be indexed automatically." , category: "advanced"}
         limaThreads: {description: "The number of CPU threads to be used by lima.", category: "advanced"}
         ccsThreads: {description: "The number of CPU threads to be used by ccs.", category: "advanced"}
+        fastqcThreads: {description: "The number of CPU threads to be used by fastQC.", category: "advanced"}
         dockerImages: {description: "The docker image(s) used for this workflow. Changing this may result in errors which the developers may choose not to address.", category: "advanced"}
 
         # outputs
