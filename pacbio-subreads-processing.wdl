@@ -25,10 +25,10 @@ import "tasks/ccs.wdl" as ccs
 import "tasks/fastqc.wdl" as fastqc
 import "tasks/samtools.wdl" as samtools
 import "tasks/isoseq3.wdl" as isoseq3
-import "tasks/lima.wdl" as lima
+import "/exports/sasc/jboom/Develop/tasks/lima.wdl" as lima
 import "tasks/multiqc.wdl" as multiqc
-import "tasks/pbbam.wdl" as pbbam
-import "tasks/pacbio.wdl" as pacbio
+import "/exports/sasc/jboom/Develop/tasks/pbbam.wdl" as pbbam
+import "/exports/sasc/jboom/Develop/tasks/pacbio.wdl" as pacbio
 
 workflow SubreadsProcessing {
     input {
@@ -75,15 +75,15 @@ workflow SubreadsProcessing {
 
     # Index the input bamfile.
     if (!defined(subreadsIndexFile)) {
-        call pbbam.Index as pbindex {
+        call pbbam.Index as pbIndex {
             input:
                 bamFile = subreadsFile,
                 dockerImage = dockerImages["pbbam"]
         }
     }
 
-    File subreadsIndex = select_first([pbindex.index, subreadsIndexFile])
-    File subreadsBam = select_first([pbindex.indexedBam, subreadsFile])
+    File subreadsIndex = select_first([pbIndex.index, subreadsIndexFile])
+    File subreadsBam = select_first([pbIndex.indexedBam, subreadsFile])
 
     scatter (chunk in createChunks.chunks) {
         # Convert chunk from 1/10 to 1 to determine output filename.
@@ -93,7 +93,7 @@ workflow SubreadsProcessing {
             input:
                 subreadsFile = subreadsBam,
                 subreadsIndexFile = subreadsIndex,
-                outputPrefix = outputDirectory + "/" + subreadsName + "_chunk" + chunkNumber,
+                outputPrefix = outputDirectory + "/" + subreadsName + ".chunk." + chunkNumber,
                 threads = ccsThreads,
                 chunkString = chunk,
                 dockerImage = dockerImages["ccs"]
@@ -101,10 +101,10 @@ workflow SubreadsProcessing {
     }
 
     # Merge the bam files again.
-    call samtools.Merge as merge {
+    call samtools.Merge as mergeBams {
         input:
             bamFiles = ccs.ccsBam,
-            outputBamPath = subreadsName + ".ccs.bam",
+            outputBamPath = outputDirectory + "/" + subreadsName + ".merged.ccs.bam",
             dockerImage = dockerImages["samtools"]
     }
 
@@ -112,7 +112,7 @@ workflow SubreadsProcessing {
     call pacbio.mergePacBio as mergeCCSReport {
         input:
             reports = ccs.ccsReport,
-            mergedReport = subreadsName + ".ccs.report.json",
+            outputPathMergedReport = outputDirectory + "/" + subreadsName + ".merged.ccs.report.json",
             dockerImage = dockerImages["pacbio-merge"]
     }
 
@@ -121,7 +121,7 @@ workflow SubreadsProcessing {
             libraryDesign = libraryDesign,
             ccsMode = ccsMode,
             splitBamNamed = splitBamNamed,
-            inputBamFile = merge.outputBam,
+            inputBamFile = mergeBams.outputBam,
             barcodeFile = barcodesFasta,
             outputPrefix = outputDirectory + "/" + subreadsName,
             threads = limaThreads,
@@ -190,7 +190,7 @@ workflow SubreadsProcessing {
 
         # Determine the sample name from the bam file name. This is needed
         # because the sample names are determine from the headers in the
-        # fasta file, which is not accessible from the WDL.
+        # fasta file, which is not accessible from WDL.
         String sampleName = sub(sub(bamFile, ".*--", ""),".bam", "")
 
         if (generateFastq) {
@@ -209,8 +209,8 @@ workflow SubreadsProcessing {
     }
 
     output {
-        File ccsReads = merge.outputBam
-        File ccsIndex = merge.outputBamIndex
+        File ccsReads = mergeBams.outputBam
+        File ccsIndex = mergeBams.outputBamIndex
         File ccsReport = mergeCCSReport.outputMergedReport
         Array[File] ccsStderr = ccs.ccsStderr
         Array[File] limaReads = lima.limaBam
