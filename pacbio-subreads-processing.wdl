@@ -242,9 +242,10 @@ workflow SubreadsProcessing {
         libraryDesign: {description: "Barcode structure of the library design.", category: "advanced"}
         ccsMode: {description: "Ccs mode, use optimal alignment options.", category: "advanced"}
         splitBamNamed: {description: "Split bam file(s) by resolved barcode pair name.", category: "advanced"}
-        generateFastq: {description: "Generate fastq files from demultiplexed bam files.", category: "common"}
         runIsoseq3Refine: {description: "Run isoseq3 refine for de-novo transcript reconstruction. Do not set this to true when analysing dna reads.", category: "advanced"}
         ccsChunks: {description: "The number of chunks to be used by ccs.", category: "advanced"}
+        generateFastq: {description: "Generate fastq files from demultiplexed bam files.", category: "common"}
+        outputDirectory: {description: "The directory in which the output files will be put.", category: "common"}
         subreadsIndexFile: {description: ".pbi file for the subreadsFile. If not specified, the subreadsFile will be indexed automatically." , category: "advanced"}
         limaThreads: {description: "The number of CPU threads to be used by lima.", category: "advanced"}
         ccsThreads: {description: "The number of CPU threads to be used by ccs.", category: "advanced"}
