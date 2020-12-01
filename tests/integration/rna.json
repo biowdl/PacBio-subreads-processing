@@ -2,5 +2,9 @@
     "SubreadsProcessing.subreadsFile": "tests/data/batch.1.march.subreads.bam",
     "SubreadsProcessing.barcodesFasta": "tests/data/batch.1.march.barcodes.fasta",
     "SubreadsProcessing.runIsoseq3Refine": true,
-    "SubreadsProcessing.generateFastq": false
+    "SubreadsProcessing.generateFastq": false,
+    "SubreadsProcessing.limaThreads": "3",
+    "SubreadsProcessing.ccsThreads": "4",
+    "SubreadsProcessing.fastqcThreads": "4",
+    "SubreadsProcessing.ccsChunks": "2"
 }

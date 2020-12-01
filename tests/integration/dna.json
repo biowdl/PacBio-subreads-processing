@@ -4,5 +4,7 @@
     "SubreadsProcessing.runIsoseq3Refine": false,
     "SubreadsProcessing.generateFastq": false,
     "SubreadsProcessing.limaThreads": "3",
-    "SubreadsProcessing.ccsThreads": "4"
+    "SubreadsProcessing.ccsThreads": "4",
+    "SubreadsProcessing.fastqcThreads": "4",
+    "SubreadsProcessing.ccsChunks": "2"
 }

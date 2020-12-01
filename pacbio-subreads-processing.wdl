@@ -94,7 +94,7 @@ workflow SubreadsProcessing {
             input:
                 subreadsFile = subreadsBam,
                 subreadsIndexFile = subreadsIndex,
-                outputPrefix = outputDirectory + "/" + subreadsName + ".chunk." + chunkNumber,
+                outputPrefix = outputDirectory + "/ccs/" + subreadsName + ".chunk." + chunkNumber,
                 threads = ccsThreads,
                 chunkString = chunk,
                 dockerImage = dockerImages["ccs"]
@@ -105,7 +105,7 @@ workflow SubreadsProcessing {
     call samtools.Merge as mergeBams {
         input:
             bamFiles = ccs.ccsBam,
-            outputBamPath = outputDirectory + "/" + subreadsName + ".merged.ccs.bam",
+            outputBamPath = outputDirectory + "/ccs/" + subreadsName + ".merged.ccs.bam",
             dockerImage = dockerImages["samtools"]
     }
 
@@ -113,7 +113,7 @@ workflow SubreadsProcessing {
     call pacbio.mergePacBio as mergeCCSReport {
         input:
             reports = ccs.ccsReport,
-            outputPathMergedReport = outputDirectory + "/" + subreadsName + ".merged.ccs.report.json",
+            outputPathMergedReport = outputDirectory + "/ccs/" + subreadsName + ".merged.ccs.report.json",
             dockerImage = dockerImages["pacbio-merge"]
     }
 
@@ -124,7 +124,7 @@ workflow SubreadsProcessing {
             splitBamNamed = splitBamNamed,
             inputBamFile = mergeBams.outputBam,
             barcodeFile = barcodesFasta,
-            outputPrefix = outputDirectory + "/" + subreadsName,
+            outputPrefix = outputDirectory + "/lima/" + subreadsName,
             threads = limaThreads,
             dockerImage = dockerImages["lima"]
     }
@@ -140,7 +140,7 @@ workflow SubreadsProcessing {
                     inputBamFile = bamFile,
                     inputBamIndex = bamFileIndex,
                     primerFile = barcodesFasta,
-                    outputDir = outputDirectory,
+                    outputDir = outputDirectory + "/refine",
                     outputNamePrefix = refineOutputPrefix,
                     dockerImage = dockerImages["isoseq3"]
             }
@@ -148,7 +148,7 @@ workflow SubreadsProcessing {
             call fastqc.Fastqc as fastqcRefine {
                 input:
                     seqFile = refine.refineBam,
-                    outdirPath = outputDirectory + "/" + "fastqc/" + basename(refine.refineBam, ".bam") + "-fastqc",
+                    outdirPath = outputDirectory + "/fastqc/" + basename(refine.refineBam, ".bam") + "-fastqc",
                     format = "bam",
                     threads = fastqcThreads,
                     dockerImage = dockerImages["fastqc"]
@@ -159,7 +159,7 @@ workflow SubreadsProcessing {
                     input:
                         bam = [refine.refineBam],
                         bamIndex = [refine.refineBamIndex],
-                        outputPrefix =  outputDirectory + "/" + "fastq-files/" + basename(refine.refineBam, ".bam"),
+                        outputPrefix =  outputDirectory + "/fastq-files/" + basename(refine.refineBam, ".bam"),
                         dockerImage = dockerImages["bam2fastx"]
                 }
             }
@@ -169,7 +169,7 @@ workflow SubreadsProcessing {
             call fastqc.Fastqc as fastqcLima {
                 input:
                     seqFile = bamFile,
-                    outdirPath = outputDirectory + "/" + "fastqc/" + basename(bamFile, ".bam") + "-fastqc",
+                    outdirPath = outputDirectory + "/fastqc/" + basename(bamFile, ".bam") + "-fastqc",
                     format = "bam",
                     threads = fastqcThreads,
                     dockerImage = dockerImages["fastqc"]
@@ -180,7 +180,7 @@ workflow SubreadsProcessing {
                     input:
                         bam = [bamFile],
                         bamIndex = [bamFileIndex],
-                        outputPrefix = outputDirectory + "/" + "fastq-files/" + basename(bamFile, ".bam"),
+                        outputPrefix = outputDirectory + "/fastq-files/" + basename(bamFile, ".bam"),
                         dockerImage = dockerImages["bam2fastx"]
                 }
             }
@@ -204,7 +204,7 @@ workflow SubreadsProcessing {
     call multiqc.MultiQC as multiqcTask {
         input:
             reports = qualityReports,
-            outDir = outputDirectory + "/" + "multiqc",
+            outDir = outputDirectory + "/multiqc",
             dataDir = true,
             dockerImage = dockerImages["multiqc"]
     }

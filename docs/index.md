@@ -74,6 +74,7 @@ The following is an example of what an inputs JSON might look like:
     "SubreadsProcessing.limaThreads": "3",
     "SubreadsProcessing.ccsThreads": "4",
     "SubreadsProcessing.ccsChunks": "5",
+    "SubreadsProcessing.fastqcThreads": "4",
     "SubreadsProcessing.outputDirectory": "tests/test-output",
 }
 ```
