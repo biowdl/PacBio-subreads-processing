@@ -493,3 +493,75 @@
       should_exist: false
     - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.stderr.log
       should_exist: false
+
+- name: dna.chunks.93
+  tags:
+    - CCS
+  command: >-
+    cromwell run -o tests/cromwell.options.json
+    -i tests/integration/dna.chunks.93.json pacbio-subreads-processing.wdl
+  files:
+    - path: test-output/batch.1.march.ccs.report.json
+      contains_regex:
+        - 'ZMWs input'
+        - 'value.*: 93'
+        - 'ZMWs pass filters'
+        - 'value.*: 44'
+        - 'ZMWs fail filters'
+        - 'value.*: 49'
+        - 'Median length filter'
+        - 'value.*: 0'
+        - 'Lacking full passes'
+        - 'value.*: 42'
+        - 'Draft generation error'
+        - 'value.*: 1'
+        - 'CCS below minimum RQ'
+        - 'value.*: 6'
+
+- name: dna.chunks.5
+  tags:
+    - CCS
+  command: >-
+    cromwell run -o tests/cromwell.options.json
+    -i tests/integration/dna.chunks.5.json pacbio-subreads-processing.wdl
+  files:
+    - path: test-output/batch.1.march.ccs.report.json
+      contains_regex:
+        - 'ZMWs input'
+        - 'value.*: 93'
+        - 'ZMWs pass filters'
+        - 'value.*: 44'
+        - 'ZMWs fail filters'
+        - 'value.*: 49'
+        - 'Median length filter'
+        - 'value.*: 0'
+        - 'Lacking full passes'
+        - 'value.*: 42'
+        - 'Draft generation error'
+        - 'value.*: 1'
+        - 'CCS below minimum RQ'
+        - 'value.*: 6'
+
+- name: dna.chunks.1
+  tags:
+    - CCS
+  command: >-
+    cromwell run -o tests/cromwell.options.json
+    -i tests/integration/dna.chunks.1.json pacbio-subreads-processing.wdl
+  files:
+    - path: test-output/batch.1.march.ccs.report.json
+      contains_regex:
+        - 'ZMWs input'
+        - 'value.*: 93'
+        - 'ZMWs pass filters'
+        - 'value.*: 44'
+        - 'ZMWs fail filters'
+        - 'value.*: 49'
+        - 'Median length filter'
+        - 'value.*: 0'
+        - 'Lacking full passes'
+        - 'value.*: 42'
+        - 'Draft generation error'
+        - 'value.*: 1'
+        - 'CCS below minimum RQ'
+        - 'value.*: 6'
