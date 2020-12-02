@@ -501,7 +501,7 @@
     cromwell run -o tests/cromwell.options.json
     -i tests/integration/dna.chunks.93.json pacbio-subreads-processing.wdl
   files:
-    - path: test-output/batch.1.march.ccs.report.json
+    - path: test-output/ccs/batch.1.march.merged.ccs.report.json
       contains_regex:
         - 'ZMWs input'
         - 'value.*: 93'
@@ -525,7 +525,7 @@
     cromwell run -o tests/cromwell.options.json
     -i tests/integration/dna.chunks.5.json pacbio-subreads-processing.wdl
   files:
-    - path: test-output/batch.1.march.ccs.report.json
+    - path: test-output/ccs/batch.1.march.merged.ccs.report.json
       contains_regex:
         - 'ZMWs input'
         - 'value.*: 93'
@@ -549,7 +549,7 @@
     cromwell run -o tests/cromwell.options.json
     -i tests/integration/dna.chunks.1.json pacbio-subreads-processing.wdl
   files:
-    - path: test-output/batch.1.march.ccs.report.json
+    - path: test-output/ccs/batch.1.march.merged.ccs.report.json
       contains_regex:
         - 'ZMWs input'
         - 'value.*: 93'
