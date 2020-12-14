@@ -13,7 +13,7 @@ version develop
 + Add the dockerImages to the output section.
 + Replace travis with github CI.
 + Reinstate `outputDirectory` input.
-+ Move tasks to tasks repository.
++ Move tasks `ccsChunks` & `mergePacBio` to tasks repository.
 + Update IsoSeq3 to version 3.4.0, Lima to version 2.0.0.
 + The pipeline now only supports a single input subreads bamfile
   and barcodes fasta file.

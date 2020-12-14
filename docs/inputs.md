@@ -5,10 +5,15 @@
 
 
 ### Required inputs
-<p name="SubreadsProcessing.subreadsConfigFile">
-        <b>SubreadsProcessing.subreadsConfigFile</b><br />
+<p name="SubreadsProcessing.barcodesFasta">
+        <b>SubreadsProcessing.barcodesFasta</b><br />
         <i>File &mdash; Default: None</i><br />
-        Configuration file describing input subread BAMs and barcode files.
+        Fasta file with the barcodes used in the PacBio experiment.
+</p>
+<p name="SubreadsProcessing.subreadsFile">
+        <b>SubreadsProcessing.subreadsFile</b><br />
+        <i>File &mdash; Default: None</i><br />
+        The PacBio subreads file that contains the raw PacBio reads.
 </p>
 
 ### Other common inputs
@@ -41,6 +46,21 @@
         <b>SubreadsProcessing.lima.minScoreLead</b><br />
         <i>Int &mdash; Default: 10</i><br />
         The minimal score lead required to call a barcode pair significant.
+</p>
+<p name="SubreadsProcessing.mergeBams.threads">
+        <b>SubreadsProcessing.mergeBams.threads</b><br />
+        <i>Int &mdash; Default: 1</i><br />
+        Number of threads to use.
+</p>
+<p name="SubreadsProcessing.outputDirectory">
+        <b>SubreadsProcessing.outputDirectory</b><br />
+        <i>String &mdash; Default: "."</i><br />
+        The directory in which the output files will be put.
+</p>
+<p name="SubreadsProcessing.pbIndex.outputBamPath">
+        <b>SubreadsProcessing.pbIndex.outputBamPath</b><br />
+        <i>String? &mdash; Default: None</i><br />
+        The location where the BAM file should be written to. The index will appear alongside this link to the BAM file.
 </p>
 <p name="SubreadsProcessing.refine.requirePolyA">
         <b>SubreadsProcessing.refine.requirePolyA</b><br />
@@ -118,7 +138,7 @@
 </p>
 <p name="SubreadsProcessing.ccs.memory">
         <b>SubreadsProcessing.ccs.memory</b><br />
-        <i>String &mdash; Default: "2G"</i><br />
+        <i>String &mdash; Default: "4G"</i><br />
         The amount of memory available to the job.
 </p>
 <p name="SubreadsProcessing.ccs.minLength">
@@ -136,19 +156,29 @@
         <i>Int &mdash; Default: 1440</i><br />
         The maximum amount of time the job will run in minutes.
 </p>
-<p name="SubreadsProcessing.ccsCores">
-        <b>SubreadsProcessing.ccsCores</b><br />
+<p name="SubreadsProcessing.ccsChunks">
+        <b>SubreadsProcessing.ccsChunks</b><br />
         <i>Int &mdash; Default: 2</i><br />
-        The number of CPU cores to be used by ccs.
+        The number of chunks to be used by ccs.
 </p>
 <p name="SubreadsProcessing.ccsMode">
         <b>SubreadsProcessing.ccsMode</b><br />
         <i>Boolean &mdash; Default: true</i><br />
         Ccs mode, use optimal alignment options.
 </p>
+<p name="SubreadsProcessing.ccsThreads">
+        <b>SubreadsProcessing.ccsThreads</b><br />
+        <i>Int &mdash; Default: 2</i><br />
+        The number of CPU threads to be used by ccs.
+</p>
+<p name="SubreadsProcessing.createChunks.memory">
+        <b>SubreadsProcessing.createChunks.memory</b><br />
+        <i>String &mdash; Default: "4G"</i><br />
+        The amount of memory this job will use.
+</p>
 <p name="SubreadsProcessing.dockerImages">
         <b>SubreadsProcessing.dockerImages</b><br />
-        <i>Map[String,String] &mdash; Default: {"bam2fastx": "quay.io/biocontainers/bam2fastx:1.3.0--he1c1bb9_8", "biowdl-input-converter": "quay.io/biocontainers/biowdl-input-converter:0.2.1--py_0", "ccs": "quay.io/biocontainers/pbccs:4.2.0--1", "fastqc": "quay.io/biocontainers/fastqc:0.11.9--0", "isoseq3": "quay.io/biocontainers/isoseq3:3.3.0--0", "lima": "quay.io/biocontainers/lima:1.11.0--0", "multiqc": "quay.io/biocontainers/multiqc:1.9--pyh9f0ad1d_0"}</i><br />
+        <i>Map[String,String] &mdash; Default: {"bam2fastx": "quay.io/biocontainers/bam2fastx:1.3.0--he1c1bb9_8", "biowdl-input-converter": "quay.io/biocontainers/biowdl-input-converter:0.2.1--py_0", "ccs": "quay.io/biocontainers/pbccs:5.0.0--0", "fastqc": "quay.io/biocontainers/fastqc:0.11.9--0", "isoseq3": "quay.io/biocontainers/isoseq3:3.4.0--0", "lima": "quay.io/biocontainers/lima:2.0.0--0", "python3": "python:3.7-slim", "multiqc": "quay.io/biocontainers/multiqc:1.9--py_1", "pacbio-merge": "lumc/pacbio-merge:0.2", "pbbam": "quay.io/biocontainers/pbbam:1.6.0--h5b7e6e0_0", "samtools": "quay.io/biocontainers/samtools:1.11--h6270b1f_0"}</i><br />
         The docker image(s) used for this workflow. Changing this may result in errors which the developers may choose not to address.
 </p>
 <p name="SubreadsProcessing.fastqcLima.adapters">
@@ -291,6 +321,11 @@
         <i>Int &mdash; Default: 1 + ceil(size(seqFile,"G")) * 4</i><br />
         The maximum amount of time the job will run in minutes.
 </p>
+<p name="SubreadsProcessing.fastqcThreads">
+        <b>SubreadsProcessing.fastqcThreads</b><br />
+        <i>Int &mdash; Default: 4</i><br />
+        The number of CPU threads to be used by fastQC.
+</p>
 <p name="SubreadsProcessing.libraryDesign">
         <b>SubreadsProcessing.libraryDesign</b><br />
         <i>String &mdash; Default: "same"</i><br />
@@ -381,10 +416,30 @@
         <i>Int &mdash; Default: 30</i><br />
         The maximum amount of time the job will run in minutes.
 </p>
-<p name="SubreadsProcessing.limaCores">
-        <b>SubreadsProcessing.limaCores</b><br />
+<p name="SubreadsProcessing.limaThreads">
+        <b>SubreadsProcessing.limaThreads</b><br />
         <i>Int &mdash; Default: 2</i><br />
-        The number of CPU cores to be used by lima.
+        The number of CPU threads to be used by lima.
+</p>
+<p name="SubreadsProcessing.mergeBams.force">
+        <b>SubreadsProcessing.mergeBams.force</b><br />
+        <i>Boolean &mdash; Default: true</i><br />
+        Equivalent to samtools merge's `-f` flag.
+</p>
+<p name="SubreadsProcessing.mergeBams.memory">
+        <b>SubreadsProcessing.mergeBams.memory</b><br />
+        <i>String &mdash; Default: "4G"</i><br />
+        The amount of memory this job will use.
+</p>
+<p name="SubreadsProcessing.mergeBams.timeMinutes">
+        <b>SubreadsProcessing.mergeBams.timeMinutes</b><br />
+        <i>Int &mdash; Default: 1 + ceil((size(bamFiles,"G") * 2))</i><br />
+        The maximum amount of time the job will run in minutes.
+</p>
+<p name="SubreadsProcessing.mergeCCSReport.memory">
+        <b>SubreadsProcessing.mergeCCSReport.memory</b><br />
+        <i>String &mdash; Default: "4G"</i><br />
+        The amount of memory this job will use.
 </p>
 <p name="SubreadsProcessing.multiqcTask.clConfig">
         <b>SubreadsProcessing.multiqcTask.clConfig</b><br />
@@ -521,15 +576,15 @@
         <i>Boolean &mdash; Default: true</i><br />
         Equivalent to MultiQC's `--zip-data-dir` flag.
 </p>
-<p name="SubreadsProcessing.outputDirectory">
-        <b>SubreadsProcessing.outputDirectory</b><br />
-        <i>String &mdash; Default: "."</i><br />
-        The directory to which the outputs will be written.
+<p name="SubreadsProcessing.pbIndex.memory">
+        <b>SubreadsProcessing.pbIndex.memory</b><br />
+        <i>String &mdash; Default: "2G"</i><br />
+        The amount of memory needed for the job.
 </p>
-<p name="SubreadsProcessing.refine.cores">
-        <b>SubreadsProcessing.refine.cores</b><br />
-        <i>Int &mdash; Default: 2</i><br />
-        The number of cores to be used.
+<p name="SubreadsProcessing.pbIndex.timeMinutes">
+        <b>SubreadsProcessing.pbIndex.timeMinutes</b><br />
+        <i>Int &mdash; Default: 1 + ceil((size(bamFile,"G") * 4))</i><br />
+        The maximum amount of time the job will run in minutes.
 </p>
 <p name="SubreadsProcessing.refine.logLevel">
         <b>SubreadsProcessing.refine.logLevel</b><br />
@@ -546,6 +601,11 @@
         <i>Int &mdash; Default: 20</i><br />
         Minimum poly(A) tail length.
 </p>
+<p name="SubreadsProcessing.refine.threads">
+        <b>SubreadsProcessing.refine.threads</b><br />
+        <i>Int &mdash; Default: 2</i><br />
+        The number of threads to be used.
+</p>
 <p name="SubreadsProcessing.refine.timeMinutes">
         <b>SubreadsProcessing.refine.timeMinutes</b><br />
         <i>Int &mdash; Default: 30</i><br />
@@ -560,6 +620,11 @@
         <b>SubreadsProcessing.splitBamNamed</b><br />
         <i>Boolean &mdash; Default: true</i><br />
         Split bam file(s) by resolved barcode pair name.
+</p>
+<p name="SubreadsProcessing.subreadsIndexFile">
+        <b>SubreadsProcessing.subreadsIndexFile</b><br />
+        <i>File? &mdash; Default: None</i><br />
+        .pbi file for the subreadsFile. If not specified, the subreadsFile will be indexed automatically.
 </p>
 </details>
 

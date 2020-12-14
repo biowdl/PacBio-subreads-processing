@@ -1,49 +1,9 @@
-- name: womtool.rna
+- name: womtool.dna.chunks.1
   tags:
     - sanity
   command: >-
     womtool validate
-    --inputs tests/integration/rna.json
-    pacbio-subreads-processing.wdl
-
-- name: womtool.rna.fastq
-  tags:
-    - sanity
-  command: >-
-    womtool validate
-    --inputs tests/integration/rna.fastq.json
-    pacbio-subreads-processing.wdl
-
-- name: womtool.dna.pbi
-  tags:
-    - sanity
-  command: >-
-    womtool validate
-    --inputs tests/integration/dna.pbi.json
-    pacbio-subreads-processing.wdl
-
-- name: womtool.dna
-  tags:
-    - sanity
-  command: >-
-    womtool validate
-    --inputs tests/integration/dna.json
-    pacbio-subreads-processing.wdl
-
-- name: womtool.dna.fastq
-  tags:
-    - sanity
-  command: >-
-    womtool validate
-    --inputs tests/integration/dna.fastq.json
-    pacbio-subreads-processing.wdl
-
-- name: womtool.dna.chunks.93
-  tags:
-    - sanity
-  command: >-
-    womtool validate
-    --inputs tests/integration/dna.chunks.93.json
+    --inputs tests/integration/dna.chunks.1.json
     pacbio-subreads-processing.wdl
 
 - name: womtool.dna.chunks.5
@@ -54,10 +14,50 @@
     --inputs tests/integration/dna.chunks.5.json
     pacbio-subreads-processing.wdl
 
-- name: womtool.dna.chunks.1
+- name: womtool.dna.chunks.93
   tags:
     - sanity
   command: >-
     womtool validate
-    --inputs tests/integration/dna.chunks.1.json
+    --inputs tests/integration/dna.chunks.93.json
+    pacbio-subreads-processing.wdl
+
+- name: womtool.dna.fastq
+  tags:
+    - sanity
+  command: >-
+    womtool validate
+    --inputs tests/integration/dna.fastq.json
+    pacbio-subreads-processing.wdl
+
+- name: womtool.dna
+  tags:
+    - sanity
+  command: >-
+    womtool validate
+    --inputs tests/integration/dna.json
+    pacbio-subreads-processing.wdl
+
+- name: womtool.dna.pbi
+  tags:
+    - sanity
+  command: >-
+    womtool validate
+    --inputs tests/integration/dna.pbi.json
+    pacbio-subreads-processing.wdl
+
+- name: womtool.rna.fastq
+  tags:
+    - sanity
+  command: >-
+    womtool validate
+    --inputs tests/integration/rna.fastq.json
+    pacbio-subreads-processing.wdl
+
+- name: womtool.rna
+  tags:
+    - sanity
+  command: >-
+    womtool validate
+    --inputs tests/integration/rna.json
     pacbio-subreads-processing.wdl
