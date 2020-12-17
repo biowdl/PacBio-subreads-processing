@@ -82,18 +82,6 @@
     contains:
       - 'pbindex batch.1.march.subreads.bam batch.1.march.subreads.bam.pbi'
   files:
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.bam
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.bam.pbi
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.ccs_report.txt
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.report.json
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.zmw_metrics.json.gz
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.bam
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.bam.pbi
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.ccs_report.txt
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.report.json
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
     - path: test-output/ccs/batch.1.march.merged.ccs.report.json
@@ -187,18 +175,6 @@
       - '--num-threads 3'
       - '--num-threads 4'
   files:
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.bam
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.bam.pbi
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.ccs_report.txt
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.report.json
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.zmw_metrics.json.gz
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.bam
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.bam.pbi
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.ccs_report.txt
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.report.json
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
     - path: test-output/ccs/batch.1.march.merged.ccs.report.json
@@ -297,18 +273,6 @@
       - '--num-threads 3'
       - '--num-threads 4'
   files:
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.bam
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.bam.pbi
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.ccs_report.txt
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.report.json
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.zmw_metrics.json.gz
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.bam
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.bam.pbi
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.ccs_report.txt
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.report.json
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
     - path: test-output/ccs/batch.1.march.merged.ccs.report.json
@@ -402,18 +366,6 @@
     contains_regex:
       - 'SubreadsProcessing.samples.*"Sample_1_3p"'
   files:
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.bam
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.bam.pbi
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.ccs_report.txt
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.report.json
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.zmw_metrics.json.gz
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.bam
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.bam.pbi
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.ccs_report.txt
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.report.json
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
     - path: test-output/ccs/batch.1.march.merged.ccs.report.json
@@ -489,18 +441,6 @@
       - '--num-threads 3'
       - '--num-threads 4'
   files:
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.bam
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.bam.pbi
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.ccs_report.txt
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.report.json
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.zmw_metrics.json.gz
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.bam
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.bam.pbi
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.ccs_report.txt
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.report.json
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
     - path: test-output/ccs/batch.1.march.merged.ccs.report.json
