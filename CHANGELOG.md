@@ -10,6 +10,13 @@ that users understand how the changes affect the new version.
 
 version develop
 ---------------------------
++ Update samtools to version 1.12.
++ Change pacbio-merge from dockerhub to quay.
++ Update multiqc to version 1.10.
++ Update biowdl-input-converter to version 0.3.
++ Update lima to version 2.2.0.
++ Update ccs to version 6.0.0.
++ Update bam2fastx to version 1.3.1.
 + Add the dockerImages to the output section.
 + Replace travis with github CI.
 + Reinstate `outputDirectory` input.

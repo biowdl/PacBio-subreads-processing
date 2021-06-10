@@ -23,24 +23,24 @@ version 1.0
 import "tasks/bam2fastx.wdl" as bam2fastx
 import "tasks/ccs.wdl" as ccs
 import "tasks/fastqc.wdl" as fastqc
-import "tasks/samtools.wdl" as samtools
 import "tasks/isoseq3.wdl" as isoseq3
 import "tasks/lima.wdl" as lima
 import "tasks/multiqc.wdl" as multiqc
-import "tasks/pbbam.wdl" as pbbam
 import "tasks/pacbio.wdl" as pacbio
+import "tasks/pbbam.wdl" as pbbam
+import "tasks/samtools.wdl" as samtools
 
 workflow SubreadsProcessing {
     input {
         File subreadsFile
         File barcodesFasta
         String libraryDesign = "same"
+        String outputDirectory = "."
+        Int ccsChunks = 2
         Boolean ccsMode = true
         Boolean splitBamNamed = true
         Boolean runIsoseq3Refine = false
-        Int ccsChunks = 2
         Boolean generateFastq = false
-        String outputDirectory = "."
 
         File? subreadsIndexFile
 
@@ -62,7 +62,9 @@ workflow SubreadsProcessing {
         }
     }
 
-    meta {allowNestedInputs: true}
+    meta {
+        allowNestedInputs: true
+    }
 
     # The name of the subreads, to be used to determine output filenames.
     File subreadsName = basename(subreadsFile, ".subreads.bam")
