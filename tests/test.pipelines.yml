@@ -20,6 +20,12 @@
     - path: test-output/fastqc/batch.1.march.Sample_3_3p--Sample_3_3p-fastqc/batch.1.march.Sample_3_3p--Sample_3_3p_fastqc.zip
     - path: test-output/fastqc/batch.1.march.Sample_4_3p--Sample_4_3p-fastqc/batch.1.march.Sample_4_3p--Sample_4_3p_fastqc.html
     - path: test-output/fastqc/batch.1.march.Sample_4_3p--Sample_4_3p-fastqc/batch.1.march.Sample_4_3p--Sample_4_3p_fastqc.zip
+    - path: test-output/fastq-files/batch.1.march.Sample_1_3p--Sample_1_3p.fastq.gz
+      should_exist: false
+    - path: test-output/fastq-files/batch.1.march.Sample_3_3p--Sample_3_3p.fastq.gz
+      should_exist: false
+    - path: test-output/fastq-files/batch.1.march.Sample_4_3p--Sample_4_3p.fastq.gz
+      should_exist: false
     - path: test-output/lima/batch.1.march.Sample_1_3p--Sample_1_3p.bam
     - path: test-output/lima/batch.1.march.Sample_1_3p--Sample_1_3p.bam.pbi
     - path: test-output/lima/batch.1.march.Sample_1_3p--Sample_1_3p.consensusreadset.xml
@@ -36,6 +42,42 @@
     - path: test-output/lima/batch.1.march.lima.summary
     - path: test-output/multiqc/multiqc_data.zip
     - path: test-output/multiqc/multiqc_report.html
+    - path: test-output/refine/batch.1.march.Sample_1_3p--Sample_1_3p.bam
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_1_3p--Sample_1_3p.bam.pbi
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_1_3p--Sample_1_3p.consensusreadset.xml
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_1_3p--Sample_1_3p.filter_summary.json
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_1_3p--Sample_1_3p.report.csv
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_1_3p--Sample_1_3p.stderr.log
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_3_3p--Sample_3_3p.bam
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_3_3p--Sample_3_3p.bam.pbi
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_3_3p--Sample_3_3p.consensusreadset.xml
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_3_3p--Sample_3_3p.filter_summary.json
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_3_3p--Sample_3_3p.report.csv
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_3_3p--Sample_3_3p.stderr.log
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.bam
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.bam.pbi
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.consensusreadset.xml
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.filter_summary.json
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.report.csv
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.stderr.log
+      should_exist: false
 
 - name: dna.chunks.5
   tags:
@@ -75,6 +117,12 @@
     - path: test-output/fastqc/batch.1.march.Sample_3_3p--Sample_3_3p-fastqc/batch.1.march.Sample_3_3p--Sample_3_3p_fastqc.zip
     - path: test-output/fastqc/batch.1.march.Sample_4_3p--Sample_4_3p-fastqc/batch.1.march.Sample_4_3p--Sample_4_3p_fastqc.html
     - path: test-output/fastqc/batch.1.march.Sample_4_3p--Sample_4_3p-fastqc/batch.1.march.Sample_4_3p--Sample_4_3p_fastqc.zip
+    - path: test-output/fastq-files/batch.1.march.Sample_1_3p--Sample_1_3p.fastq.gz
+      should_exist: false
+    - path: test-output/fastq-files/batch.1.march.Sample_3_3p--Sample_3_3p.fastq.gz
+      should_exist: false
+    - path: test-output/fastq-files/batch.1.march.Sample_4_3p--Sample_4_3p.fastq.gz
+      should_exist: false
     - path: test-output/lima/batch.1.march.Sample_1_3p--Sample_1_3p.bam
     - path: test-output/lima/batch.1.march.Sample_1_3p--Sample_1_3p.bam.pbi
     - path: test-output/lima/batch.1.march.Sample_1_3p--Sample_1_3p.consensusreadset.xml
@@ -91,6 +139,42 @@
     - path: test-output/lima/batch.1.march.lima.summary
     - path: test-output/multiqc/multiqc_data.zip
     - path: test-output/multiqc/multiqc_report.html
+    - path: test-output/refine/batch.1.march.Sample_1_3p--Sample_1_3p.bam
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_1_3p--Sample_1_3p.bam.pbi
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_1_3p--Sample_1_3p.consensusreadset.xml
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_1_3p--Sample_1_3p.filter_summary.json
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_1_3p--Sample_1_3p.report.csv
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_1_3p--Sample_1_3p.stderr.log
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_3_3p--Sample_3_3p.bam
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_3_3p--Sample_3_3p.bam.pbi
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_3_3p--Sample_3_3p.consensusreadset.xml
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_3_3p--Sample_3_3p.filter_summary.json
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_3_3p--Sample_3_3p.report.csv
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_3_3p--Sample_3_3p.stderr.log
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.bam
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.bam.pbi
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.consensusreadset.xml
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.filter_summary.json
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.report.csv
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.stderr.log
+      should_exist: false
 
 - name: dna.chunks.93
   tags:
@@ -118,6 +202,12 @@
     - path: test-output/fastqc/batch.1.march.Sample_3_3p--Sample_3_3p-fastqc/batch.1.march.Sample_3_3p--Sample_3_3p_fastqc.zip
     - path: test-output/fastqc/batch.1.march.Sample_4_3p--Sample_4_3p-fastqc/batch.1.march.Sample_4_3p--Sample_4_3p_fastqc.html
     - path: test-output/fastqc/batch.1.march.Sample_4_3p--Sample_4_3p-fastqc/batch.1.march.Sample_4_3p--Sample_4_3p_fastqc.zip
+    - path: test-output/fastq-files/batch.1.march.Sample_1_3p--Sample_1_3p.fastq.gz
+      should_exist: false
+    - path: test-output/fastq-files/batch.1.march.Sample_3_3p--Sample_3_3p.fastq.gz
+      should_exist: false
+    - path: test-output/fastq-files/batch.1.march.Sample_4_3p--Sample_4_3p.fastq.gz
+      should_exist: false
     - path: test-output/lima/batch.1.march.Sample_1_3p--Sample_1_3p.bam
     - path: test-output/lima/batch.1.march.Sample_1_3p--Sample_1_3p.bam.pbi
     - path: test-output/lima/batch.1.march.Sample_1_3p--Sample_1_3p.consensusreadset.xml
@@ -134,6 +224,42 @@
     - path: test-output/lima/batch.1.march.lima.summary
     - path: test-output/multiqc/multiqc_data.zip
     - path: test-output/multiqc/multiqc_report.html
+    - path: test-output/refine/batch.1.march.Sample_1_3p--Sample_1_3p.bam
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_1_3p--Sample_1_3p.bam.pbi
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_1_3p--Sample_1_3p.consensusreadset.xml
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_1_3p--Sample_1_3p.filter_summary.json
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_1_3p--Sample_1_3p.report.csv
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_1_3p--Sample_1_3p.stderr.log
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_3_3p--Sample_3_3p.bam
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_3_3p--Sample_3_3p.bam.pbi
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_3_3p--Sample_3_3p.consensusreadset.xml
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_3_3p--Sample_3_3p.filter_summary.json
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_3_3p--Sample_3_3p.report.csv
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_3_3p--Sample_3_3p.stderr.log
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.bam
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.bam.pbi
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.consensusreadset.xml
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.filter_summary.json
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.report.csv
+      should_exist: false
+    - path: test-output/refine/batch.1.march.Sample_4_3p--Sample_4_3p.stderr.log
+      should_exist: false
 
 - name: dna.fastq
   tags:
@@ -155,15 +281,15 @@
     - path: test-output/ccs/batch.1.march.chunk.2.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
-    - path: test-output/fastq-files/batch.1.march.Sample_1_3p--Sample_1_3p.fastq.gz
-    - path: test-output/fastq-files/batch.1.march.Sample_3_3p--Sample_3_3p.fastq.gz
-    - path: test-output/fastq-files/batch.1.march.Sample_4_3p--Sample_4_3p.fastq.gz
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.html
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.zip
     - path: test-output/fastqc/batch.1.march.Sample_3_3p--Sample_3_3p-fastqc/batch.1.march.Sample_3_3p--Sample_3_3p_fastqc.html
     - path: test-output/fastqc/batch.1.march.Sample_3_3p--Sample_3_3p-fastqc/batch.1.march.Sample_3_3p--Sample_3_3p_fastqc.zip
     - path: test-output/fastqc/batch.1.march.Sample_4_3p--Sample_4_3p-fastqc/batch.1.march.Sample_4_3p--Sample_4_3p_fastqc.html
     - path: test-output/fastqc/batch.1.march.Sample_4_3p--Sample_4_3p-fastqc/batch.1.march.Sample_4_3p--Sample_4_3p_fastqc.zip
+    - path: test-output/fastq-files/batch.1.march.Sample_1_3p--Sample_1_3p.fastq.gz
+    - path: test-output/fastq-files/batch.1.march.Sample_3_3p--Sample_3_3p.fastq.gz
+    - path: test-output/fastq-files/batch.1.march.Sample_4_3p--Sample_4_3p.fastq.gz
     - path: test-output/lima/batch.1.march.json
     - path: test-output/lima/batch.1.march.lima.counts
     - path: test-output/lima/batch.1.march.lima.report
@@ -224,31 +350,19 @@
     cromwell run -o tests/cromwell.options.json
     -i tests/integration/dna.json pacbio-subreads-processing.wdl
   stdout:
-    contains_regex:
-      - 'SubreadsProcessing.samples.*"Sample_1_3p"'
     contains:
       - "SingleWorkflowRunnerActor workflow finished with status 'Succeeded'."
-      - '--num-threads 3'
-      - '--num-threads 4'
   files:
+    - path: test-output/ccs/batch.1.march.chunk.1.ccs.report.json
+    - path: test-output/ccs/batch.1.march.chunk.1.ccs.stderr.log
+    - path: test-output/ccs/batch.1.march.chunk.1.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.1.zmw_metrics.json.gz
+    - path: test-output/ccs/batch.1.march.chunk.2.ccs.report.json
+    - path: test-output/ccs/batch.1.march.chunk.2.ccs.stderr.log
+    - path: test-output/ccs/batch.1.march.chunk.2.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.2.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
-    - path: test-output/ccs/batch.1.march.merged.ccs.report.json
-      contains_regex:
-        - 'ZMWs input'
-        - 'value.*: 93'
-        - 'ZMWs pass filters'
-        - 'value.*: 44'
-        - 'ZMWs fail filters'
-        - 'value.*: 49'
-        - 'Median length filter'
-        - 'value.*: 0'
-        - 'Lacking full passes'
-        - 'value.*: 42'
-        - 'Draft generation error'
-        - 'value.*: 1'
-        - 'CCS below minimum RQ'
-        - 'value.*: 6'
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.html
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.zip
     - path: test-output/fastqc/batch.1.march.Sample_3_3p--Sample_3_3p-fastqc/batch.1.march.Sample_3_3p--Sample_3_3p_fastqc.html
@@ -324,21 +438,16 @@
     contains:
       - "SingleWorkflowRunnerActor workflow finished with status 'Succeeded'."
   files:
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.bam
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.bam.pbi
     - path: test-output/ccs/batch.1.march.chunk.1.ccs.ccs_report.txt
     - path: test-output/ccs/batch.1.march.chunk.1.ccs.report.json
     - path: test-output/ccs/batch.1.march.chunk.1.ccs.stderr.log
     - path: test-output/ccs/batch.1.march.chunk.1.ccs.zmw_metrics.json.gz
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.bam
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.bam.pbi
     - path: test-output/ccs/batch.1.march.chunk.2.ccs.ccs_report.txt
     - path: test-output/ccs/batch.1.march.chunk.2.ccs.report.json
     - path: test-output/ccs/batch.1.march.chunk.2.ccs.stderr.log
     - path: test-output/ccs/batch.1.march.chunk.2.ccs.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
-    - path: test-output/ccs/batch.1.march.merged.ccs.report.json
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.html
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.zip
     - path: test-output/fastqc/batch.1.march.Sample_3_3p--Sample_3_3p-fastqc/batch.1.march.Sample_3_3p--Sample_3_3p_fastqc.html
@@ -411,29 +520,19 @@
     cromwell run -o tests/cromwell.options.json
     -i tests/integration/rna.fastq.json pacbio-subreads-processing.wdl
   stdout:
-    contains_regex:
-      - 'SubreadsProcessing.samples.*"Sample_1_3p"'
     contains:
       - "SingleWorkflowRunnerActor workflow finished with status 'Succeeded'."
   files:
+    - path: test-output/ccs/batch.1.march.chunk.1.ccs.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.1.ccs.report.json
+    - path: test-output/ccs/batch.1.march.chunk.1.ccs.stderr.log
+    - path: test-output/ccs/batch.1.march.chunk.1.ccs.zmw_metrics.json.gz
+    - path: test-output/ccs/batch.1.march.chunk.2.ccs.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.2.ccs.report.json
+    - path: test-output/ccs/batch.1.march.chunk.2.ccs.stderr.log
+    - path: test-output/ccs/batch.1.march.chunk.2.ccs.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
-    - path: test-output/ccs/batch.1.march.merged.ccs.report.json
-      contains_regex:
-        - 'ZMWs input'
-        - 'value.*: 93'
-        - 'ZMWs pass filters'
-        - 'value.*: 44'
-        - 'ZMWs fail filters'
-        - 'value.*: 49'
-        - 'Median length filter'
-        - 'value.*: 0'
-        - 'Lacking full passes'
-        - 'value.*: 42'
-        - 'Draft generation error'
-        - 'value.*: 1'
-        - 'CCS below minimum RQ'
-        - 'value.*: 6'
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.html
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.zip
     - path: test-output/fastqc/batch.1.march.Sample_3_3p--Sample_3_3p-fastqc/batch.1.march.Sample_3_3p--Sample_3_3p_fastqc.html
@@ -485,32 +584,19 @@
     cromwell run -o tests/cromwell.options.json
     -i tests/integration/rna.json pacbio-subreads-processing.wdl
   stdout:
-    contains_regex:
-      - 'SubreadsProcessing.samples.*"Sample_1_3p"'
-    must_not_contain:
-      - '--num-threads 3'
-      - '--num-threads 4'
     contains:
       - "SingleWorkflowRunnerActor workflow finished with status 'Succeeded'."
   files:
+    - path: test-output/ccs/batch.1.march.chunk.1.ccs.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.1.ccs.report.json
+    - path: test-output/ccs/batch.1.march.chunk.1.ccs.stderr.log
+    - path: test-output/ccs/batch.1.march.chunk.1.ccs.zmw_metrics.json.gz
+    - path: test-output/ccs/batch.1.march.chunk.2.ccs.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.2.ccs.report.json
+    - path: test-output/ccs/batch.1.march.chunk.2.ccs.stderr.log
+    - path: test-output/ccs/batch.1.march.chunk.2.ccs.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
-    - path: test-output/ccs/batch.1.march.merged.ccs.report.json
-      contains_regex:
-        - 'ZMWs input'
-        - 'value.*: 93'
-        - 'ZMWs pass filters'
-        - 'value.*: 44'
-        - 'ZMWs fail filters'
-        - 'value.*: 49'
-        - 'Median length filter'
-        - 'value.*: 0'
-        - 'Lacking full passes'
-        - 'value.*: 42'
-        - 'Draft generation error'
-        - 'value.*: 1'
-        - 'CCS below minimum RQ'
-        - 'value.*: 6'
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.html
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.zip
     - path: test-output/fastqc/batch.1.march.Sample_3_3p--Sample_3_3p-fastqc/batch.1.march.Sample_3_3p--Sample_3_3p_fastqc.html
