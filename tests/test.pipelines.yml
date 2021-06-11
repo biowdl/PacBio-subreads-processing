@@ -1,6 +1,6 @@
 - name: dna.chunks.1
   tags:
-    - CCS
+    - integration
   command: >-
     cromwell run -o tests/cromwell.options.json
     -i tests/integration/dna.chunks.1.json pacbio-subreads-processing.wdl
@@ -27,7 +27,7 @@
 
 - name: dna.chunks.5
   tags:
-    - CCS
+    - integration
   command: >-
     cromwell run -o tests/cromwell.options.json
     -i tests/integration/dna.chunks.5.json pacbio-subreads-processing.wdl
@@ -54,7 +54,7 @@
 
 - name: dna.chunks.93
   tags:
-    - CCS
+    - integration
   command: >-
     cromwell run -o tests/cromwell.options.json
     -i tests/integration/dna.chunks.93.json pacbio-subreads-processing.wdl
