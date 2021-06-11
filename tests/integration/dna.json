@@ -1,10 +1,11 @@
 {
-    "SubreadsProcessing.subreadsFile": "tests/data/batch.1.march.subreads.bam",
-    "SubreadsProcessing.barcodesFasta": "tests/data/batch.1.march.barcodes.fasta",
+    "SubreadsProcessing.subreadsFile": "/exports/sasc/jboom/WDL/PacBio-subreads-processing/tests/data/batch.1.march.subreads.bam",
+    "SubreadsProcessing.barcodesFasta": "/exports/sasc/jboom/WDL/PacBio-subreads-processing/tests/data/batch.1.march.barcodes.fasta",
     "SubreadsProcessing.runIsoseq3Refine": false,
     "SubreadsProcessing.generateFastq": false,
     "SubreadsProcessing.limaThreads": "3",
     "SubreadsProcessing.ccsThreads": "4",
     "SubreadsProcessing.fastqcThreads": "4",
-    "SubreadsProcessing.ccsChunks": "2"
+    "SubreadsProcessing.ccsChunks": "2",
+    "SubreadsProcessing.outputDirectory": "/exports/sasc/jboom/WDL/dna"
 }

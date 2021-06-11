@@ -10,6 +10,7 @@ that users understand how the changes affect the new version.
 
 version develop
 ---------------------------
++ Remove ccs report merging because of new formats from version 6.0.0.
 + Update samtools to version 1.12.
 + Change pacbio-merge from dockerhub to quay.
 + Update multiqc to version 1.10.
