@@ -121,10 +121,25 @@
         <i>Int &mdash; Default: 15</i><br />
         The maximum amount of time the job will run in minutes.
 </p>
+<p name="SubreadsProcessing.ccs.all">
+        <b>SubreadsProcessing.ccs.all</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Emit all ZMWs.
+</p>
+<p name="SubreadsProcessing.ccs.allKinetics">
+        <b>SubreadsProcessing.ccs.allKinetics</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Calculate mean pulse widths (PW) and interpulse durations (IPD) for every ZMW.
+</p>
 <p name="SubreadsProcessing.ccs.byStrand">
         <b>SubreadsProcessing.ccs.byStrand</b><br />
         <i>Boolean &mdash; Default: false</i><br />
         Generate a consensus for each strand.
+</p>
+<p name="SubreadsProcessing.ccs.hifiKinetics">
+        <b>SubreadsProcessing.ccs.hifiKinetics</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Calculate mean pulse widths (PW) and interpulse durations (IPD) for every HiFi read.
 </p>
 <p name="SubreadsProcessing.ccs.logLevel">
         <b>SubreadsProcessing.ccs.logLevel</b><br />
@@ -151,10 +166,30 @@
         <i>Int &mdash; Default: 3</i><br />
         Minimum number of full-length subreads required to generate ccs for a ZMW.
 </p>
+<p name="SubreadsProcessing.ccs.minSnr">
+        <b>SubreadsProcessing.ccs.minSnr</b><br />
+        <i>Float &mdash; Default: 2.5</i><br />
+        Minimum SNR of subreads to use for generating CCS.
+</p>
+<p name="SubreadsProcessing.ccs.skipPolish">
+        <b>SubreadsProcessing.ccs.skipPolish</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Only output the initial draft template (faster, less accurate).
+</p>
+<p name="SubreadsProcessing.ccs.subreadFallback">
+        <b>SubreadsProcessing.ccs.subreadFallback</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Emit a representative subread, instead of the draft consensus, if polishing failed.
+</p>
 <p name="SubreadsProcessing.ccs.timeMinutes">
         <b>SubreadsProcessing.ccs.timeMinutes</b><br />
         <i>Int &mdash; Default: 1440</i><br />
         The maximum amount of time the job will run in minutes.
+</p>
+<p name="SubreadsProcessing.ccs.topPasses">
+        <b>SubreadsProcessing.ccs.topPasses</b><br />
+        <i>Int &mdash; Default: 60</i><br />
+        Pick at maximum the top N passes for each ZMW.
 </p>
 <p name="SubreadsProcessing.ccsChunks">
         <b>SubreadsProcessing.ccsChunks</b><br />
@@ -178,7 +213,7 @@
 </p>
 <p name="SubreadsProcessing.dockerImages">
         <b>SubreadsProcessing.dockerImages</b><br />
-        <i>Map[String,String] &mdash; Default: {"bam2fastx": "quay.io/biocontainers/bam2fastx:1.3.1--hf05d43a_1", "biowdl-input-converter": "quay.io/biocontainers/biowdl-input-converter:0.3.0--pyhdfd78af_0", "ccs": "quay.io/biocontainers/pbccs:6.0.0--h9ee0642_2", "fastqc": "quay.io/biocontainers/fastqc:0.11.9--hdfd78af_1", "isoseq3": "quay.io/biocontainers/isoseq3:3.4.0--0", "lima": "quay.io/biocontainers/lima:2.2.0--h9ee0642_0", "python3": "python:3.7-slim", "multiqc": "quay.io/biocontainers/multiqc:1.10.1--pyhdfd78af_1", "pacbio-merge": "quay.io/redmar_van_den_berg/pacbio-merge:0.2", "pbbam": "quay.io/biocontainers/pbbam:1.6.0--h058f120_1", "samtools": "quay.io/biocontainers/samtools:1.12--h9aed4be_1"}</i><br />
+        <i>Map[String,String] &mdash; Default: {"bam2fastx": "quay.io/biocontainers/bam2fastx:1.3.1--hf05d43a_1", "biowdl-input-converter": "quay.io/biocontainers/biowdl-input-converter:0.3.0--pyhdfd78af_0", "ccs": "quay.io/biocontainers/pbccs:6.0.0--h9ee0642_2", "fastqc": "quay.io/biocontainers/fastqc:0.11.9--hdfd78af_1", "isoseq3": "quay.io/biocontainers/isoseq3:3.4.0--0", "lima": "quay.io/biocontainers/lima:2.2.0--h9ee0642_0", "python3": "python:3.7-slim", "multiqc": "quay.io/biocontainers/multiqc:1.10.1--pyhdfd78af_1", "pbbam": "quay.io/biocontainers/pbbam:1.6.0--h058f120_1", "samtools": "quay.io/biocontainers/samtools:1.12--h9aed4be_1"}</i><br />
         The docker image(s) used for this workflow. Changing this may result in errors which the developers may choose not to address.
 </p>
 <p name="SubreadsProcessing.fastqcLima.adapters">
@@ -436,11 +471,6 @@
         <i>Int &mdash; Default: 1 + ceil((size(bamFiles,"G") * 2))</i><br />
         The maximum amount of time the job will run in minutes.
 </p>
-<p name="SubreadsProcessing.mergeCCSReport.memory">
-        <b>SubreadsProcessing.mergeCCSReport.memory</b><br />
-        <i>String &mdash; Default: "4G"</i><br />
-        The amount of memory this job will use.
-</p>
 <p name="SubreadsProcessing.multiqcTask.clConfig">
         <b>SubreadsProcessing.multiqcTask.clConfig</b><br />
         <i>String? &mdash; Default: None</i><br />
@@ -563,7 +593,7 @@
 </p>
 <p name="SubreadsProcessing.multiqcTask.timeMinutes">
         <b>SubreadsProcessing.multiqcTask.timeMinutes</b><br />
-        <i>Int &mdash; Default: 2 + ceil((size(reports,"G") * 8))</i><br />
+        <i>Int &mdash; Default: 10 + ceil((size(reports,"G") * 8))</i><br />
         The maximum amount of time the job will run in minutes.
 </p>
 <p name="SubreadsProcessing.multiqcTask.title">
