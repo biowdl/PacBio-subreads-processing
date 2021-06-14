@@ -8,10 +8,10 @@
     contains:
       - "SingleWorkflowRunnerActor workflow finished with status 'Succeeded'."
   files:
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.1.ccs_report.txt
     - path: test-output/ccs/batch.1.march.chunk.1.ccs.report.json
     - path: test-output/ccs/batch.1.march.chunk.1.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.zmw_metrics.json.gz
+    - path: test-output/ccs/batch.1.march.chunk.1.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.html
@@ -89,26 +89,26 @@
     contains:
       - "SingleWorkflowRunnerActor workflow finished with status 'Succeeded'."
   files:
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.1.ccs_report.txt
     - path: test-output/ccs/batch.1.march.chunk.1.ccs.report.json
     - path: test-output/ccs/batch.1.march.chunk.1.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.zmw_metrics.json.gz
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.1.zmw_metrics.json.gz
+    - path: test-output/ccs/batch.1.march.chunk.2.ccs_report.txt
     - path: test-output/ccs/batch.1.march.chunk.2.ccs.report.json
     - path: test-output/ccs/batch.1.march.chunk.2.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.zmw_metrics.json.gz
-    - path: test-output/ccs/batch.1.march.chunk.3.ccs.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.2.zmw_metrics.json.gz
+    - path: test-output/ccs/batch.1.march.chunk.3.ccs_report.txt
     - path: test-output/ccs/batch.1.march.chunk.3.ccs.report.json
     - path: test-output/ccs/batch.1.march.chunk.3.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.3.ccs.zmw_metrics.json.gz
-    - path: test-output/ccs/batch.1.march.chunk.4.ccs.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.3.zmw_metrics.json.gz
+    - path: test-output/ccs/batch.1.march.chunk.4.ccs_report.txt
     - path: test-output/ccs/batch.1.march.chunk.4.ccs.report.json
     - path: test-output/ccs/batch.1.march.chunk.4.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.4.ccs.zmw_metrics.json.gz
-    - path: test-output/ccs/batch.1.march.chunk.5.ccs.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.4.zmw_metrics.json.gz
+    - path: test-output/ccs/batch.1.march.chunk.5.ccs_report.txt
     - path: test-output/ccs/batch.1.march.chunk.5.ccs.report.json
     - path: test-output/ccs/batch.1.march.chunk.5.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.5.ccs.zmw_metrics.json.gz
+    - path: test-output/ccs/batch.1.march.chunk.5.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.html
@@ -186,10 +186,10 @@
     contains:
       - "SingleWorkflowRunnerActor workflow finished with status 'Succeeded'."
   files:
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.1.ccs_report.txt
     - path: test-output/ccs/batch.1.march.chunk.1.ccs.report.json
     - path: test-output/ccs/batch.1.march.chunk.1.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.zmw_metrics.json.gz
+    - path: test-output/ccs/batch.1.march.chunk.1.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.chunk.93.ccs.report.json
     - path: test-output/ccs/batch.1.march.chunk.93.ccs.stderr.log
     - path: test-output/ccs/batch.1.march.chunk.93.ccs_report.txt
@@ -438,14 +438,14 @@
     contains:
       - "SingleWorkflowRunnerActor workflow finished with status 'Succeeded'."
   files:
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.1.ccs_report.txt
     - path: test-output/ccs/batch.1.march.chunk.1.ccs.report.json
     - path: test-output/ccs/batch.1.march.chunk.1.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.zmw_metrics.json.gz
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.1.zmw_metrics.json.gz
+    - path: test-output/ccs/batch.1.march.chunk.2.ccs_report.txt
     - path: test-output/ccs/batch.1.march.chunk.2.ccs.report.json
     - path: test-output/ccs/batch.1.march.chunk.2.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.zmw_metrics.json.gz
+    - path: test-output/ccs/batch.1.march.chunk.2.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.html
@@ -523,14 +523,14 @@
     contains:
       - "SingleWorkflowRunnerActor workflow finished with status 'Succeeded'."
   files:
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.1.ccs_report.txt
     - path: test-output/ccs/batch.1.march.chunk.1.ccs.report.json
     - path: test-output/ccs/batch.1.march.chunk.1.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.zmw_metrics.json.gz
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.1.zmw_metrics.json.gz
+    - path: test-output/ccs/batch.1.march.chunk.2.ccs_report.txt
     - path: test-output/ccs/batch.1.march.chunk.2.ccs.report.json
     - path: test-output/ccs/batch.1.march.chunk.2.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.zmw_metrics.json.gz
+    - path: test-output/ccs/batch.1.march.chunk.2.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.html
@@ -587,14 +587,14 @@
     contains:
       - "SingleWorkflowRunnerActor workflow finished with status 'Succeeded'."
   files:
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.1.ccs_report.txt
     - path: test-output/ccs/batch.1.march.chunk.1.ccs.report.json
     - path: test-output/ccs/batch.1.march.chunk.1.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.1.ccs.zmw_metrics.json.gz
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.ccs_report.txt
+    - path: test-output/ccs/batch.1.march.chunk.1.zmw_metrics.json.gz
+    - path: test-output/ccs/batch.1.march.chunk.2.ccs_report.txt
     - path: test-output/ccs/batch.1.march.chunk.2.ccs.report.json
     - path: test-output/ccs/batch.1.march.chunk.2.ccs.stderr.log
-    - path: test-output/ccs/batch.1.march.chunk.2.ccs.zmw_metrics.json.gz
+    - path: test-output/ccs/batch.1.march.chunk.2.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.html
