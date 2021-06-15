@@ -20,7 +20,6 @@ version 1.0
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import "tasks/bam2fastx.wdl" as bam2fastx
 import "tasks/ccs.wdl" as ccs
 import "tasks/fastqc.wdl" as fastqc
 import "tasks/isoseq3.wdl" as isoseq3
@@ -28,7 +27,7 @@ import "tasks/lima.wdl" as lima
 import "tasks/multiqc.wdl" as multiqc
 import "tasks/pacbio.wdl" as pacbio
 import "tasks/pbbam.wdl" as pbbam
-import "tasks/samtools.wdl" as samtools
+import "/exports/sasc/jboom/WDL/UPDATE/tasks/samtools.wdl" as samtools
 
 workflow SubreadsProcessing {
     input {
@@ -48,7 +47,6 @@ workflow SubreadsProcessing {
         Int ccsThreads = 2
         Int fastqcThreads = 4
         Map[String, String] dockerImages = {
-            "bam2fastx": "quay.io/biocontainers/bam2fastx:1.3.1--hf05d43a_1",
             "biowdl-input-converter": "quay.io/biocontainers/biowdl-input-converter:0.3.0--pyhdfd78af_0",
             "ccs": "quay.io/biocontainers/pbccs:6.0.0--h9ee0642_2",
             "fastqc": "quay.io/biocontainers/fastqc:0.11.9--hdfd78af_1",
@@ -148,12 +146,15 @@ workflow SubreadsProcessing {
             }
 
             if (generateFastq) {
-                call bam2fastx.Bam2Fastq as bam2FastqRefine {
+                call samtools.Fastq as bam2FastqRefine {
                     input:
-                        bam = [refine.refineBam],
-                        bamIndex = [refine.refineBamIndex],
-                        outputPrefix =  outputDirectory + "/fastq-files/" + basename(refine.refineBam, ".bam"),
-                        dockerImage = dockerImages["bam2fastx"]
+                        inputBam = refine.refineBam,
+                        outputRead1 = outputDirectory + "/fastq-files/" + basename(refine.refineBam, ".bam") + "_temp.fastq.gz",
+                        outputRead0 = outputDirectory + "/fastq-files/" + basename(refine.refineBam, ".bam") + ".fastq.gz",
+                        outputQuality = true,
+                        compressionLevel = 1,
+                        threads = 3,
+                        dockerImage = dockerImages["samtools"]
                 }
             }
         }
@@ -169,12 +170,15 @@ workflow SubreadsProcessing {
             }
 
             if (generateFastq) {
-                call bam2fastx.Bam2Fastq as bam2FastqLima {
+                call samtools.Fastq as bam2FastqLima {
                     input:
-                        bam = [bamFile],
-                        bamIndex = [bamFileIndex],
-                        outputPrefix = outputDirectory + "/fastq-files/" + basename(bamFile, ".bam"),
-                        dockerImage = dockerImages["bam2fastx"]
+                        inputBam = bamFile,
+                        outputRead1 = outputDirectory + "/fastq-files/" + basename(bamFile, ".bam") + "_temp.fastq.gz",
+                        outputRead0 = outputDirectory + "/fastq-files/" + basename(bamFile, ".bam") + ".fastq.gz",
+                        outputQuality = true,
+                        compressionLevel = 1,
+                        threads = 3,
+                        dockerImage = dockerImages["samtools"]
                 }
             }
         }
@@ -188,7 +192,8 @@ workflow SubreadsProcessing {
         String sampleName = sub(sub(bamFile, ".*--", ""),".bam", "")
 
         if (generateFastq) {
-            File? fastqFile = select_first([bam2FastqRefine.fastqFile, bam2FastqLima.fastqFile])
+            File? fastqFile = select_first([bam2FastqRefine.read0, bam2FastqLima.read0])
+            File? extraFastqFile = select_first([bam2FastqRefine.read1, bam2FastqLima.read1])
         }
     }
 
@@ -222,6 +227,7 @@ workflow SubreadsProcessing {
         File multiqcReport = multiqcTask.multiqcReport
         File? multiqcZip = multiqcTask.multiqcDataDirZip
         Array[File?] fastqFiles = fastqFile
+        Array[File?] extraFastqFiles = extraFastqFile
         Array[File?] refineReads = refine.refineBam
         Array[File?] refineIndex = refine.refineBamIndex
         Array[File?] refineConsensusReadset = refine.refineConsensusReadset
@@ -265,6 +271,7 @@ workflow SubreadsProcessing {
         samples: {description: "The name(s) of the sample(s)."}
         workflowReports: {description: "A collection of all metrics."}
         fastqFiles: {description: "Fastq files extracted from bam files."}
+        extraFastqFiles: {description: "Extra fastq files extracted from bam files."}
         multiqcReport: {description: "The multiqc html report."}
         multiqcZip: {description: "The multiqc data zip file."}
         refineReads: {description: "Filtered reads file(s)."}

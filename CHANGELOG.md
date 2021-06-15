@@ -10,6 +10,7 @@ that users understand how the changes affect the new version.
 
 version develop
 ---------------------------
++ Replace bam2fastx task with samtools fastq task.
 + Remove ccs report merging because of new formats from version 6.0.0.
 + Update samtools to version 1.12.
 + Change pacbio-merge from dockerhub to quay.
