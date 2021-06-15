@@ -27,7 +27,7 @@ import "tasks/lima.wdl" as lima
 import "tasks/multiqc.wdl" as multiqc
 import "tasks/pacbio.wdl" as pacbio
 import "tasks/pbbam.wdl" as pbbam
-import "/exports/sasc/jboom/WDL/UPDATE/tasks/samtools.wdl" as samtools
+import "tasks/samtools.wdl" as samtools
 
 workflow SubreadsProcessing {
     input {
