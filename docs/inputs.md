@@ -17,6 +17,16 @@
 </p>
 
 ### Other common inputs
+<p name="SubreadsProcessing.bam2FastqLima.outputRead2">
+        <b>SubreadsProcessing.bam2FastqLima.outputRead2</b><br />
+        <i>String? &mdash; Default: None</i><br />
+        The location the second reads from pairs should be written to.
+</p>
+<p name="SubreadsProcessing.bam2FastqRefine.outputRead2">
+        <b>SubreadsProcessing.bam2FastqRefine.outputRead2</b><br />
+        <i>String? &mdash; Default: None</i><br />
+        The location the second reads from pairs should be written to.
+</p>
 <p name="SubreadsProcessing.ccs.minReadQuality">
         <b>SubreadsProcessing.ccs.minReadQuality</b><br />
         <i>Float &mdash; Default: 0.99</i><br />
@@ -71,54 +81,64 @@
 ### Advanced inputs
 <details>
 <summary> Show/Hide </summary>
-<p name="SubreadsProcessing.bam2FastqLima.compressionLevel">
-        <b>SubreadsProcessing.bam2FastqLima.compressionLevel</b><br />
-        <i>Int &mdash; Default: 1</i><br />
-        Gzip compression level [1-9]
+<p name="SubreadsProcessing.bam2FastqLima.appendReadNumber">
+        <b>SubreadsProcessing.bam2FastqLima.appendReadNumber</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Append /1 and /2 to the read name, or don't. Corresponds to `-n/N`.
+</p>
+<p name="SubreadsProcessing.bam2FastqLima.excludeFilter">
+        <b>SubreadsProcessing.bam2FastqLima.excludeFilter</b><br />
+        <i>Int? &mdash; Default: None</i><br />
+        Exclude reads with ONE OR MORE of these flags. Corresponds to `-F`.
+</p>
+<p name="SubreadsProcessing.bam2FastqLima.excludeSpecificFilter">
+        <b>SubreadsProcessing.bam2FastqLima.excludeSpecificFilter</b><br />
+        <i>Int? &mdash; Default: None</i><br />
+        Exclude reads with ALL of these flags. Corresponds to `-G`.
+</p>
+<p name="SubreadsProcessing.bam2FastqLima.includeFilter">
+        <b>SubreadsProcessing.bam2FastqLima.includeFilter</b><br />
+        <i>Int? &mdash; Default: None</i><br />
+        Include reads with ALL of these flags. Corresponds to `-f`.
 </p>
 <p name="SubreadsProcessing.bam2FastqLima.memory">
         <b>SubreadsProcessing.bam2FastqLima.memory</b><br />
-        <i>String &mdash; Default: "2G"</i><br />
-        The amount of memory available to the job.
-</p>
-<p name="SubreadsProcessing.bam2FastqLima.seqIdPrefix">
-        <b>SubreadsProcessing.bam2FastqLima.seqIdPrefix</b><br />
-        <i>String? &mdash; Default: None</i><br />
-        Prefix for sequence IDs in headers.
-</p>
-<p name="SubreadsProcessing.bam2FastqLima.splitByBarcode">
-        <b>SubreadsProcessing.bam2FastqLima.splitByBarcode</b><br />
-        <i>Boolean &mdash; Default: false</i><br />
-        Split output into multiple fastq files, by barcode pairs.
+        <i>String &mdash; Default: "1G"</i><br />
+        The amount of memory this job will use.
 </p>
 <p name="SubreadsProcessing.bam2FastqLima.timeMinutes">
         <b>SubreadsProcessing.bam2FastqLima.timeMinutes</b><br />
-        <i>Int &mdash; Default: 15</i><br />
+        <i>Int &mdash; Default: 1 + ceil((size(inputBam) * 2))</i><br />
         The maximum amount of time the job will run in minutes.
 </p>
-<p name="SubreadsProcessing.bam2FastqRefine.compressionLevel">
-        <b>SubreadsProcessing.bam2FastqRefine.compressionLevel</b><br />
-        <i>Int &mdash; Default: 1</i><br />
-        Gzip compression level [1-9]
+<p name="SubreadsProcessing.bam2FastqRefine.appendReadNumber">
+        <b>SubreadsProcessing.bam2FastqRefine.appendReadNumber</b><br />
+        <i>Boolean &mdash; Default: false</i><br />
+        Append /1 and /2 to the read name, or don't. Corresponds to `-n/N`.
+</p>
+<p name="SubreadsProcessing.bam2FastqRefine.excludeFilter">
+        <b>SubreadsProcessing.bam2FastqRefine.excludeFilter</b><br />
+        <i>Int? &mdash; Default: None</i><br />
+        Exclude reads with ONE OR MORE of these flags. Corresponds to `-F`.
+</p>
+<p name="SubreadsProcessing.bam2FastqRefine.excludeSpecificFilter">
+        <b>SubreadsProcessing.bam2FastqRefine.excludeSpecificFilter</b><br />
+        <i>Int? &mdash; Default: None</i><br />
+        Exclude reads with ALL of these flags. Corresponds to `-G`.
+</p>
+<p name="SubreadsProcessing.bam2FastqRefine.includeFilter">
+        <b>SubreadsProcessing.bam2FastqRefine.includeFilter</b><br />
+        <i>Int? &mdash; Default: None</i><br />
+        Include reads with ALL of these flags. Corresponds to `-f`.
 </p>
 <p name="SubreadsProcessing.bam2FastqRefine.memory">
         <b>SubreadsProcessing.bam2FastqRefine.memory</b><br />
-        <i>String &mdash; Default: "2G"</i><br />
-        The amount of memory available to the job.
-</p>
-<p name="SubreadsProcessing.bam2FastqRefine.seqIdPrefix">
-        <b>SubreadsProcessing.bam2FastqRefine.seqIdPrefix</b><br />
-        <i>String? &mdash; Default: None</i><br />
-        Prefix for sequence IDs in headers.
-</p>
-<p name="SubreadsProcessing.bam2FastqRefine.splitByBarcode">
-        <b>SubreadsProcessing.bam2FastqRefine.splitByBarcode</b><br />
-        <i>Boolean &mdash; Default: false</i><br />
-        Split output into multiple fastq files, by barcode pairs.
+        <i>String &mdash; Default: "1G"</i><br />
+        The amount of memory this job will use.
 </p>
 <p name="SubreadsProcessing.bam2FastqRefine.timeMinutes">
         <b>SubreadsProcessing.bam2FastqRefine.timeMinutes</b><br />
-        <i>Int &mdash; Default: 15</i><br />
+        <i>Int &mdash; Default: 1 + ceil((size(inputBam) * 2))</i><br />
         The maximum amount of time the job will run in minutes.
 </p>
 <p name="SubreadsProcessing.ccs.all">
@@ -213,7 +233,7 @@
 </p>
 <p name="SubreadsProcessing.dockerImages">
         <b>SubreadsProcessing.dockerImages</b><br />
-        <i>Map[String,String] &mdash; Default: {"bam2fastx": "quay.io/biocontainers/bam2fastx:1.3.1--hf05d43a_1", "biowdl-input-converter": "quay.io/biocontainers/biowdl-input-converter:0.3.0--pyhdfd78af_0", "ccs": "quay.io/biocontainers/pbccs:6.0.0--h9ee0642_2", "fastqc": "quay.io/biocontainers/fastqc:0.11.9--hdfd78af_1", "isoseq3": "quay.io/biocontainers/isoseq3:3.4.0--0", "lima": "quay.io/biocontainers/lima:2.2.0--h9ee0642_0", "python3": "python:3.7-slim", "multiqc": "quay.io/biocontainers/multiqc:1.10.1--pyhdfd78af_1", "pbbam": "quay.io/biocontainers/pbbam:1.6.0--h058f120_1", "samtools": "quay.io/biocontainers/samtools:1.12--h9aed4be_1"}</i><br />
+        <i>Map[String,String] &mdash; Default: {"biowdl-input-converter": "quay.io/biocontainers/biowdl-input-converter:0.3.0--pyhdfd78af_0", "ccs": "quay.io/biocontainers/pbccs:6.0.0--h9ee0642_2", "fastqc": "quay.io/biocontainers/fastqc:0.11.9--hdfd78af_1", "isoseq3": "quay.io/biocontainers/isoseq3:3.4.0--0", "lima": "quay.io/biocontainers/lima:2.2.0--h9ee0642_0", "python3": "python:3.7-slim", "multiqc": "quay.io/biocontainers/multiqc:1.10.1--pyhdfd78af_1", "pbbam": "quay.io/biocontainers/pbbam:1.6.0--h058f120_1", "samtools": "quay.io/biocontainers/samtools:1.12--h9aed4be_1"}</i><br />
         The docker image(s) used for this workflow. Changing this may result in errors which the developers may choose not to address.
 </p>
 <p name="SubreadsProcessing.fastqcLima.adapters">
