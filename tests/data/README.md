@@ -1,5 +1,4 @@
 # Test data
-
 * `batch.1.march.subreads.bam`: The original dataset consisted of 4 samples.
    The test version used here contains 3 samples.
 * `batch.2.february.subreads.bam`: The original dataset consisted of 12 samples.

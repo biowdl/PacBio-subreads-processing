@@ -3,22 +3,23 @@ layout: default
 title: Home
 ---
 
-This pipeline can be used to process Pacific Biosciences subread BAM files.
+This workflow can be used to process a Pacific Biosciences subreads BAM file.
 It generates ccs reads (using pbccs), demultiplexes the ccs reads into samples
 (using lima) and polishes the reads (using isoseq3 refine for RNA).
 
-This pipeline is part of [BioWDL](https://biowdl.github.io/)
+This workflow is part of [BioWDL](https://biowdl.github.io/)
 developed by the SASC team
 at [Leiden University Medical Center](https://www.lumc.nl/).
 
 ## Usage
-You can run this pipeline using
+This workflow can be run using
 [Cromwell](http://cromwell.readthedocs.io/en/stable/):
 
-First download the latest version of the pipeline wdl file(s)
+First download the latest version of the workflow wdl file(s)
 from the
-[releases page](https://github.com/biowdl/PacBio-subreads-processing/releases).
+[github page](https://github.com/biowdl/PacBio-subreads-processing).
 
+The workflow can then be started with the following command:
 ```bash
 java \
     -jar cromwell-<version>.jar \
@@ -47,61 +48,40 @@ For an overview of all available inputs, see [this page](./inputs.html).
 
 ```json
 {
-    "SubreadsProcessing.subreadsConfigFile": "Configuration file describing input subread BAMs and barcode files.",
-    "SubreadsProcessing.runIsoseq3Refine": "Option to run isoseq3 refine for de-novo transcript reconstruction.",
-    "SubreadsProcessing.outputDirectory": "The path to the output directory.",
-    "SubreadsProcessing.generateFastq": "Option to generate fastq files from demultiplexed bam files."
+    "SubreadsProcessing.subreadsFile": "The PacBio subreads file that contains the raw PacBio reads.",
+    "SubreadsProcessing.barcodesFasta": "Fasta file with the barcodes used in the PacBio experiment.",
+    "SubreadsProcessing.runIsoseq3Refine":"Option to run isoseq3 refine for de-novo transcript reconstruction.",
+    "SubreadsProcessing.generateFastq": "Option to generate fastq files from demultiplexed bam files.",
+    "SubreadsProcessing.outputDirectory": "The path to the output directory."
 }
 ```
 
-#### Subread configuration
-##### JSON format
-The subread configuration can be given as a json file with the following items.
-
-```
-subreads_id
-subreads_file
-subreads_md5
-barcodes_file
-```
-
-These items need to be filled per subreads BAM.
-Below is a example of such a json configuration.
-
+Optional settings:
 ```json
 {
-    "subreads": [
-        {
-            "subreads_id": "id",
-            "subreads_file": "path/to/subreads.bam",
-            "subreads_md5": "94127ced6d8428301376ee4ac18df58a",
-            "barcodes_file": "path/to/barcodes.fasta"
-        },
-        {
-            "subreads_id": "id2",
-            "subreads_file": "path/to/subreads2.bam",
-            "subreads_md5": "94127ced6d8428301376ee4ac18df58b",
-            "barcodes_file": "path/to/barcodes2.fasta"
-        }
-    ]
+    "SubreadsProcessing.ccsChunks": "The number of chunks to be used by ccs."
 }
 ```
 
 #### Example
 The following is an example of what an inputs JSON might look like:
-
 ```json
 {
-    "SubreadsProcessing.subreadsConfigFile": "tests/samplesheets/batches.json",
-    "SubreadsProcessing.runIsoseq3Refine": true,
-    "SubreadsProcessing.outputDirectory": "tests/test-output",
-    "SubreadsProcessing.generateFastq": true
+    "SubreadsProcessing.subreadsFile": "tests/data/batch.1.march.subreads.bam",
+    "SubreadsProcessing.barcodesFasta": "tests/data/batch.1.march.barcodes.fasta",
+    "SubreadsProcessing.runIsoseq3Refine": false,
+    "SubreadsProcessing.generateFastq": false,
+    "SubreadsProcessing.limaThreads": "3",
+    "SubreadsProcessing.ccsThreads": "4",
+    "SubreadsProcessing.ccsChunks": "5",
+    "SubreadsProcessing.fastqcThreads": "4",
+    "SubreadsProcessing.outputDirectory": "tests/test-output"
 }
 ```
 
-### Dependency requirements and tool versions
-Biowdl pipelines use docker images to ensure  reproducibility. This
-means that biowdl pipelines will run on any system that has docker
+## Dependency requirements and tool versions
+Biowdl workflows use docker images to ensure reproducibility. This
+means that biowdl workflows will run on any system that has docker
 installed. Alternatively they can be run with singularity.
 
 For more advanced configuration of docker or singularity please check
@@ -109,22 +89,22 @@ the [cromwell documentation on containers](
 https://cromwell.readthedocs.io/en/stable/tutorials/Containers/).
 
 Images from [biocontainers](https://biocontainers.pro) are preferred for
-biowdl pipelines. The list of default images for this pipeline can be
+biowdl workflows. The list of default images for this workflow can be
 found in the default for the `dockerImages` input.
 
-### Output
+## Output
 The workflow will output polished ccs reads split into their respective sample.
-Along with these BAM files, the workflow will also output all
-intermediate files. Depending on the options set, the pipeline can also output
+Along with these (split on sample) BAM files, the workflow will also output all
+intermediate files. Depending on the options set, the workflow can also output
 fastq files.
 
 ## Contact
 <p>
   <!-- Obscure e-mail address for spammers -->
-For any questions about running this pipeline and feature request (such as
+For any questions about running this workflow and feature requests (such as
 adding additional tools and options), please use the
-<a href='https://github.com/biowdl/PacBio-subreads-processing/issues'>github issue tracker</a>
+<a href="https://github.com/biowdl/PacBio-subreads-processing/issues">github issue tracker</a>
 or contact the SASC team directly at: 
-<a href='&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#97;&#115;&#99;&#64;&#108;&#117;&#109;&#99;&#46;&#110;&#108;'>
+<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#97;&#115;&#99;&#64;&#108;&#117;&#109;&#99;&#46;&#110;&#108;">
 &#115;&#97;&#115;&#99;&#64;&#108;&#117;&#109;&#99;&#46;&#110;&#108;</a>.
 </p>

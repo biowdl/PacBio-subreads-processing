@@ -10,6 +10,20 @@ that users understand how the changes affect the new version.
 
 version develop
 ---------------------------
++ Replace bam2fastx task with samtools fastq task.
++ Remove ccs report merging because of new formats from version 6.0.0.
++ Update samtools to version 1.12.
++ Change pacbio-merge from dockerhub to quay.
++ Update multiqc to version 1.10.
++ Update biowdl-input-converter to version 0.3.
++ Update lima to version 2.2.0.
++ Update ccs to version 6.0.0.
++ Update bam2fastx to version 1.3.1.
++ Add the dockerImages to the output section.
++ Replace travis with github CI.
++ Reinstate `outputDirectory` input.
++ Move tasks `ccsChunks` & `mergePacBio` to tasks repository.
++ Update IsoSeq3 to version 3.4.0, Lima to version 2.0.0.
 + The pipeline now only supports a single input subreads bamfile
   and barcodes fasta file.
 + Rename main pipeline file to `pacbio-subreads-processing.wdl`.

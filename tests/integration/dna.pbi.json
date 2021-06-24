@@ -4,6 +4,8 @@
     "SubreadsProcessing.barcodesFasta": "tests/data/batch.1.march.barcodes.fasta",
     "SubreadsProcessing.runIsoseq3Refine": false,
     "SubreadsProcessing.generateFastq": false,
-    "SubreadsProcessing.limaCores": "3",
-    "SubreadsProcessing.ccsCores": "4"
+    "SubreadsProcessing.limaThreads": "3",
+    "SubreadsProcessing.ccsThreads": "4",
+    "SubreadsProcessing.fastqcThreads": "4",
+    "SubreadsProcessing.ccsChunks": "2"
 }
