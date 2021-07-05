@@ -55,7 +55,8 @@ workflow SubreadsProcessing {
             "python3": "python:3.7-slim",
             "multiqc": "quay.io/biocontainers/multiqc:1.10.1--pyhdfd78af_1",
             "pbbam": "quay.io/biocontainers/pbbam:1.6.0--h058f120_1",
-            "samtools": "quay.io/biocontainers/samtools:1.12--h9aed4be_1"
+            "samtools": "quay.io/biocontainers/samtools:1.12--h9aed4be_1",
+            "pacbio-merge": "quay.io/redmar_van_den_berg/pacbio-merge:0.2"
         }
     }
 
@@ -106,6 +107,14 @@ workflow SubreadsProcessing {
             bamFiles = ccs.ccsBam,
             outputBamPath = outputDirectory + "/ccs/" + subreadsName + ".merged.ccs.bam",
             dockerImage = dockerImages["samtools"]
+    }
+
+    # Merge the report for MultiQC.
+    call pacbio.mergePacBio as mergeCCSReport {
+        input:
+            reports = ccs.ccsJsonReport,
+            outputPathMergedReport =  outputDirectory + "/ccs/" + subreadsName + ".merged.ccs.report.json",
+            dockerImage = dockerImages["pacbio-merge"]
     }
 
     call lima.Lima as lima {
@@ -208,8 +217,9 @@ workflow SubreadsProcessing {
     }
 
     output {
-        File ccsReads = mergeBams.outputBam
-        File ccsIndex = mergeBams.outputBamIndex
+        File ccsReadsMerge = mergeBams.outputBam
+        File ccsIndexMerge = mergeBams.outputBamIndex
+        File ccsReportMerge = mergeCCSReport.outputMergedReport
         Array[File] ccsReport = ccs.ccsReport
         Array[File] ccsJsonReport = ccs.ccsJsonReport
         Array[File] ccsStderr = ccs.ccsStderr
@@ -254,8 +264,9 @@ workflow SubreadsProcessing {
         dockerImages: {description: "The docker image(s) used for this workflow. Changing this may result in errors which the developers may choose not to address.", category: "advanced"}
 
         # outputs
-        ccsReads: {description: "Consensus reads file(s)."}
-        ccsIndex: {description: "Index of consensus reads file(s)."}
+        ccsReadsMerge: {description: "Merged consensus reads file(s)."}
+        ccsIndexMerge: {description: "Merged index of consensus reads file(s)."}
+        ccsReportMerge: {description: "Merged ccs report file."}
         ccsReport: {description: "Ccs report file(s)."}
         ccsJsonReport: {description: "Ccs results json report file(s)."}
         ccsStderr: {description: "Ccs stderr log file(s)."}
