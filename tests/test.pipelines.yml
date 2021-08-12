@@ -14,6 +14,7 @@
     - path: test-output/ccs/batch.1.march.chunk.1.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
+    - path: test-output/ccs/batch.1.march.merged.ccs.report.json
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.html
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.zip
     - path: test-output/fastqc/batch.1.march.Sample_3_3p--Sample_3_3p-fastqc/batch.1.march.Sample_3_3p--Sample_3_3p_fastqc.html
@@ -111,6 +112,7 @@
     - path: test-output/ccs/batch.1.march.chunk.5.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
+    - path: test-output/ccs/batch.1.march.merged.ccs.report.json
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.html
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.zip
     - path: test-output/fastqc/batch.1.march.Sample_3_3p--Sample_3_3p-fastqc/batch.1.march.Sample_3_3p--Sample_3_3p_fastqc.html
@@ -196,6 +198,7 @@
     - path: test-output/ccs/batch.1.march.chunk.93.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
+    - path: test-output/ccs/batch.1.march.merged.ccs.report.json
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.html
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.zip
     - path: test-output/fastqc/batch.1.march.Sample_3_3p--Sample_3_3p-fastqc/batch.1.march.Sample_3_3p--Sample_3_3p_fastqc.html
@@ -281,6 +284,7 @@
     - path: test-output/ccs/batch.1.march.chunk.2.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
+    - path: test-output/ccs/batch.1.march.merged.ccs.report.json
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.html
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.zip
     - path: test-output/fastqc/batch.1.march.Sample_3_3p--Sample_3_3p-fastqc/batch.1.march.Sample_3_3p--Sample_3_3p_fastqc.html
@@ -363,6 +367,7 @@
     - path: test-output/ccs/batch.1.march.chunk.2.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
+    - path: test-output/ccs/batch.1.march.merged.ccs.report.json
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.html
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.zip
     - path: test-output/fastqc/batch.1.march.Sample_3_3p--Sample_3_3p-fastqc/batch.1.march.Sample_3_3p--Sample_3_3p_fastqc.html
@@ -448,6 +453,7 @@
     - path: test-output/ccs/batch.1.march.chunk.2.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
+    - path: test-output/ccs/batch.1.march.merged.ccs.report.json
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.html
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.zip
     - path: test-output/fastqc/batch.1.march.Sample_3_3p--Sample_3_3p-fastqc/batch.1.march.Sample_3_3p--Sample_3_3p_fastqc.html
@@ -533,6 +539,7 @@
     - path: test-output/ccs/batch.1.march.chunk.2.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
+    - path: test-output/ccs/batch.1.march.merged.ccs.report.json
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.html
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.zip
     - path: test-output/fastqc/batch.1.march.Sample_3_3p--Sample_3_3p-fastqc/batch.1.march.Sample_3_3p--Sample_3_3p_fastqc.html
@@ -597,6 +604,7 @@
     - path: test-output/ccs/batch.1.march.chunk.2.zmw_metrics.json.gz
     - path: test-output/ccs/batch.1.march.merged.ccs.bai
     - path: test-output/ccs/batch.1.march.merged.ccs.bam
+    - path: test-output/ccs/batch.1.march.merged.ccs.report.json
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.html
     - path: test-output/fastqc/batch.1.march.Sample_1_3p--Sample_1_3p-fastqc/batch.1.march.Sample_1_3p--Sample_1_3p_fastqc.zip
     - path: test-output/fastqc/batch.1.march.Sample_3_3p--Sample_3_3p-fastqc/batch.1.march.Sample_3_3p--Sample_3_3p_fastqc.html
